@@ -1,0 +1,27 @@
+---
+- name: Configure system started
+  hosts: all
+  # roles:
+  #   - manjaro
+
+- name: Configure packages by pacman
+  hosts: all
+  tasks:
+  - include_role:
+      name: manjaro
+      tasks_from: pacman
+
+# - name: Configure packages by pacaur
+#   hosts: all
+#   tasks:
+#   - include_role:
+#       name: manjaro
+#       tasks_from: pacaur
+
+- name: Configure packages by snap
+  hosts: all
+  tasks:
+  - include_role:
+      name: manjaro
+      tasks_from: snap
+

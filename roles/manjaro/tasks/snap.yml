@@ -1,0 +1,14 @@
+- name: Develop
+  snap:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - code
+    - android-studio
+
+- name: Social
+  snap:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - slack

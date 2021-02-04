@@ -1,0 +1,14 @@
+- name: Install Develop
+  pacman: 
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - apachedirectorystudio
+
+- name: Install Social
+  pacman: 
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - delta-chat
+

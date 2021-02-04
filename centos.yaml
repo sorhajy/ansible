@@ -1,0 +1,8 @@
+---
+# - name: Configure CentOS
+#   hosts: all
+#   tasks:
+#     include_role: CentOS
+- hosts: all
+  roles:
+    - centos

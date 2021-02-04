@@ -1,0 +1,16 @@
+---
+- name: Install packages
+  yum: 
+    name: "{ packages }"
+    state: present
+  var:
+    packages:
+    - git
+    - htop
+    - ansible
+    - jq
+
+- name: echo
+  command: echo ""
+- name: touch
+  command: touch /tmp/file
