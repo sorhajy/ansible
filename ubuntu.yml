@@ -2,6 +2,13 @@
 - name: Configure system started
   hosts: all
 
+- name: Configure wallpaper
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: wallpaper
+
 - name: Configure packages by apt
   hosts: all
   tasks:
