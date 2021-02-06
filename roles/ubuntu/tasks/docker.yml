@@ -10,18 +10,18 @@
     state: present
 
 - name: Install Docker packages
-  apt: 
+  apt:
     name: "{{ packages }}"
     state: present
   vars:
     packages:
-      - docker-ce 
+      - docker-ce
       - docker-ce-cli
       - containerd.io
       - docker-compose
 
 - name: Enable Docker service
-  service: 
+  service:
     name: docker
     state: started
     enabled: yes

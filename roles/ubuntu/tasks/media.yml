@@ -1,7 +1,7 @@
 ---
 
 - name: Install media editor
-  apt: 
+  apt:
     name: "{{ packages }}"
     state: present
   vars:

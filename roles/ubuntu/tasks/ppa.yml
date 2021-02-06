@@ -1,6 +1,6 @@
 ---
 # ! PPA
-- name: Add PPA repo for cryptomator 
+- name: Add PPA repo for cryptomator
   apt_repository:
     validate_certs: no
     repo: "ppa:sebastian-stenzel/cryptomator"

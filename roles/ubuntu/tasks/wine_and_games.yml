@@ -1,7 +1,7 @@
 ---
 
 - name: Install wine & steam
-  apt: 
+  apt:
     name: "{{ packages }}"
     state: present
   vars:

@@ -1,7 +1,7 @@
 ---
 
 - name: Install browsers
-  apt: 
+  apt:
     name: "{{ packages }}"
     state: present
   vars:

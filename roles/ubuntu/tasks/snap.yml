@@ -1,3 +1,5 @@
+---
+
 - name: Install develop snap packages
   snap:
     name: "{{ packages }}"

@@ -14,13 +14,13 @@
       - bridge-utils
 
 - name: Enable libvirt service
-  service: 
+  service:
     name: libvirtd
     state: started
     enabled: yes
 
 - name: Install virtualbox
-  apt: 
+  apt:
     name: "{{ packages }}"
     state: present
   vars:
@@ -31,6 +31,6 @@
       - virtualbox-guest-additions-iso
 
 - name: Install vagrant
-  apt: 
+  apt:
     name: vagrant
     state: present
