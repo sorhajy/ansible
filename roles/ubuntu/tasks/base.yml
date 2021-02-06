@@ -1,0 +1,37 @@
+---
+
+- name: Install base packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - wget
+      - gnupg-agent
+      - software-properties-common
+      - gufw
+      - ssh
+      - gnome-tweaks
+      - vim
+      - htop
+      - net-tools
+      - keepassxc
+
+- name: Disable autoload & stop ufw service
+  service:
+    name: ufw
+    state: stopped
+    enabled: no
+
+- name: Inspect SSH key
+  openssh_keypair:
+        path: "/home/{{ os_user }}/.ssh/id_rsa"
+        type: rsa
+        size: 4096
+        state: present
+        force: no
+  become: true
+  become_user: "{{ os_user }}"

@@ -15,19 +15,26 @@
       name: ubuntu
       tasks_from: wallpaper
 
-- name: Configure packages by apt
+- name: Configure base
   hosts: all
   tasks:
   - include_role:
       name: ubuntu
-      tasks_from: apt
+      tasks_from: base
 
-- name: Configure packages from additional repo
+- name: Configure SDK & DevTools # Install SDK packages
   hosts: all
   tasks:
   - include_role:
       name: ubuntu
-      tasks_from: additional_repo
+      tasks_from: sdk
+
+- name: Git Configure
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: git
 
 - name: Configure VPN
   hosts: all
@@ -49,13 +56,6 @@
   - include_role:
       name: ubuntu
       tasks_from: social
-
-- name: Configure SDK & DevTools # Install SDK packages
-  hosts: all
-  tasks:
-  - include_role:
-      name: ubuntu
-      tasks_from: sdk
 
 - name: Configure packages for files
   hosts: all
@@ -106,6 +106,20 @@
       name: ubuntu
       tasks_from: wine_and_games
 
+- name: Configure remote access packages
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: remote_access
+
+- name: Configure packages from additional repo
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: additional_repo
+
 - name: Configure packages by snap
   hosts: all
   tasks:
@@ -126,6 +140,7 @@
   - include_role:
       name: ubuntu
       tasks_from: custom
+
 
 
 - name: Configure system finished # Clear apt cache & useless dependencies

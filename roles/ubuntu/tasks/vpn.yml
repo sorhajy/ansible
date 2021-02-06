@@ -12,3 +12,30 @@
       - network-manager-openconnect-gnome
       - network-manager-openvpn-gnome
       - shadowsocks-libev
+      - tor
+      - i2p
+      - i2pd
+
+- name: Disable autoload & stop tor service
+  service:
+    name: tor
+    state: stopped
+    enabled: no
+
+- name: Disable autoload & stop i2p service
+  service:
+    name: i2p
+    state: stopped
+    enabled: no
+
+- name: Disable autoload & stop i2pd service
+  service:
+    name: i2pd
+    state: stopped
+    enabled: no
+
+- name: Disable autoload & stop shadowsocks service
+  service:
+    name: shadowsocks-libev
+    state: stopped
+    enabled: no

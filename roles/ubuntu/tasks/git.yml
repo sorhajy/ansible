@@ -1,0 +1,31 @@
+---
+
+- name: Create user GIT dir
+  file:
+    path: "/home/{{ os_user }}/git"
+    state: directory
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: "0755"
+  become: true
+  become_user: "{{ os_user }}"
+
+- name: Create git lib dir
+  file:
+    path: "{{ git_lib }}"
+    state: directory
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: "0777"
+
+- name: Clone flutter repo
+  git:
+    repo: https://github.com/flutter/flutter.git
+    dest: "{{ git_lib }}/flutter"
+  become: true
+  become_user: "{{ os_user }}"
+
+- name: Add flutter in PATH
+  lineinfile:
+    path: "/home/{{ os_user }}/.{{ os_shell }}rc"
+    line: export PATH="{{ git_lib }}/flutter/bin:$PATH"
