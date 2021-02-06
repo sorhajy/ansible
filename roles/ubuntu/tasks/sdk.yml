@@ -17,10 +17,16 @@
     state: present
   vars:
     packages:
+      - build-essential
       - git
       - ansible
       - watch
       - cmake
+      - ninja-build
       - gcc
+      - clang
+      - libgtk-3-dev
+      - libblkid-dev
+      - liblzma-dev
       - jq
       - wireshark
