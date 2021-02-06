@@ -1,0 +1,54 @@
+---
+
+- name: Update Homebrew
+  community.general.homebrew:
+    update_homebrew: yes
+    upgrade_all: yes
+
+- name: Configure formulae
+  community.general.homebrew:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - apktool
+      - arp-scan
+      - autossh
+      - cjdns
+      - cmake
+      - cocoapods
+      - exiftool
+      - go
+      - hashcat
+      - heroku #! Need tap
+      - htop
+      - i2p
+      - i2pd
+      - iperf
+      - iperf3
+      - mat2
+      - midnight-commander
+      - minikube
+      - netcat
+      - nmap
+      # - node@14
+      - nomad
+      - openconnect
+      - openjdk@11
+      - openjdk@8
+      - openldap
+      - pipenv
+      - redis
+      - speedtest-cli
+      - sqlite
+      - sshfs
+      - telnet
+      - terraform
+      - tor
+      - tree
+      - watch
+      - wget
+      - zenity
+      - zsh-autosuggestions
+      - zsh-git-prompt
+      - zsh-syntax-highlighting

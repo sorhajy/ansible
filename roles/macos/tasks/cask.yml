@@ -1,0 +1,9 @@
+---
+
+- name: Configure cask
+  community.general.homebrew_cask:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - android-file-transfer

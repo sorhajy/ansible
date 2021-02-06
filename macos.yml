@@ -1,0 +1,22 @@
+---
+
+- name: Configure Tap
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: macos
+      tasks_from: tap
+
+- name: Configure formulae
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: macos
+      tasks_from: formulae
+
+- name: Configure cask
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: macos
+      tasks_from: cask
