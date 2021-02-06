@@ -1,0 +1,14 @@
+---
+
+- name: Install file managing & share packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - transmission
+      - syncthing
+      - filezilla
+      - meld
+      - onionshare
+      - persepolis

@@ -1,6 +1,12 @@
 ---
-- name: Configure system started
+# * Don't forget comment uslesess block for you
+
+- name: Configure system started # Updating apt cache
   hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: start
 
 - name: Configure wallpaper
   hosts: all
@@ -15,6 +21,90 @@
   - include_role:
       name: ubuntu
       tasks_from: apt
+
+- name: Configure packages from additional repo
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: additional_repo
+
+- name: Configure VPN
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: vpn
+
+- name: Configure browsers
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: browsers
+
+- name: Configure social app
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: social
+
+- name: Configure SDK & DevTools # Install SDK packages
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: sdk
+
+- name: Configure packages for files
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: files
+
+- name: Configure Docker packages # Install Docker & Docker-compose from official repo
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: docker
+
+- name: Configure virtualization packages # Install virtualization packages
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: virtualization
+
+- name: Configure packages from PPA # Install packages from PPA repo
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: ppa
+
+- name: Configure Office packages
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: office
+
+- name: Configure Media packages
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: media
+
+- name: Configure Wine packages
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: wine_and_games
 
 - name: Configure packages by snap
   hosts: all
@@ -36,3 +126,11 @@
   - include_role:
       name: ubuntu
       tasks_from: custom
+
+
+- name: Configure system finished # Clear apt cache & useless dependencies
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: end

@@ -1,0 +1,15 @@
+---
+
+- name: Install media editor
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - blender
+      - nvidia-cuda-toolkit # ! Only for Nvidia GPU
+      - gimp
+      - inkscape
+      - vlc
+      - obs-studio
+      - handbrake

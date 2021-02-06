@@ -1,0 +1,12 @@
+---
+
+- name: Install Social
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - telegram-desktop
+      - jami
+      - thunderbird
+      - pidgin

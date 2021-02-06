@@ -1,0 +1,23 @@
+---
+
+- name: Install Java v11
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - openjdk-11-jdk
+      - openjdk-11-jre
+
+- name: Install DevTools
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - git
+      - ansible
+      - watch
+      - cmake
+      - gcc
+      - jq
