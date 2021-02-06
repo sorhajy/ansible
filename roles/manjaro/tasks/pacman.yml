@@ -17,6 +17,8 @@
     - vagrant
     - docker
     - containerd
+    - cmake
+    - ninja
 
 - name: Install wine
   pacman: 
