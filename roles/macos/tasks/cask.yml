@@ -7,3 +7,41 @@
   vars:
     packages:
       - android-file-transfer
+      - android-platform-tools
+      - androidtool
+      - apache-directory-studio
+      - balenaetcher
+      - blender
+      - chromium
+      - cool-retro-term
+      - cryptomator
+      - dbeaver-community
+      - edex-ui
+      - electrum
+      - freecad
+      - gimp
+      - gswitch
+      - inkscape
+      - jitsi-meet
+      - kdiff3
+      - keepassxc
+      - librecad
+      - libreoffice
+      - meld
+      - ngrok
+      - nitroshare
+      - obsidian
+      - openconnect-gui
+      - osxfuse
+      - outline-manager
+      - patchwork
+      - persepolis-download-manager
+      - radicle-upstream
+      - scribus
+      - shadowsocksx-ng
+      - sql-power-architect-jdbc
+      - turbo-boost-switcher
+      - vagrant
+      - vagrant-manager
+      - veracrypt
+      - vnc-viewer
