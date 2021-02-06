@@ -5,7 +5,11 @@
     classic: yes
   vars:
     packages:
+      - pycharm-community
+      - intellij-idea-community
       - android-studio
+      - postman
+      - dbeaver-ce
 
 - name: Install social snap packages
   snap:
@@ -15,4 +19,16 @@
   vars:
     packages:
     - slack
+    - zoom-client
     - skype
+    - ssb-patchwork
+
+- name: Install network snap packages
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: yes
+  vars:
+    packages:
+    - ipfs-desktop
+

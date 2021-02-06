@@ -11,7 +11,17 @@
 - name: Add Flathub repo
   command: "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
 
-- name: Install the flathub repo
+- name: Install Delta Chat
   flatpak:
     name: chat.delta
+    state: present
+
+- name: Install Jitsi meet
+  flatpak:
+    name: org.jitsi.jitsi-meet
+    state: present
+
+- name: Install Obsidian
+  flatpak:
+    name: md.obsidian.Obsidian
     state: present

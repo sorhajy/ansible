@@ -26,6 +26,12 @@
     repo: "deb https://packages.riot.im/debian/ default main"
     state: present
 
+- name: Add PPA repo for cryptomator # ! PPA
+  apt_repository:
+    validate_certs: no
+    repo: "ppa:sebastian-stenzel/cryptomator"
+    state: present
+
 - name: Update cache
   apt:
     update_cache: yes
@@ -36,23 +42,52 @@
     state: present
   vars:
     packages:
+      - gufw
       - gnome-tweaks
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - wget
+      - gnupg-agent
+      - software-properties-common
+      - tor
+      - keepassxc
+
+- name: Install DevTools
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
       - git
       - vim
       - ansible
       - htop
       - watch
-      - apt-transport-https
-      - ca-certificates
-      - curl
-      - gnupg-agent
-      - software-properties-common
       - cmake
       - gcc
       - jq
-      - tor
 
-- name: Install browsers 
+- name: Install VPNs & net-utils
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - wireguard
+      - wireguard-tools
+      - openconnect
+      - network-manager-openconnect-gnome
+      - network-manager-openvpn-gnome
+      - shadowsocks-libev
+      - wireshark
+
+- name: Install VeraCrypt
+  apt:
+    deb: https://launchpad.net/veracrypt/trunk/1.24-update7/+download/veracrypt-1.24-Update7-Ubuntu-20.04-amd64.deb
+    state: present
+
+- name: Install browsers
   apt: 
     name: "{{ packages }}"
     state: present
@@ -62,7 +97,7 @@
       - chromium-browser
       - torbrowser-launcher
 
-- name: Install file managing packages
+- name: Install file managing & share packages
   apt:
     name: "{{ packages }}"
     state: present
@@ -70,6 +105,11 @@
     packages:
       - transmission
       - syncthing
+      - filezilla
+      - meld
+      - onionshare
+      - persepolis
+      - cryptomator # ! PPA
 
 - name: Install Java v11
   apt:
@@ -162,6 +202,8 @@
       - element-desktop
       - telegram-desktop
       - jami
+      - thunderbird
+      - pidgin
 
 - name: Install Remote utils
   apt: 
@@ -171,6 +213,7 @@
     packages:
       - remmina
       - remmina-plugin-rdp
+      - remmina-plugin-vnc
 
 - name: Install media editor
   apt: 
@@ -184,6 +227,7 @@
       - inkscape
       - vlc
       - obs-studio
+      - handbrake
 
 - name: Install CAD packages
   apt:
@@ -193,3 +237,10 @@
     packages:
       - freecad
       - librecad
+
+- name: Remove useless packages from the cache
+  apt:
+    autoclean: yes
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
