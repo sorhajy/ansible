@@ -1,54 +1,69 @@
 ---
 
-- name: Update Homebrew
+- name: Update Homebrew & upgrade formulae
   community.general.homebrew:
     update_homebrew: yes
     upgrade_all: yes
 
-- name: Configure formulae
+- name: Configure base formulae
+  community.general.homebrew:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - arp-scan
+      - autossh
+      - cjdns
+      - exiftool
+      - hashcat
+      - htop
+      - iperf
+      - iperf3
+      - mat2
+      - midnight-commander
+      - netcat
+      - nmap
+      - openconnect
+      - openldap
+      - speedtest-cli
+      - sshfs
+      - telnet
+      - terraform
+      - tree
+      - watch
+      - wget
+      - zsh-autosuggestions
+      - zsh-git-prompt
+      - zsh-syntax-highlighting
+
+- name: Configure DevTools formulae
   community.general.homebrew:
     name: "{{ packages }}"
     state: present
   vars:
     packages:
       - apktool
-      - arp-scan
-      - autossh
-      - cjdns
       - cmake
       - cocoapods
-      - exiftool
       - go
-      - hashcat
-      - heroku #! Need tap
-      - htop
-      - i2p
-      - i2pd
-      - iperf
-      - iperf3
-      - mat2
-      - midnight-commander
-      - minikube
-      - netcat
-      - nmap
-      # - node@14
-      - nomad
-      - openconnect
       - openjdk@11
       - openjdk@8
-      - openldap
       - pipenv
-      - redis
-      - speedtest-cli
-      - sqlite
-      - sshfs
-      - telnet
-      - terraform
-      - tor
-      - tree
-      - watch
-      - wget
       - zenity
-      - zsh-autosuggestions
-      - zsh-git-prompt
-      - zsh-syntax-highlighting
+      - heroku #! Need tap
+      - minikube
+      # - node@14
+      - sqlite
+
+- name: Configure services formulae
+  community.general.homebrew:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - redis
+      - tor
+      - i2p
+      - i2pd
+      - nomad
+      - postgresql@11

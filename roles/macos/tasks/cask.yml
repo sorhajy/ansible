@@ -1,47 +1,159 @@
 ---
 
-- name: Configure cask
+- name: Upgrade Homebrew casks
+  community.general.homebrew_cask:
+    upgrade_all: true
+
+- name: Configure OS cask
   community.general.homebrew_cask:
     name: "{{ packages }}"
     state: present
   vars:
     packages:
+      # - adguard
+      # - appcleaner
+      # - xquartz
+      - gswitch
+      - turbo-boost-switcher
+      - osxfuse
+      # - unlox
+      # - coconutbattery
+
+- name: Configure DevTools cask
+  community.general.homebrew_cask:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      # - sourcetree
+      # - github
+      # - intellij-idea-ce
+      # - pycharm-ce 
+      # - visual-studio-code 
       - android-file-transfer
       - android-platform-tools
       - androidtool
+      # - android-studio 
       - apache-directory-studio
-      - balenaetcher
-      - blender
-      - chromium
-      - cool-retro-term
-      - cryptomator
       - dbeaver-community
-      - edex-ui
-      - electrum
-      - freecad
-      - gimp
-      - gswitch
-      - inkscape
-      - jitsi-meet
       - kdiff3
-      - keepassxc
-      - librecad
-      - libreoffice
       - meld
       - ngrok
-      - nitroshare
       - obsidian
-      - openconnect-gui
-      - osxfuse
-      - outline-manager
-      - patchwork
-      - persepolis-download-manager
-      - radicle-upstream
-      - scribus
-      - shadowsocksx-ng
-      - sql-power-architect-jdbc
-      - turbo-boost-switcher
+      - radicle-upstream #* optional
       - vagrant
       - vagrant-manager
+      # - postman
+      - sql-power-architect-jdbc
+      # - cyberduck
+
+# - name: Configure virtualization cask
+#   community.general.homebrew_cask:
+#     name: "{{ packages }}"
+#     state: present
+#   vars:
+#     packages:
+#       - virtualbox
+#       - virtualbox-extension-pack
+#       - vmware-fusion
+#       - docker
+
+- name: Configure file's management cask
+  community.general.homebrew_cask:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - cryptomator
       - veracrypt
+      - nitroshare
+      - persepolis-download-manager
+      # - transmission
+      # - daisydisk
+      # - resilio-sync
+      # - syncthing
+      # - 4k-video-downloader
+      # - onionshare
+      # - gpg-suite-no-mail
+
+- name: Configure browser cask
+  community.general.homebrew_cask:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - chromium
+      # - firefox
+      # - tor-browser
+      # - beaker-browser
+
+- name: Configure utils cask
+  community.general.homebrew_cask:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - balenaetcher
+      - cool-retro-term
+      - edex-ui
+      - electrum
+      - keepassxc
       - vnc-viewer
+      # - teamviewer
+
+- name: Configure social cask
+  community.general.homebrew_cask:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - jitsi-meet
+      - patchwork
+      # - element
+      # - adium
+      # - skype
+      # - skype-for-business
+      # - zoom
+      # - thunderbird
+
+- name: Configure network cask
+  community.general.homebrew_cask:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - openconnect-gui
+      - outline-manager
+      - shadowsocksx-ng
+      # - protonvpn
+      # - tunnelblick
+      # - wireshark
+      # - zeronet
+      # - ipfs
+
+- name: Configure media cask
+  community.general.homebrew_cask:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - blender
+      - gimp
+      - inkscape
+      # - soda-player
+      # - vlc
+      # - iina
+      # - obs
+      # - handbrake
+      # - steam
+
+- name: Configure office cask
+  community.general.homebrew_cask:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - libreoffice
+      - freecad
+      - librecad
+      - scribus
