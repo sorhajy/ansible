@@ -1,0 +1,18 @@
+- name: Install develop snap packages
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: yes
+  vars:
+    packages:
+      - android-studio
+
+- name: Install social snap packages
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: yes
+  vars:
+    packages:
+    - slack
+    - skype

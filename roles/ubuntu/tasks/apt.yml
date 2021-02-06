@@ -1,0 +1,195 @@
+---
+- name: Add Docker GPG key
+  apt_key:
+    url: "https://download.docker.com/linux/ubuntu/gpg"
+    state: present
+- name: Add Docker repo
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release }} stable"
+    state: present
+
+- name: Add VScode GPG key
+  apt_key:
+    url: "https://packages.microsoft.com/keys/microsoft.asc"
+    state: present
+- name: Add VScode repo
+  apt_repository:
+    repo: "deb https://packages.microsoft.com/repos/vscode stable main"
+    state: present
+
+- name: Add Element GPG key
+  apt_key:
+    url: "https://packages.riot.im/debian/riot-im-archive-keyring.gpg"
+    state: present
+- name: Add Element repo
+  apt_repository:
+    repo: "deb https://packages.riot.im/debian/ default main"
+    state: present
+
+- name: Update cache
+  apt:
+    update_cache: yes
+
+- name: Install base packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - gnome-tweaks
+      - git
+      - vim
+      - ansible
+      - htop
+      - watch
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg-agent
+      - software-properties-common
+      - cmake
+      - gcc
+      - jq
+      - tor
+
+- name: Install browsers 
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - firefox
+      - chromium-browser
+      - torbrowser-launcher
+
+- name: Install file managing packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - transmission
+      - syncthing
+
+- name: Install Java v11
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - openjdk-11-jdk
+      - openjdk-11-jre
+
+- name: Install wine & steam
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - wine
+      - playonlinux
+      - steam
+
+- name: Install virtualization packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - vagrant
+      - qemu
+      - qemu-kvm
+      - libvirt-daemon
+      - ebtables
+      - virt-manager
+      - bridge-utils
+
+- name: Enable libvirt service
+  service: 
+    name: libvirtd
+    state: started
+    enabled: yes
+
+- name: Install virtualbox
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - virtualbox
+      - virtualbox-dkms
+      # - virtualbox-ext-pack
+      - virtualbox-guest-additions-iso
+
+- name: Install text editor & IDE
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - libreoffice
+      - code
+
+- name: Install Docker packages
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - docker-ce 
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose
+
+- name: Enable Docker service
+  service: 
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Add the user Docker groups
+  user:
+    name: "{{ os_user }}"
+    groups: docker
+    append: yes
+
+- name: Install Social
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - element-desktop
+      - telegram-desktop
+      - jami
+
+- name: Install Remote utils
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - remmina
+      - remmina-plugin-rdp
+
+- name: Install media editor
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - blender
+      - nvidia-cuda-toolkit
+      - gimp
+      - inkscape
+      - vlc
+      - obs-studio
+
+- name: Install CAD packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - freecad
+      - librecad

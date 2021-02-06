@@ -1,0 +1,31 @@
+---
+- name: Configure system started
+  hosts: all
+
+- name: Configure packages by apt
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: apt
+
+- name: Configure packages by snap
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: snap
+
+- name: Configure packages by flatpak
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: flatpak
+
+- name: Configure custom packages
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu
+      tasks_from: custom
