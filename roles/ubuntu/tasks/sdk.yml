@@ -28,5 +28,22 @@
       - libgtk-3-dev
       - libblkid-dev
       - liblzma-dev
+      - libsasl2-dev
+      - libldap2-dev
+      - libssl-dev
       - jq
+      - python3
+      - python3-pip
+      - python-dev
       - wireshark
+
+- name: Install Redis
+  apt:
+    name: redis
+    state: present
+
+- name: Enable Redis
+  service:
+    name: redis
+    enabled: yes
+    state: started

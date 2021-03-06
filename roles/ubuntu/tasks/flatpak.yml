@@ -21,7 +21,7 @@
     name: org.jitsi.jitsi-meet
     state: present
 
-- name: Install Obsidian
-  flatpak:
-    name: md.obsidian.Obsidian
-    state: present
+# - name: Install Obsidian
+#   flatpak:
+#     name: md.obsidian.Obsidian
+#     state: present

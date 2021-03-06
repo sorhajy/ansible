@@ -39,7 +39,7 @@
       - kdiff3
       - meld
       - ngrok
-      - obsidian
+      # - obsidian #! Proprietary
       - radicle-upstream #* optional
       - vagrant
       - vagrant-manager

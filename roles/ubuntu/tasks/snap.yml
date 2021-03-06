@@ -12,6 +12,7 @@
       - android-studio
       - postman
       - dbeaver-ce
+      - go
 
 - name: Install social snap packages
   snap:

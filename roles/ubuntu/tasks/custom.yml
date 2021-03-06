@@ -13,6 +13,12 @@
     group: "{{ os_user }}"
     mode: '0777'
 
+- name: Download OpenDJ Community Edition
+  unarchive:
+    src: https://github.com/ForgeRock/opendj-community-edition/releases/download/ce%2F2.6.4/OpenDJ-2.6.4.zip
+    dest: /opt/
+    remote_src: yes
+
 - name: Install VeraCrypt
   apt:
     deb: https://launchpad.net/veracrypt/trunk/1.24-update7/+download/veracrypt-1.24-Update7-Ubuntu-20.04-amd64.deb

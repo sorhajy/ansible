@@ -19,6 +19,7 @@
       - htop
       - net-tools
       - keepassxc
+      - guake
 
 - name: Disable autoload & stop ufw service
   service:
@@ -26,12 +27,17 @@
     state: stopped
     enabled: no
 
+- name: Check SSH dir
+  file: 
+    path: "/home/{{ os_user }}/.ssh"
+    state: directory
+
 - name: Inspect SSH key
   openssh_keypair:
-        path: "/home/{{ os_user }}/.ssh/id_rsa"
-        type: rsa
-        size: 4096
-        state: present
-        force: no
+    path: "/home/{{ os_user }}/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    state: present
+    force: no
   become: true
   become_user: "{{ os_user }}"
