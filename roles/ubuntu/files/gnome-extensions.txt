@@ -1,0 +1,6 @@
+https://extensions.gnome.org/extension/1804/sermon/
+https://extensions.gnome.org/extension/1034/services-systemd/
+https://extensions.gnome.org/extension/1269/gnome-vagrant-indicator/
+https://extensions.gnome.org/extension/1065/docker-status/
+https://extensions.gnome.org/extension/8/places-status-indicator/
+https://extensions.gnome.org/extension/7/removable-drive-menu/
