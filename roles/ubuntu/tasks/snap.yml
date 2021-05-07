@@ -1,5 +1,14 @@
 ---
 
+- name: Install system snap packages
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: yes
+  vars:
+    packages:
+    - kdiskmark
+
 - name: Install develop snap packages
   snap:
     name: "{{ packages }}"
@@ -7,12 +16,26 @@
     classic: yes
   vars:
     packages:
+      # - code
       - pycharm-community
-      - intellij-idea-community
-      - android-studio
+        #- intellij-idea-community
+        #- android-studio
       - postman
       - dbeaver-ce
       - go
+
+- name: Install media snap packages
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: yes
+  vars:
+    packages:
+      - obs-studio
+      - blender
+      - natron
+      - vlc
+      # - handbrake-jz
 
 - name: Install social snap packages
   snap:
@@ -21,9 +44,12 @@
     classic: yes
   vars:
     packages:
+    - thunderbird
+    - telegram-desktop
     - slack
     - zoom-client
     - skype
+    - jami
     - ssb-patchwork
 
 - name: Install network snap packages

@@ -14,12 +14,40 @@
       - software-properties-common
       - gufw
       - ssh
-      - gnome-tweaks
       - vim
       - htop
+      - iotop
+      - ncdu
       - net-tools
       - keepassxc
       - guake
+      - copyq
+      - firejail
+      - gnome-tweaks
+      - gnome-usage
+      - timeshift
+      - flameshot
+      - zram-config
+      - zram-tools
+      - locate
+      - gnome-dictionary
+      - gnome-sushi
+      - devhelp
+      - geany
+
+- name: Install monitor packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - hardinfo
+      - cpupower-gui
+      - gir1.2-gtop-2.0 # for extension
+      - gir1.2-nm-1.0
+      - gir1.2-clutter-1.0
+      - gnome-system-monitor
+      - gsmartcontrol
 
 - name: Disable autoload & stop ufw service
   service:
@@ -32,7 +60,16 @@
     path: "/home/{{ os_user }}/.ssh"
     state: directory
 
-- name: Inspect SSH key
+- name: Inspect root SSH key
+  openssh_keypair:
+    path: "/root/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    state: present
+    force: no
+  become: true
+
+- name: Inspect user SSH key
   openssh_keypair:
     path: "/home/{{ os_user }}/.ssh/id_rsa"
     type: rsa

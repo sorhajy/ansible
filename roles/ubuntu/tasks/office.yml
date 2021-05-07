@@ -1,5 +1,10 @@
 ---
 
+- name: Install calendar
+  apt:
+    name: gnome-calendar 
+    state: present
+
 - name: Install Libre office
   apt:
     name: libreoffice

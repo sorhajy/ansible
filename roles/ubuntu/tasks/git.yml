@@ -18,14 +18,26 @@
     group: "{{ os_user }}"
     mode: "0777"
 
-- name: Clone flutter repo
-  git:
-    repo: https://github.com/flutter/flutter.git
-    dest: "{{ git_lib }}/flutter"
-  become: true
-  become_user: "{{ os_user }}"
+# - name: Clone flutter repo
+#   git:
+#     repo: https://github.com/flutter/flutter.git
+#     dest: "{{ git_lib }}/flutter"
+#   become: true
+#   become_user: "{{ os_user }}"
 
-- name: Add flutter in PATH
-  lineinfile:
-    path: "/home/{{ os_user }}/.{{ os_shell }}rc"
-    line: export PATH="{{ git_lib }}/flutter/bin:$PATH"
+# - name: Add flutter in PATH
+#   lineinfile:
+#     path: "/home/{{ os_user }}/.{{ os_shell }}rc"
+#     line: export PATH="{{ git_lib }}/flutter/bin:$PATH"
+
+# - name: Clone Go repo
+#   git:
+#     repo: https://github.com/golang/go.git
+#     dest: "{{ git_lib }}/go"
+#   become: true
+#   become_user: "{{ os_user }}"
+
+# - name: Add go in PATH
+#   lineinfile:
+#     path: "/home/{{ os_user }}/.{{ os_shell }}rc"
+#     line: export PATH="{{ git_lib }}/go/bin:$PATH"
