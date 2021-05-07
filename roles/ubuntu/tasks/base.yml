@@ -6,6 +6,10 @@
     state: present
   vars:
     packages:
+      - zsh
+      - zsh-autosuggestions
+      - zsh-git-prompt
+      - zsh-syntax-highlighting
       - apt-transport-https
       - ca-certificates
       - curl
@@ -34,6 +38,31 @@
       - gnome-sushi
       - devhelp
       - geany
+      - mat2
+      - apktool
+      - arp-scan
+      - autossh
+      - cmake
+      - libimage-exiftool-perl
+      - hashcat
+      - iperf
+      - iperf3
+      - jq
+      - netcat
+      - nmap
+      - ldap-utils
+      - pipenv
+      - virtualenv
+      - pv
+      - qrencode
+      - rsync
+      - speedtest-cli
+      - smartmontools
+      - sshfs
+      - telnet
+      - tree
+      - watch
+      - youtube-dl
 
 - name: Install monitor packages
   apt:
