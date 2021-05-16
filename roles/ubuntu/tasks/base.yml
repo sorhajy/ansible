@@ -67,6 +67,7 @@
       - android-file-transfer
       - android-platform-tools-base
       - snapd
+      - gparted
 
 - name: Install monitor packages
   apt:
