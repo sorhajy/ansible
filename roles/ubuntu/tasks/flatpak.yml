@@ -11,62 +11,62 @@
 - name: Add Flathub repo
   command: "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
 
-- name: Install Base packages
+- name: Install Electrum
   flatpak:
-    name: "{{ packages }}"
+    name: org.electrum.electrum
     state: present
-  vars:
-    packages:
-      # - org.keepassxc.KeePassXC
-      - org.electrum.electrum
-      - net.cozic.joplin_desktop
-      - com.leinardi.gst # GTK Stress Testing
-      # - com.leinardi.gwe # Nvidia GPU util # ! Nvidia only
-      # - org.libreoffice.LibreOffice
-      - org.freecadweb.FreeCAD
-      - net.scribus.Scribus
-      - org.shadowsocks.qt5client
-      # - md.obsidian.Obsidian # ! Proprietary
 
-# - name: Install DevTools
+- name: Install Joplin
+  flatpak:
+    name: net.cozic.joplin_desktop
+    state: present
+
+- name: Install GTK Stress Testing
+  flatpak:
+    name: com.leinardi.gst
+    state: present
+
+- name: Install Nvidia GPU util # ! Nvidia only
+  flatpak:
+    name: com.leinardi.gwe
+    state: present
+
+- name: Install FreeCAD
+  flatpak:
+    name: org.freecadweb.FreeCAD
+    state: present
+
+- name: Install Scribus
+  flatpak:
+    name: net.scribus.Scribus
+    state: present
+
+- name: Install Shadowsocks Qt5 client
+  flatpak:
+    name: org.shadowsocks.qt5client
+    state: present
+
+# - name: Install Obsidian # ! Proprietary
 #   flatpak:
-#     name: "{{ packages }}"
+#     name: md.obsidian.Obsidian
 #     state: present
-#   vars:
-#     packages:
-      # - com.visualstudio.code # ? Unofficial
-      # - com.getpostman.Postman
-      # - com.jetbrains.PyCharm-Community
-      # - io.dbeaver.DBeaverCommunity
-      # - org.gnome.meld
 
-- name: Install Social
+- name: Install Pidgin
   flatpak:
-    name: "{{ packages }}"
+    name: im.pidgin.Pidgin
     state: present
-  vars:
-    packages:
-      - im.pidgin.Pidgin
-      - chat.delta
-      # - com.slack.Slack
-      - org.jitsi.jitsi-meet
-      # - org.mozilla.Thunderbird
-      # - us.zoom.Zoom
-      # - com.skype.Client
-      # - net.jami.Jami
 
-- name: Install Media
+- name: Install Delta Chat
   flatpak:
-    name: "{{ packages }}"
+    name: chat.delta
     state: present
-  vars:
-    packages:
-      # - com.obsproject.Studio
-      - org.audacityteam.Audacity
-      # - org.blender.Blender
-      # - fr.natron.Natron
-      # - org.gimp.GIMP
-      # - org.inkscape.Inkscape
-      # - fr.handbrake.ghb
-      # - org.videolan.VLC
-      # - io.mpv.Mpv
+
+- name: Install Jitsi Meet
+  flatpak:
+    name: org.jitsi.jitsi-meet
+    state: present
+
+- name: Install Autdacity
+  flatpak:
+    name: org.audacityteam.Audacity
+    state: present
