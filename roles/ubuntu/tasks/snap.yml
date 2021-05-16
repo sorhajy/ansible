@@ -4,10 +4,35 @@
   snap:
     name: "{{ packages }}"
     state: present
-    classic: yes
+    classic: no
   vars:
     packages:
     - kdiskmark
+    - keepassxc
+
+- name: Install office snap packages
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: no
+  vars:
+    packages:
+    - libreoffice
+
+- name: Install develop snap packages with classic
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: yes
+  vars:
+    packages:
+    - sosumi # ?
+    - code
+    - pycharm-community
+    # - intellij-idea-community
+    # - android-studio
+    - go
+    - google-cloud-sdk
 
 - name: Install develop snap packages
   snap:
@@ -16,37 +41,51 @@
     classic: yes
   vars:
     packages:
-      # - code
-      - pycharm-community
-        #- intellij-idea-community
-        #- android-studio
-      - postman
-      - dbeaver-ce
-      - go
+    - postman
+    - dbeaver-ce
+    - ngrok
+
+- name: Install media snap packages with classic
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: yes
+  vars:
+    packages:
+    - blender
 
 - name: Install media snap packages
   snap:
     name: "{{ packages }}"
     state: present
-    classic: yes
+    classic: no
   vars:
     packages:
-      - obs-studio
-      - blender
-      - natron
-      - vlc
-      # - handbrake-jz
+    - obs-studio
+    - natron
+    - vlc
+    - handbrake-jz
+    - gimp
+    - inkscape
 
-- name: Install social snap packages
+- name: Install social snap packages with classic
   snap:
     name: "{{ packages }}"
     state: present
     classic: yes
   vars:
     packages:
+    - slack
+
+- name: Install social snap packages
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: no
+  vars:
+    packages:
     - thunderbird
     - telegram-desktop
-    - slack
     - zoom-client
     - skype
     - jami
@@ -56,7 +95,7 @@
   snap:
     name: "{{ packages }}"
     state: present
-    classic: yes
+    classic: no
   vars:
     packages:
     - ipfs-desktop

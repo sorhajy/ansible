@@ -11,37 +11,62 @@
 - name: Add Flathub repo
   command: "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
 
-- name: Install Pidgin
+- name: Install Base packages
   flatpak:
-    name: im.pidgin.Pidgin
+    name: "{{ packages }}"
     state: present
+  vars:
+    packages:
+      # - org.keepassxc.KeePassXC
+      - org.electrum.electrum
+      - net.cozic.joplin_desktop
+      - com.leinardi.gst # GTK Stress Testing
+      # - com.leinardi.gwe # Nvidia GPU util # ! Nvidia only
+      # - org.libreoffice.LibreOffice
+      - org.freecadweb.FreeCAD
+      - net.scribus.Scribus
+      - org.shadowsocks.qt5client
+      # - md.obsidian.Obsidian # ! Proprietary
 
-- name: Install GTK Stress Testing
-  flatpak:
-    name: com.leinardi.gst
-    state: present
-
-# - name: Install Nvidia GPU util # ! Nvidia only
+# - name: Install DevTools
 #   flatpak:
-#     name: com.leinardi.gwe
+#     name: "{{ packages }}"
 #     state: present
+#   vars:
+#     packages:
+      # - com.visualstudio.code # ? Unofficial
+      # - com.getpostman.Postman
+      # - com.jetbrains.PyCharm-Community
+      # - io.dbeaver.DBeaverCommunity
+      # - org.gnome.meld
 
-- name: Install Delta Chat
+- name: Install Social
   flatpak:
-    name: chat.delta
+    name: "{{ packages }}"
     state: present
+  vars:
+    packages:
+      - im.pidgin.Pidgin
+      - chat.delta
+      # - com.slack.Slack
+      - org.jitsi.jitsi-meet
+      # - org.mozilla.Thunderbird
+      # - us.zoom.Zoom
+      # - com.skype.Client
+      # - net.jami.Jami
 
-- name: Install Jitsi meet
+- name: Install Media
   flatpak:
-    name: org.jitsi.jitsi-meet
+    name: "{{ packages }}"
     state: present
-
-- name: Install Joplin
-  flatpak:
-    name: net.cozic.joplin_desktop
-    state: present
-
-# - name: Install Obsidian
-#   flatpak:
-#     name: md.obsidian.Obsidian
-#     state: present
+  vars:
+    packages:
+      # - com.obsproject.Studio
+      - org.audacityteam.Audacity
+      # - org.blender.Blender
+      # - fr.natron.Natron
+      # - org.gimp.GIMP
+      # - org.inkscape.Inkscape
+      # - fr.handbrake.ghb
+      # - org.videolan.VLC
+      # - io.mpv.Mpv

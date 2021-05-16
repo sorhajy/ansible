@@ -1,6 +1,6 @@
 ---
 # ! PPA
-- name: Add PPA repo for cryptomator
+- name: Add PPA repo for Cryptomator
   apt_repository:
     validate_certs: no
     repo: "ppa:sebastian-stenzel/cryptomator"
@@ -10,3 +10,13 @@
   apt:
     name: cryptomator
     state: present
+
+# - name: Add PPA repo for Persepolis
+#   apt_repository:
+#     validate_certs: no
+#     repo: "ppa:persepolis/ppa"
+#     state: present
+# - name: Install Persepolis
+#   apt:
+#     name: persepolis
+#     state: present

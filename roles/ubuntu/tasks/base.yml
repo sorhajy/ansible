@@ -6,10 +6,10 @@
     state: present
   vars:
     packages:
-      - zsh
-      - zsh-autosuggestions
-      - zsh-git-prompt
-      - zsh-syntax-highlighting
+      # - zsh
+      # - zsh-autosuggestions
+      # - zsh-git-prompt
+      # - zsh-syntax-highlighting
       - apt-transport-https
       - ca-certificates
       - curl
@@ -63,6 +63,10 @@
       - tree
       - watch
       - youtube-dl
+      - zstd
+      - android-file-transfer
+      - android-platform-tools-base
+      - snapd
 
 - name: Install monitor packages
   apt:

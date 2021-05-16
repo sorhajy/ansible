@@ -6,10 +6,11 @@
     state: present
   vars:
     packages:
+      # - mvp
       # - blender
       # - nvidia-cuda-toolkit # ! Only for Nvidia GPU
-      - gimp
-      - inkscape
+      # - gimp
+      # - inkscape
       # - vlc
       # - obs-studio
-      - handbrake
+      # - handbrake
