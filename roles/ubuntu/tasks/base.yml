@@ -88,6 +88,11 @@
     state: stopped
     enabled: no
 
+- name: Check root SSH dir
+  file: 
+    path: "/root/.ssh"
+    state: directory
+
 - name: Check SSH dir
   file: 
     path: "/home/{{ os_user }}/.ssh"
