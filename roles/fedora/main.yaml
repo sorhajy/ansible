@@ -7,9 +7,6 @@
     packages:
     - git
     - ansible
-    - zsh
-    - zsh-autosuggestions
-    - zsh-syntax-highlighting
     - ca-certificates
     - curl
     - wget

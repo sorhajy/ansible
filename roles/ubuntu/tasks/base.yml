@@ -6,10 +6,6 @@
     state: present
   vars:
     packages:
-      # - zsh
-      # - zsh-autosuggestions
-      # - zsh-git-prompt
-      # - zsh-syntax-highlighting
       - apt-transport-https
       - ca-certificates
       - curl
