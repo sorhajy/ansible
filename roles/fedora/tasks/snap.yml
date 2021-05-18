@@ -1,0 +1,109 @@
+---
+
+- name: Create snap symbolic link 
+  file:
+    src: "/var/lib/snapd/snap"
+    dest: "/snap"
+    state: link
+
+- name: Install system snap packages
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: no
+  vars:
+    packages:
+    - core
+    - kdiskmark
+    # - keepassxc
+
+# - name: Install office snap packages
+#   snap:
+#     name: "{{ packages }}"
+#     state: present
+#     classic: no
+#   vars:
+#     packages:
+#     - libreoffice
+
+- name: Install develop snap packages with classic
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: yes
+  vars:
+    packages:
+    - sosumi # ?
+    # - code
+    - pycharm-community
+    # - intellij-idea-community
+    # - android-studio
+    - go
+    - google-cloud-sdk
+
+- name: Install develop snap packages
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: yes
+  vars:
+    packages:
+    - postman
+    - dbeaver-ce
+    - ngrok
+
+# - name: Install media snap packages with classic
+#   snap:
+#     name: "{{ packages }}"
+#     state: present
+#     classic: yes
+#   vars:
+#     packages:
+#     - blender
+
+- name: Install media snap packages
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: no
+  vars:
+    packages:
+    # - obs-studio
+    - natron
+    # - vlc
+    # - handbrake-jz
+    # - gimp
+    # - inkscape
+
+- name: Install social snap packages with classic
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: yes
+  vars:
+    packages:
+    - slack
+
+- name: Install social snap packages
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: no
+  vars:
+    packages:
+    # - thunderbird
+    - telegram-desktop
+    - zoom-client
+    - skype
+    - jami
+    - ssb-patchwork
+
+- name: Install network snap packages
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: no
+  vars:
+    packages:
+    - ipfs-desktop
+

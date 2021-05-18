@@ -1,0 +1,52 @@
+---
+
+- name: Inspect old packages & remove them
+  dnf:
+    name: "{{ packages }}"
+    state: absent
+  vars:
+    packages:
+      - docker
+      - docker-client
+      - docker-client-latest
+      - docker-common
+      - docker-latest
+      - docker-latest-logrotate
+      - docker-logrotate
+      - docker-selinux
+      - docker-engine-selinux
+      - docker-engine
+
+- name: Add Docker GPG key
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://download.docker.com/linux/fedora/gpg
+- name: Add Docker repo
+  yum_repository:
+    name: Docker
+    description: Docker repo
+    baseurl: https://download.docker.com/linux/fedora/docker-ce.repo
+    enabled: yes
+
+- name: Install Docker packages
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose
+
+- name: Enable Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Add the user Docker groups
+  user:
+    name: "{{ os_user }}"
+    groups: docker
+    append: yes

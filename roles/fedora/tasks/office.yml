@@ -1,0 +1,25 @@
+---
+
+- name: Install calendar
+  dnf:
+    name: gnome-calendar
+    state: present
+
+- name: Install Libre office
+  dnf:
+    name: libreoffice
+    state: present
+
+- name: Install Scribus
+  dnf:
+    name: scribus
+    state: present
+
+- name: Install CAD packages
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - freecad
+      - librecad

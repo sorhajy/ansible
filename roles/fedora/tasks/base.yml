@@ -1,0 +1,106 @@
+---
+
+- name: Install base packages
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - fedora-workstation-repositories
+      - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_release }}.noarch.rpm"
+      - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_release }}.noarch.rpm"
+      - ca-certificates
+      - dkms
+      - kernel-devel
+      - kernel-headers
+      - gcc
+      - bzip2
+      - curl
+      - wget
+      - openssh
+      - vim
+      - htop
+      - iotop
+      - ncdu
+      - net-tools
+      - keepassxc
+      # - guake
+      - copyq
+      - firejail
+      - gnome-tweaks
+      - gnome-usage
+      - timeshift
+      - flameshot
+      - zram
+      - mlocate
+      - gnome-dictionary
+      - sushi
+      - devhelp
+      - geany
+      - arp-scan
+      - autossh
+      - cmake
+      - hashcat
+      - iperf
+      - iperf3
+      - jq
+      - netcat
+      - nmap
+      - openldap
+      - pipenv
+      - virtualenv
+      - pv
+      - qrencode
+      - rsync
+      - speedtest-cli
+      - smartmontools
+      - sshfs
+      - telnet
+      - tree
+      - exif
+      - youtube-dl
+      - zstd
+      # - android-file-transfer
+      # - android-platform-tools-base
+      - snapd
+      - gparted
+
+- name: Install monitor packages
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      # - hardinfo
+      # - cpupower-gui
+      - gnome-system-monitor
+      - gsmartcontrol
+
+- name: Check root SSH dir
+  file: 
+    path: "/root/.ssh"
+    state: directory
+
+- name: Check SSH dir
+  file: 
+    path: "/home/{{ os_user }}/.ssh"
+    state: directory
+
+- name: Inspect root SSH key
+  openssh_keypair:
+    path: "/root/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    state: present
+    force: no
+  become: true
+
+- name: Inspect user SSH key
+  openssh_keypair:
+    path: "/home/{{ os_user }}/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    state: present
+    force: no
+  become: true
+  become_user: "{{ os_user }}"

@@ -1,0 +1,18 @@
+---
+
+- name: Add VScode GPG key
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://packages.microsoft.com/keys/microsoft.asc
+- name: Add VScode repo
+  template:
+    src: vscode.repo.j2
+    dest: "/etc/yum.repos.d/vscode.repo"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Install VScode
+  dnf:
+    name: code
+    state: present

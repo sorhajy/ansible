@@ -1,0 +1,11 @@
+---
+
+- name: Install wine & steam
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - wine
+      - playonlinux
+      - steam

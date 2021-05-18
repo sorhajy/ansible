@@ -1,0 +1,47 @@
+---
+- name: Install flatpak
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - flatpak
+      # - gnome-software-plugin-flatpak
+
+- name: Add Flathub repo
+  command: "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
+
+- name: Install Electrum
+  flatpak:
+    name: org.electrum.electrum
+    state: present
+
+- name: Install Element
+  flatpak:
+    name: im.riot.Riot
+    state: present
+
+- name: Install Joplin
+  flatpak:
+    name: net.cozic.joplin_desktop
+    state: present
+
+- name: Install GTK Stress Testing
+  flatpak:
+    name: com.leinardi.gst
+    state: present
+
+# - name: Install Nvidia GPU util # ! Nvidia only
+#   flatpak:
+#     name: com.leinardi.gwe
+#     state: present
+
+- name: Install Delta Chat
+  flatpak:
+    name: chat.delta
+    state: present
+
+- name: Install Jitsi Meet
+  flatpak:
+    name: org.jitsi.jitsi-meet
+    state: present

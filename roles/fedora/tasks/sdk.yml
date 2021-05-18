@@ -1,0 +1,42 @@
+---
+
+- name: Install Java v8 & v11
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - java-1.8.0-openjdk
+      - java-1.8.0-openjdk-devel
+      - java-11-openjdk
+      - java-11-openjdk-devel
+
+- name: Install DevTools
+  dnf: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - "@Development Tools"
+      - git
+      - ansible
+      - cmake
+      - ninja-build
+      - gcc
+      - clang
+      - jq
+      - python3
+      - python3-pip
+      - python3-devel
+      - wireshark
+
+- name: Install Redis
+  dnf:
+    name: redis
+    state: present
+
+- name: Enable Redis
+  service:
+    name: redis
+    enabled: yes
+    state: started

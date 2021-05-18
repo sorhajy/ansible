@@ -1,0 +1,36 @@
+---
+
+- name: Install KVM packages
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - qemu
+      - qemu-kvm
+      - libvirt-daemon
+      - ebtables
+      - virt-manager
+      - bridge-utils
+
+- name: Enable libvirt service
+  service:
+    name: libvirtd
+    state: started
+    enabled: yes
+
+- name: Install virtualbox
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - VirtualBox
+      # - virtualbox-dkms
+      # - virtualbox-ext-pack #TODO Install manual
+      - virtualbox-guest-additions
+
+- name: Install vagrant
+  dnf:
+    name: vagrant
+    state: present

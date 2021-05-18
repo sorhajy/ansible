@@ -1,0 +1,5 @@
+---
+
+- name: Remove dependencies that are no longer required
+  dnf:
+    autoremove: yes
