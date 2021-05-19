@@ -138,7 +138,7 @@
 
 
 
-- name: Configure system finished # Clear apt cache & useless dependencies
+- name: Configure system finished # Clear dnf cache & useless dependencies
   hosts: localhost
   tasks:
   - include_role:
