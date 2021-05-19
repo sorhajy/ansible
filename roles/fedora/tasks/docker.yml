@@ -22,11 +22,9 @@
     state: present
     key: https://download.docker.com/linux/fedora/gpg
 - name: Add Docker repo
-  yum_repository:
-    name: Docker
-    description: Docker repo
-    baseurl: https://download.docker.com/linux/fedora/docker-ce.repo
-    enabled: yes
+  get_url:
+    url: https://download.docker.com/linux/fedora/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
 
 - name: Install Docker packages
   dnf:
