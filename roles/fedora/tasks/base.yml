@@ -81,10 +81,12 @@
     path: "/root/.ssh"
     state: directory
 
-- name: Check SSH dir
-  file: 
+- name: Check user SSH dir
+  file:
     path: "/home/{{ os_user }}/.ssh"
     state: directory
+  become: true
+  become_user: "{{ os_user }}"
 
 - name: Inspect root SSH key
   openssh_keypair:
