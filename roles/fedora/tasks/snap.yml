@@ -38,8 +38,8 @@
     - pycharm-community
     # - intellij-idea-community
     # - android-studio
-    - go
-    - google-cloud-sdk
+    # - go
+    # - google-cloud-sdk
 
 - name: Install develop snap packages
   snap:

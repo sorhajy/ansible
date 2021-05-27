@@ -16,3 +16,20 @@
   dnf:
     name: code
     state: present
+
+- name: Add Google Cloud SDK GPG key
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://packages.cloud.google.com/yum/doc/yum-key.gpg
+- name: Add Google Cloud SDK repo
+  template:
+    src: google-cloud-sdk.repo.j2
+    dest: "/etc/yum.repos.d/vscode.repo"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Install Google Cloud SDK
+  dnf:
+    name: google-cloud-sdk
+    state: present
