@@ -15,16 +15,6 @@
     packages:
     - core
     - kdiskmark
-    # - keepassxc
-
-# - name: Install office snap packages
-#   snap:
-#     name: "{{ packages }}"
-#     state: present
-#     classic: no
-#   vars:
-#     packages:
-#     - libreoffice
 
 - name: Install develop snap packages with classic
   snap:
@@ -33,13 +23,10 @@
     classic: yes
   vars:
     packages:
-    - sosumi # ?
-    # - code
+    - sosumi
     - pycharm-community
     # - intellij-idea-community
     # - android-studio
-    # - go
-    # - google-cloud-sdk
 
 - name: Install develop snap packages
   snap:
@@ -52,15 +39,6 @@
     - dbeaver-ce
     - ngrok
 
-# - name: Install media snap packages with classic
-#   snap:
-#     name: "{{ packages }}"
-#     state: present
-#     classic: yes
-#   vars:
-#     packages:
-#     - blender
-
 - name: Install media snap packages
   snap:
     name: "{{ packages }}"
@@ -68,12 +46,7 @@
     classic: no
   vars:
     packages:
-    # - obs-studio
     - natron
-    # - vlc
-    # - handbrake-jz
-    # - gimp
-    # - inkscape
 
 - name: Install social snap packages with classic
   snap:
@@ -91,7 +64,6 @@
     classic: no
   vars:
     packages:
-    # - thunderbird
     - telegram-desktop
     - zoom-client
     - skype
