@@ -5,10 +5,10 @@
     name: gnome-calendar
     state: present
 
-# - name: Install Libre office
-#   apt:
-#     name: libreoffice
-#     state: present
+- name: Install Libre office
+  apt:
+    name: libreoffice
+    state: present
 
 - name: Install CAD packages
   apt:
@@ -16,5 +16,5 @@
     state: present
   vars:
     packages:
-      # - freecad
+      - freecad
       - librecad

@@ -51,11 +51,6 @@
 #     name: md.obsidian.Obsidian
 #     state: present
 
-- name: Install Pidgin
-  flatpak:
-    name: im.pidgin.Pidgin
-    state: present
-
 - name: Install Delta Chat
   flatpak:
     name: chat.delta

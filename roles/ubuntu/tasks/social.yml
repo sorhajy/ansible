@@ -7,6 +7,6 @@
   vars:
     packages:
       # - telegram-desktop
-      # - jami
-      # - thunderbird
-      # - pidgin
+      - jami
+      - thunderbird
+      - pidgin

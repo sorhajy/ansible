@@ -7,10 +7,10 @@
   vars:
     packages:
       - mvp
-      # - blender
+      - blender
       # - nvidia-cuda-toolkit # ! Only for Nvidia GPU
-      # - gimp
-      # - inkscape
-      # - vlc
-      # - obs-studio
-      # - handbrake
+      - gimp
+      - inkscape
+      - vlc
+      - obs-studio
+      - handbrake
