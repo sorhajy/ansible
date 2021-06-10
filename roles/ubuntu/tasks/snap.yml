@@ -19,7 +19,7 @@
   vars:
     packages:
     - sosumi # ?
-    - code
+    # - code
     - pycharm-community
     # - intellij-idea-community
     # - android-studio

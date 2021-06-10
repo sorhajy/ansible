@@ -46,10 +46,10 @@
     name: org.shadowsocks.qt5client
     state: present
 
-# - name: Install Obsidian # ! Proprietary
-#   flatpak:
-#     name: md.obsidian.Obsidian
-#     state: present
+- name: Install Obsidian # ! Proprietary
+  flatpak:
+    name: md.obsidian.Obsidian
+    state: present
 
 - name: Install Delta Chat
   flatpak:
