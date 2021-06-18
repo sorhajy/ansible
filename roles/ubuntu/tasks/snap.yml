@@ -8,8 +8,6 @@
   vars:
     packages:
     - kdiskmark
-    - keepassxc
-
 
 - name: Install develop snap packages with classic
   snap:
@@ -18,11 +16,8 @@
     classic: yes
   vars:
     packages:
-    - sosumi # ?
-    # - code
+    # - sosumi # * MacOS VM
     - pycharm-community
-    # - intellij-idea-community
-    # - android-studio
     - go
     - google-cloud-sdk
 
@@ -30,21 +25,12 @@
   snap:
     name: "{{ packages }}"
     state: present
-    classic: yes
+    classic: no
   vars:
     packages:
     - postman
     - dbeaver-ce
     - ngrok
-
-- name: Install media snap packages
-  snap:
-    name: "{{ packages }}"
-    state: present
-    classic: no
-  vars:
-    packages:
-    - natron
 
 - name: Install social snap packages with classic
   snap:
@@ -62,7 +48,6 @@
     classic: no
   vars:
     packages:
-    - telegram-desktop
     - zoom-client
     - skype
     - ssb-patchwork
@@ -75,4 +60,3 @@
   vars:
     packages:
     - ipfs-desktop
-

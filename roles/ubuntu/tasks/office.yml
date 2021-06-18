@@ -10,11 +10,3 @@
     name: libreoffice
     state: present
 
-- name: Install CAD packages
-  apt:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - freecad
-      - librecad

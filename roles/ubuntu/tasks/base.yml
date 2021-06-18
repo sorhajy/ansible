@@ -12,16 +12,13 @@
       - wget
       - gnupg-agent
       - software-properties-common
-      - gufw
+      - ufw
       - ssh
       - vim
       - htop
       - iotop
       - ncdu
       - net-tools
-      - keepassxc
-      - guake
-      - copyq
       - firejail
       - gnome-tweaks
       - gnome-usage
@@ -32,18 +29,15 @@
       - locate
       - gnome-dictionary
       - gnome-sushi
-      - devhelp
-      - geany
       - mat2
-      - apktool
       - arp-scan
       - autossh
       - cmake
       - libimage-exiftool-perl
-      - hashcat
       - iperf
       - iperf3
       - jq
+      - jo
       - netcat
       - nmap
       - ldap-utils
@@ -64,6 +58,9 @@
       - android-platform-tools-base
       - snapd
       - gparted
+      - keepassxc
+      - guake
+      - copyq
 
 - name: Install monitor packages
   apt:

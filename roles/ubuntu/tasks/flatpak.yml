@@ -16,34 +16,14 @@
     name: org.electrum.electrum
     state: present
 
-- name: Install Joplin
-  flatpak:
-    name: net.cozic.joplin_desktop
-    state: present
-
 - name: Install GTK Stress Testing
   flatpak:
     name: com.leinardi.gst
     state: present
 
-# - name: Install Nvidia GPU util # ! Nvidia only
-#   flatpak:
-#     name: com.leinardi.gwe
-#     state: present
-
-- name: Install FreeCAD
+- name: Install Nvidia GPU util # ! Nvidia only
   flatpak:
-    name: org.freecadweb.FreeCAD
-    state: present
-
-- name: Install Scribus
-  flatpak:
-    name: net.scribus.Scribus
-    state: present
-
-- name: Install Shadowsocks Qt5 client
-  flatpak:
-    name: org.shadowsocks.qt5client
+    name: com.leinardi.gwe
     state: present
 
 - name: Install Obsidian # ! Proprietary
@@ -59,9 +39,4 @@
 - name: Install Jitsi Meet
   flatpak:
     name: org.jitsi.jitsi-meet
-    state: present
-
-- name: Install Autdacity
-  flatpak:
-    name: org.audacityteam.Audacity
     state: present
