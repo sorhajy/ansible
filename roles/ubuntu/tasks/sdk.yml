@@ -37,6 +37,6 @@
 
 - name: Disable Redis
   service:
-    name: redis
+    name: redis-server
     enabled: no
     state: stopped
