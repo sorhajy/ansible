@@ -56,7 +56,6 @@
       - snapd
       - gparted
       - keepassxc
-      - guake
       - copyq
 
 - name: Disable autoload & stop ufw service

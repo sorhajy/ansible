@@ -1,5 +1,10 @@
 ---
 
+- name: Allow snapd
+  file:
+    dest: /etc/apt/preferences.d/nosnap.pref
+    state: absent
+
 - name: Update apt cache
   apt:
     update_cache: yes
