@@ -10,13 +10,3 @@
   apt:
     name: cryptomator
     state: present
-
-# - name: Add PPA repo for Persepolis
-#   apt_repository:
-#     validate_certs: no
-#     repo: "ppa:persepolis/ppa"
-#     state: present
-# - name: Install Persepolis
-#   apt:
-#     name: persepolis
-#     state: present
