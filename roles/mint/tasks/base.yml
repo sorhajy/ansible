@@ -1,0 +1,95 @@
+---
+
+- name: Install base packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - wget
+      - gnupg-agent
+      - software-properties-common
+      - ufw
+      - ssh
+      - screen
+      - vim
+      - htop
+      - iotop
+      - ncdu
+      - net-tools
+      - firejail
+      - timeshift
+      - flameshot
+      - zram-config
+      - zram-tools
+      - locate
+      - gnome-sushi
+      - mat2
+      - arp-scan
+      - autossh
+      - cmake
+      - libimage-exiftool-perl
+      - iperf
+      - iperf3
+      - jq
+      - jo
+      - netcat
+      - nmap
+      - ldap-utils
+      - pipenv
+      - virtualenv
+      - pv
+      - qrencode
+      - rsync
+      - speedtest-cli
+      - smartmontools
+      - sshfs
+      - telnet
+      - tree
+      - watch
+      - zstd
+      - android-file-transfer
+      - android-platform-tools-base
+      - snapd
+      - gparted
+      - keepassxc
+      - guake
+      - copyq
+
+- name: Disable autoload & stop ufw service
+  service:
+    name: ufw
+    state: stopped
+    enabled: no
+
+- name: Check root SSH dir
+  file: 
+    path: "/root/.ssh"
+    state: directory
+
+- name: Check SSH dir
+  file: 
+    path: "/home/{{ os_user }}/.ssh"
+    state: directory
+
+- name: Inspect root SSH key
+  openssh_keypair:
+    path: "/root/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    state: present
+    force: no
+  become: true
+
+- name: Inspect user SSH key
+  openssh_keypair:
+    path: "/home/{{ os_user }}/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    state: present
+    force: no
+  become: true
+  become_user: "{{ os_user }}"

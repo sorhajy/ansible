@@ -1,0 +1,15 @@
+---
+
+- name: Install VPNs
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - wireguard
+      - wireguard-tools
+      - openconnect
+      - network-manager-l2tp
+      - network-manager-l2tp-gnome
+      - network-manager-openconnect-gnome
+      - network-manager-openvpn-gnome

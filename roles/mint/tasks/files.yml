@@ -1,0 +1,12 @@
+---
+
+- name: Install file managing & share packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - transmission
+      - filezilla
+      - meld
+      - persepolis

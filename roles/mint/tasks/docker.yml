@@ -1,0 +1,33 @@
+---
+
+- name: Add Docker GPG key
+  apt_key:
+    url: "https://download.docker.com/linux/ubuntu/gpg"
+    state: present
+- name: Add Docker repo
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release }} stable"
+    state: present
+
+- name: Install Docker packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose
+
+- name: Enable Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Add the user Docker groups
+  user:
+    name: "{{ os_user }}"
+    groups: docker
+    append: yes
