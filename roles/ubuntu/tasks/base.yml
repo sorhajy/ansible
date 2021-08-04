@@ -55,7 +55,7 @@
       - snapd
 
 - name: Install base packages
-  dnf:
+  apt:
     name: "{{ packages }}"
     state: present
   vars:
