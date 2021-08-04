@@ -1,6 +1,6 @@
 ---
 
-- name: Install base packages
+- name: Install system packages and libs
   apt:
     name: "{{ packages }}"
     state: present
@@ -21,20 +21,15 @@
       - ncdu
       - net-tools
       - firejail
-      - gnome-tweaks
-      - gnome-usage
-      - timeshift
-      - flameshot
       - zram-config
       - zram-tools
       - locate
-      - gnome-dictionary
-      - gnome-sushi
       - mat2
       - arp-scan
       - autossh
       - cmake
       - libimage-exiftool-perl
+      - exif
       - iperf
       - iperf3
       - jq
@@ -58,6 +53,19 @@
       - android-file-transfer
       - android-platform-tools-base
       - snapd
+
+- name: Install base packages
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - gnome-tweaks
+      - gnome-usage
+      - timeshift
+      - flameshot
+      - gnome-dictionary
+      - gnome-sushi
       - gparted
       - keepassxc
       - guake
@@ -71,9 +79,9 @@
     packages:
       - hardinfo
       - cpupower-gui
-      - gir1.2-gtop-2.0 # for extension
-      - gir1.2-nm-1.0
-      - gir1.2-clutter-1.0
+      # - gir1.2-gtop-2.0 # for extension
+      # - gir1.2-nm-1.0
+      # - gir1.2-clutter-1.0
       - gnome-system-monitor
       - gsmartcontrol
 
