@@ -6,8 +6,8 @@
     state: present
   vars:
     packages:
-      - java-1.8.0-openjdk
-      - java-1.8.0-openjdk-devel
+      # - java-1.8.0-openjdk
+      # - java-1.8.0-openjdk-devel
       - java-11-openjdk
       - java-11-openjdk-devel
 
@@ -39,5 +39,5 @@
 - name: Enable Redis
   service:
     name: redis
-    enabled: yes
-    state: started
+    enabled: no
+    state: stopped

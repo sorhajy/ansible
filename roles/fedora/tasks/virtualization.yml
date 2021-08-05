@@ -26,8 +26,7 @@
   vars:
     packages:
       - VirtualBox
-      # - virtualbox-dkms
-      # - virtualbox-ext-pack #TODO Install manual
+      - kmod-VirtualBox
       - virtualbox-guest-additions
 
 - name: Install vagrant

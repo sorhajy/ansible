@@ -1,6 +1,6 @@
 ---
 
-- name: Install base packages
+- name: Install system packages
   dnf:
     name: "{{ packages }}"
     state: present
@@ -23,24 +23,14 @@
       - iotop
       - ncdu
       - net-tools
-      - keepassxc
-      # - guake
-      - copyq
       - firejail
-      - gnome-tweaks
       - gnome-usage
-      - timeshift
-      - flameshot
       - zram
       - mlocate
       - gnome-dictionary
-      - sushi
-      - devhelp
-      - geany
       - arp-scan
       - autossh
       - cmake
-      - hashcat
       - iperf
       - iperf3
       - jq
@@ -60,10 +50,28 @@
       - exif
       - youtube-dl
       - zstd
-      # - android-file-transfer
-      # - android-platform-tools-base
+      - android-file-transfer
+      - android-platform-tools-base
       - snapd
+
+- name: Install base packages
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - keepassxc
+      - guake
+      - copyq
       - gparted
+      - geany
+      - sushi # A quick previewer for Nautilus
+      - devhelp # API documentation browser
+      - timeshift
+      - flameshot
+      - hashcat
+      - gnome-tweaks
+      - kdiskmark
 
 - name: Install monitor packages
   dnf:
@@ -71,8 +79,6 @@
     state: present
   vars:
     packages:
-      # - hardinfo
-      # - cpupower-gui
       - gnome-system-monitor
       - gsmartcontrol
 

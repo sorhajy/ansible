@@ -14,7 +14,6 @@
   vars:
     packages:
     - core
-    - kdiskmark
 
 - name: Install develop snap packages with classic
   snap:
@@ -39,14 +38,6 @@
     - dbeaver-ce
     - ngrok
 
-- name: Install media snap packages
-  snap:
-    name: "{{ packages }}"
-    state: present
-    classic: no
-  vars:
-    packages:
-    - natron
 
 - name: Install social snap packages with classic
   snap:
