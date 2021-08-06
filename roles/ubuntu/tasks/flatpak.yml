@@ -40,3 +40,8 @@
   flatpak:
     name: org.jitsi.jitsi-meet
     state: present
+
+- name: Install Natron
+  flatpak:
+    name: fr.natron.Natron
+    state: present
