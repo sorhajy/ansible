@@ -51,7 +51,7 @@
       - youtube-dl
       - zstd
       - android-file-transfer
-      - android-platform-tools-base
+      - android-tools
       - snapd
 
 - name: Install base packages
