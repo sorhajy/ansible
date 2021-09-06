@@ -6,7 +6,7 @@
     state: present
   vars:
     packages:
-      # - telegram-desktop
+      - telegram-desktop
       # - jami
       - thunderbird
       - pidgin

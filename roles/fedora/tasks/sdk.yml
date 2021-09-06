@@ -36,8 +36,19 @@
     name: redis
     state: present
 
-- name: Enable Redis
+- name: Configure Redis
   service:
     name: redis
+    enabled: no
+    state: stopped
+
+- name: Install Nginx
+  dnf:
+    name: nginx
+    state: present
+
+- name: Configure Nginx
+  service:
+    name: nginx
     enabled: no
     state: stopped

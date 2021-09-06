@@ -7,7 +7,7 @@
   vars:
     packages:
       - blender
-      - nvidia-cuda-toolkit # ! Only for Nvidia GPU
+      # - nvidia-cuda-toolkit # ! Only for Nvidia GPU
       - gimp
       - inkscape
       - vlc

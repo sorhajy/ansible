@@ -13,7 +13,7 @@
       - NetworkManager-l2tp-gnome
       - NetworkManager-openconnect-gnome
       - NetworkManager-openvpn-gnome
-      # - shadowsocks-libev
+      # - python3-shadowsocks
       - tor
       # - i2p
       # - i2pd
