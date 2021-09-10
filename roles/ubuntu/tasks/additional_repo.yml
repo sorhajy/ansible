@@ -9,6 +9,15 @@
     repo: "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
     state: present
 
+- name: Add Resilio Sync GPG key
+  apt_key:
+    url: "https://linux-packages.resilio.com/resilio-sync/key.asc"
+    state: present
+- name: Add Resilio Sync repo
+  apt_repository:
+    repo: "deb http://linux-packages.resilio.com/resilio-sync/deb resilio-sync non-free"
+    state: present
+
 - name: Add Element GPG key
   apt_key:
     url: "https://packages.riot.im/debian/riot-im-archive-keyring.gpg"
@@ -25,6 +34,11 @@
 - name: Install VScode
   apt:
     name: code
+    state: present
+
+- name: Install Resilio Sync
+  apt:
+    name: resilio-sync
     state: present
 
 - name: Install Element
