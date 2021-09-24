@@ -74,6 +74,11 @@
   apt:
     name: resilio-sync
     state: present
+- name: Add user into Resilio Sync group
+  user:
+    name: "{{ os_user }}"
+    groups: rslsync
+    append: yes
 - name: Disable autoload & stop Resilio Sync service
   service:
     name: resilio-sync

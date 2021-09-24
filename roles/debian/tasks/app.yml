@@ -78,15 +78,13 @@
       - thunderbird
       - pidgin
 
-- name: Install wine & steam
+- name: Install Win compatibility tools
   apt:
     name: "{{ packages }}"
     state: present
   vars:
     packages:
-      - wine
       - playonlinux
-      - steam
 
 - name: Install Remmina
   apt:

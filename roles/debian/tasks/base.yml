@@ -4,7 +4,6 @@
   apt:
     name: "{{ packages }}"
     state: present
-  install_recommends: yes
   vars:
     packages:
       - zsh
@@ -63,6 +62,7 @@
       - snapd
       - mdadm
       - gnome-sushi
+      - wine
 
 - name: Install monitor packages
   apt:
@@ -75,7 +75,6 @@
       - gnome-system-monitor
       - gsmartcontrol
 
-###
 - name: Install VPN & net-tools
   apt:
     name: "{{ packages }}"
@@ -93,7 +92,6 @@
       - tor
       - i2pd
 
-###
 - name: Install DevTools
   apt: 
     name: "{{ packages }}"
@@ -128,7 +126,6 @@
       - virtualenv
       - nvidia-cuda-toolkit # ! Only for Nvidia GPU
 
-###
 - name: Install VM packages
   apt:
     name: "{{ packages }}"
@@ -142,7 +139,6 @@
       - bridge-utils
       - vagrant
 
-###
 - name: Install DBs
   apt: 
     name: "{{ packages }}"
@@ -185,7 +181,6 @@
   become: true
   become_user: "{{ os_user }}"
 
-###
 - name: Create user GIT dir
   file:
     path: "/home/{{ os_user }}/git"
@@ -204,7 +199,6 @@
     group: "{{ os_user }}"
     mode: "0777"
 
-###
 - name: Install VimPlug
   become: true
   become_user: "{{ os_user }}"
@@ -222,7 +216,6 @@
   become: true
   become_user: "{{ os_user }}"
   command: 'vim -c ":PlugInstall" -c ":q" -c ":q"'
-
 
 # Services
 - name: Enable autoload & start ufw service
@@ -266,7 +259,6 @@
     state: stopped
     enabled: no
 
-###
 - name: Copy wallpaper
   copy:
     src: "files/Wallpaper"
