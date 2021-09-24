@@ -1,0 +1,99 @@
+###
+- name: Install base Apps
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - deja-dup
+      - gnome-tweaks
+      - timeshift
+      - flameshot
+      - gparted
+      - keepassxc
+      - guake
+      - copyq
+      - wireshark
+      - virt-manager
+
+- name: Install browsers
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - firefox-esr
+      - chromium
+      - torbrowser-launcher
+      # - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb # ! Optional. Proprietary.
+
+- name: Install file managing & share packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - transmission
+      - syncthing
+      - filezilla
+      - meld
+      - onionshare
+      - persepolis
+
+- name: Install media
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - gimp
+      - vlc
+      - handbrake
+      - blender
+      - inkscape
+      - obs-studio
+      - audacity
+      - kdenlive
+
+- name: Install Office apps
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - gnome-calendar
+      - libreoffice
+      - scribus
+      - freecad
+      - librecad
+
+- name: Install Social
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - telegram-desktop
+      - jami
+      - thunderbird
+      - pidgin
+
+- name: Install wine & steam
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - wine
+      - playonlinux
+      - steam
+
+- name: Install Remmina
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - remmina
+      - remmina-plugin-rdp
+      - remmina-plugin-vnc

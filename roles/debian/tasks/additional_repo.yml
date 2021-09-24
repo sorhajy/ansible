@@ -1,0 +1,86 @@
+---
+
+- name: Add VScode GPG key
+  apt_key:
+    url: "https://packages.microsoft.com/keys/microsoft.asc"
+    state: present
+- name: Add VScode repo
+  apt_repository:
+    repo: "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+    state: present
+
+- name: Add Resilio Sync GPG key
+  apt_key:
+    url: "https://linux-packages.resilio.com/resilio-sync/key.asc"
+    state: present
+- name: Add Resilio Sync repo
+  apt_repository:
+    repo: "deb http://linux-packages.resilio.com/resilio-sync/deb resilio-sync non-free"
+    state: present
+
+- name: Add yggdrasil GPG key
+  apt_key:
+    url: "https://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/key.txt"
+    state: present
+- name: Add yggdrasil repo
+  apt_repository:
+    repo: "deb http://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/ debian yggdrasil"
+    state: present
+
+- name: Add Element GPG key
+  apt_key:
+    url: "https://packages.riot.im/debian/riot-im-archive-keyring.gpg"
+    state: present
+- name: Add Element repo
+  apt_repository:
+    repo: "deb https://packages.riot.im/debian/ default main"
+    state: present
+
+- name: Add Google Cloud SDK GPG key
+  apt_key:
+    url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+    state: present
+- name: Add Google Cloud SDK repo
+  apt_repository:
+    repo: "deb https://packages.cloud.google.com/apt cloud-sdk main"
+    state: present
+
+
+- name: Update cache after update repo
+  apt:
+    update_cache: yes
+
+- name: Install VScode
+  apt:
+    name: code
+    state: present
+
+- name: Install Yggdrasil
+  apt:
+    name: yggdrasil
+    state: present
+- name: Disable autoload & stop yggdrasil service
+  service:
+    name: yggdrasil
+    state: stopped
+    enabled: no
+
+- name: Install Google Cloud SDK
+  apt:
+    name: google-cloud-sdk
+    state: present
+
+- name: Install Resilio Sync
+  apt:
+    name: resilio-sync
+    state: present
+- name: Disable autoload & stop Resilio Sync service
+  service:
+    name: resilio-sync
+    state: stopped
+    enabled: no
+
+- name: Install Element
+  apt:
+    name: element-desktop
+    state: present

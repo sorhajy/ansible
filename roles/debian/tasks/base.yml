@@ -1,0 +1,276 @@
+---
+
+- name: Install system packages and libs
+  apt:
+    name: "{{ packages }}"
+    state: present
+  install_recommends: yes
+  vars:
+    packages:
+      - zsh
+      - zsh-syntax-highlighting
+      - zsh-autosuggestions
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - wget
+      - gnupg-agent
+      - software-properties-common
+      - ufw
+      - ssh
+      - screen
+      - vim
+      - htop
+      - iotop
+      - ncdu
+      - net-tools
+      - firejail
+      - zram-tools
+      - locate
+      - mat2
+      - arp-scan
+      - autossh
+      - cmake
+      - libimage-exiftool-perl
+      - exif
+      - iperf
+      - iperf3
+      - jq
+      - jo
+      - netcat
+      - hashcat
+      - nmap
+      - ldap-utils
+      - pv
+      - qrencode
+      - rsync
+      - speedtest-cli
+      - smartmontools
+      - sshfs
+      - telnet
+      - tree
+      - watch
+      - dirmngr
+      - youtube-dl
+      - zstd
+      - btrfs-compsize
+      - android-file-transfer
+      - android-sdk
+      - adb
+      - fastboot
+      - apkinfo
+      - apktool
+      - snapd
+      - mdadm
+      - gnome-sushi
+
+- name: Install monitor packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - hardinfo
+      - cpupower-gui
+      - gnome-system-monitor
+      - gsmartcontrol
+
+###
+- name: Install VPN & net-tools
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - wireguard
+      - wireguard-tools
+      - openconnect
+      - network-manager-l2tp
+      - network-manager-l2tp-gnome
+      - network-manager-openconnect-gnome
+      - network-manager-openvpn-gnome
+      - shadowsocks-libev
+      - tor
+      - i2pd
+
+###
+- name: Install DevTools
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - default-jdk
+      - default-jdk-headless
+      - default-jre
+      - default-jre-headless
+      - ansible
+      - build-essential
+      - git
+      - watch
+      - cmake
+      - ninja-build
+      - gcc
+      - rustc
+      - golang
+      - clang
+      - libgtk-3-dev
+      - libblkid-dev
+      - liblzma-dev
+      - libsasl2-dev
+      - libldap2-dev
+      - libssl-dev
+      - python3
+      - python3-pip
+      - python3-dev
+      - python-dev
+      - pipenv
+      - virtualenv
+      - nvidia-cuda-toolkit # ! Only for Nvidia GPU
+
+###
+- name: Install VM packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - qemu
+      - qemu-kvm
+      - libvirt-daemon
+      - ebtables
+      - bridge-utils
+      - vagrant
+
+###
+- name: Install DBs
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - redis
+      - postgresql
+      - postgresql-client
+      - default-mysql-server
+      - default-mysql-client
+      - sqlite3
+
+- name: Check root SSH dir
+  file: 
+    path: "/root/.ssh"
+    state: directory
+
+- name: Check SSH dir
+  file: 
+    path: "/home/{{ os_user }}/.ssh"
+    state: directory
+
+- name: Inspect root SSH key
+  openssh_keypair:
+    path: "/root/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    state: present
+    force: no
+  become: true
+
+- name: Inspect user SSH key
+  openssh_keypair:
+    path: "/home/{{ os_user }}/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    state: present
+    force: no
+  become: true
+  become_user: "{{ os_user }}"
+
+###
+- name: Create user GIT dir
+  file:
+    path: "/home/{{ os_user }}/git"
+    state: directory
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: "0755"
+  become: true
+  become_user: "{{ os_user }}"
+
+- name: Create git lib dir
+  file:
+    path: "/opt/git"
+    state: directory
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: "0777"
+
+###
+- name: Install VimPlug
+  become: true
+  become_user: "{{ os_user }}"
+  command: "curl -s -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+
+- name: Config vimrc
+  template:
+    src: vimrc.j2
+    dest: "/home/{{ os_user }}/.vimrc"
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: '0640'
+
+- name: Install VimPlug
+  become: true
+  become_user: "{{ os_user }}"
+  command: 'vim -c ":PlugInstall" -c ":q" -c ":q"'
+
+
+# Services
+- name: Enable autoload & start ufw service
+  service:
+    name: ufw
+    state: started
+    enabled: yes
+- name: Enable libvirt service
+  service:
+    name: libvirtd
+    state: started
+    enabled: yes
+- name: Disable Redis
+  service:
+    name: redis-server
+    enabled: no
+    state: stopped
+- name: Disable PostgreSQL
+  service:
+    name: postgresql
+    enabled: no
+    state: stopped
+- name: Disable MySQL
+  service:
+    name: mysql
+    enabled: no
+    state: stopped
+- name: Disable autoload & stop tor service
+  service:
+    name: tor
+    state: stopped
+    enabled: no
+- name: Disable autoload & stop i2pd service
+  service:
+    name: i2pd
+    state: stopped
+    enabled: no
+- name: Disable autoload & stop shadowsocks service
+  service:
+    name: shadowsocks-libev
+    state: stopped
+    enabled: no
+
+###
+- name: Copy wallpaper
+  copy:
+    src: "files/Wallpaper"
+    dest: "/home/{{os_user}}/Pictures/"
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: '0444'

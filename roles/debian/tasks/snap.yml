@@ -1,0 +1,37 @@
+---
+
+- name: Install system snap packages
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: no
+  vars:
+    packages:
+    - kdiskmark
+
+# - name: Install develop snap packages with classic
+#   snap:
+#     name: "{{ packages }}"
+#     state: present
+#     classic: yes
+#   vars:
+#     packages:
+    # - sosumi # * MacOS VM
+
+- name: Install develop snap packages
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: no
+  vars:
+    packages:
+    - ngrok
+
+- name: Install network snap packages
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: no
+  vars:
+    packages:
+    - ipfs-desktop

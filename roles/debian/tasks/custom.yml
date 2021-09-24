@@ -1,0 +1,20 @@
+---
+- name: Install Apache Directory Studio
+  unarchive:
+    src: '{{ Apache_Directory_Studio_URL }}'
+    dest: /opt/
+    remote_src: yes
+
+- name: Create Apache Directory Studio link into Launcher
+  template:
+    src: ApacheDirectoryStudio.j2
+    dest: "/home/{{ os_user }}/.local/share/applications/ApacheDirectoryStudio.desktop"
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: '0777'
+
+- name: Download OpenDJ Community Edition
+  unarchive:
+    src: https://github.com/ForgeRock/opendj-community-edition/releases/download/ce%2F2.6.4/OpenDJ-2.6.4.zip
+    dest: /opt/
+    remote_src: yes

@@ -1,0 +1,60 @@
+---
+# * Don't forget comment uslesess block for you
+
+- name: Configure system started # Updating apt cache
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: debian
+      tasks_from: start
+
+- name: Configure CLI & libs
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: debian
+      tasks_from: base
+
+- name: Configure Apps
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: debian
+      tasks_from: app
+
+- name: Configure packages from additional repo
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: debian
+      tasks_from: additional_repo
+
+- name: Configure packages by snap
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: debian
+      tasks_from: snap
+
+- name: Configure packages by flatpak
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: debian
+      tasks_from: flatpak
+
+- name: Configure custom packages
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: debian
+      tasks_from: custom
+
+
+
+- name: Configure system finished # Clear apt cache & useless dependencies
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: debian
+      tasks_from: end

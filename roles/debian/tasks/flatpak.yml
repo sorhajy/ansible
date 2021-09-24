@@ -1,0 +1,97 @@
+---
+- name: Install flatpak
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - flatpak
+      - gnome-software-plugin-flatpak
+
+- name: Add Flathub repo
+  command: "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
+
+- name: Install PyCharm
+  flatpak:
+    name: com.jetbrains.PyCharm-Community
+    state: present
+
+- name: Install Postman
+  flatpak:
+    name: com.getpostman.Postman
+    state: present
+
+- name: Install Dbeaver
+  flatpak:
+    name: io.dbeaver.DBeaverCommunity 
+    state: present
+
+- name: Install OnlyOffice
+  flatpak:
+    name: org.onlyoffice
+    state: present
+
+- name: Install Tribler
+  flatpak:
+    name: org.tribler.Tribler
+    state: present
+
+- name: Install Electrum
+  flatpak:
+    name: org.electrum.electrum
+    state: present
+
+- name: Install GTK Stress Testing
+  flatpak:
+    name: com.leinardi.gst
+    state: present
+
+- name: Install Nvidia GPU util # ! Nvidia only
+  flatpak:
+    name: com.leinardi.gwe
+    state: present
+
+- name: Install Obsidian # ! Proprietary
+  flatpak:
+    name: md.obsidian.Obsidian
+    state: present
+
+- name: Install Joplin
+  flatpak:
+    name: net.cozic.joplin_desktop
+    state: present
+
+- name: Install Zoom
+  flatpak:
+    name: us.zoom.Zoom
+    state: present
+
+- name: Install MS Teams
+  flatpak:
+    name: com.microsoft.Teams
+    state: present
+
+- name: Install Slack
+  flatpak:
+    name: com.slack.Slack
+    state: present
+
+- name: Install Skype
+  flatpak:
+    name: com.skype.Client
+    state: present
+
+- name: Install Delta Chat
+  flatpak:
+    name: chat.delta
+    state: present
+
+- name: Install Jitsi Meet
+  flatpak:
+    name: org.jitsi.jitsi-meet
+    state: present
+
+- name: Install Natron
+  flatpak:
+    name: fr.natron.Natron
+    state: present
