@@ -135,6 +135,9 @@
       - qemu
       - qemu-kvm
       - libvirt-daemon
+      - libvirt-clients
+      - libvirt-daemon-system
+      - virtinst
       - ebtables
       - bridge-utils
       - vagrant
