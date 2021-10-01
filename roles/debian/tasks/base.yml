@@ -125,6 +125,10 @@
       - pipenv
       - virtualenv
       # - nvidia-cuda-toolkit # ! Only for Nvidia GPU
+      # - nvidia-detect
+      # - nvidia-kernel-dkms
+      # - nvidia-driver
+      # - firmware-misc-nonfree
 
 - name: Install VM packages
   apt:
