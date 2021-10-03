@@ -63,6 +63,12 @@
       - mdadm
       - gnome-sushi
       - wine
+      # ! Only for Nvidia GPU
+      - nvidia-detect
+      - nvidia-kernel-dkms
+      - nvidia-driver
+      - nvidia-cuda-toolkit 
+      - firmware-misc-nonfree
 
 - name: Install monitor packages
   apt:
@@ -124,11 +130,6 @@
       - python-dev
       - pipenv
       - virtualenv
-      # - nvidia-cuda-toolkit # ! Only for Nvidia GPU
-      # - nvidia-detect
-      # - nvidia-kernel-dkms
-      # - nvidia-driver
-      # - firmware-misc-nonfree
 
 - name: Install VM packages
   apt:
