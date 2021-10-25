@@ -1,5 +1,13 @@
 ---
 
+- name: Add contrib repo
+  command: "apt-add-repository contrib"
+  ignore_errors: yes
+
+- name: Add non-free repo
+  command: "apt-add-repository non-free"
+  ignore_errors: yes
+
 - name: Update apt cache
   apt:
     update_cache: yes
