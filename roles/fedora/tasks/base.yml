@@ -7,8 +7,6 @@
   vars:
     packages:
       - fedora-workstation-repositories
-      - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_release }}.noarch.rpm"
-      - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_release }}.noarch.rpm"
       - ca-certificates
       - dkms
       - kernel-devel
@@ -54,6 +52,7 @@
       - android-tools
       - snapd
       - akmod-nvidia #! Nvidia Only
+      - redhat-lsb-core
 
 - name: Install base packages
   dnf:
