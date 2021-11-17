@@ -24,7 +24,7 @@
 - name: Add Google Cloud SDK repo
   template:
     src: google-cloud-sdk.repo.j2
-    dest: "/etc/yum.repos.d/vscode.repo"
+    dest: "/etc/yum.repos.d/google-cloud-sdk.repo"
     owner: root
     group: root
     mode: '0644'

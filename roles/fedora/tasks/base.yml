@@ -53,6 +53,7 @@
       - android-file-transfer
       - android-tools
       - snapd
+      - akmod-nvidia #! Nvidia Only
 
 - name: Install base packages
   dnf:
