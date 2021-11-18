@@ -6,19 +6,68 @@
   vars:
     packages:
       - flatpak
-      # - gnome-software-plugin-flatpak
 
 - name: Add Flathub repo
   command: "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
+
+- name: Install OnlyOffice
+  flatpak:
+    name: org.onlyoffice
+    state: present
+
+- name: Install PyCharm
+  flatpak:
+    name: com.jetbrains.PyCharm-Community
+    state: present
+
+- name: Install IDEA
+  flatpak:
+    name: com.jetbrains.IntelliJ-IDEA-Community
+    state: present
+
+- name: Install Android Studio
+  flatpak:
+    name: com.google.AndroidStudio
+    state: present
+
+- name: Install Postman
+  flatpak:
+    name: com.getpostman.Postman
+    state: present
+
+- name: Install DBeaver CE
+  flatpak:
+    name: io.dbeaver.DBeaverCommunity
+    state: present
 
 - name: Install Electrum
   flatpak:
     name: org.electrum.electrum
     state: present
 
+- name: Install Zoom
+  flatpak:
+    name: us.zoom.Zoom
+    state: present
+
+- name: Install Skype
+  flatpak:
+    name: com.skype.Client 
+    state: present
+
 - name: Install Element
   flatpak:
     name: im.riot.Riot
+    state: present
+
+- name: Install Slack
+  flatpak:
+    name: com.slack.Slack
+    state: present
+
+- name: Install Jami
+  flatpak:
+    name: net.jami.Jami
     state: present
 
 - name: Install Obsidian # ! Proprietary

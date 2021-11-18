@@ -22,44 +22,7 @@
     classic: yes
   vars:
     packages:
-    - sosumi
-    - pycharm-community
-    # - intellij-idea-community
-    # - android-studio
-
-- name: Install develop snap packages
-  snap:
-    name: "{{ packages }}"
-    state: present
-    classic: yes
-  vars:
-    packages:
-    - postman
-    - dbeaver-ce
-    - ngrok
-
-
-- name: Install social snap packages with classic
-  snap:
-    name: "{{ packages }}"
-    state: present
-    classic: yes
-  vars:
-    packages:
-    - slack
-
-- name: Install social snap packages
-  snap:
-    name: "{{ packages }}"
-    state: present
-    classic: no
-  vars:
-    packages:
-    - telegram-desktop
-    - zoom-client
-    - skype
-    - jami
-    - ssb-patchwork
+    - sosumi # MacOS VM
 
 - name: Install network snap packages
   snap:
@@ -69,4 +32,3 @@
   vars:
     packages:
     - ipfs-desktop
-
