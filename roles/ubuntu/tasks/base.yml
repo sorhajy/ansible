@@ -48,8 +48,10 @@
       - telnet
       - tree
       - watch
+      - dirmngr
       - youtube-dl
       - zstd
+      - btrfs-compsize
       - android-file-transfer
       - android-platform-tools-base
       - snapd
@@ -77,16 +79,17 @@
     state: present
   vars:
     packages:
+      - deja-dup
       - hardinfo
       - cpupower-gui
       - gnome-system-monitor
       - gsmartcontrol
 
-- name: Disable autoload & stop ufw service
+- name: Enable autoload & start ufw service
   service:
     name: ufw
-    state: stopped
-    enabled: no
+    state: started
+    enabled: yes
 
 - name: Check root SSH dir
   file: 

@@ -18,6 +18,15 @@
     repo: "deb http://linux-packages.resilio.com/resilio-sync/deb resilio-sync non-free"
     state: present
 
+- name: Add yggdrasil GPG key
+  apt_key:
+    url: "https://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/key.txt"
+    state: present
+- name: Add yggdrasil repo
+  apt_repository:
+    repo: "deb http://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/ debian yggdrasil"
+    state: present
+
 - name: Add Element GPG key
   apt_key:
     url: "https://packages.riot.im/debian/riot-im-archive-keyring.gpg"
@@ -35,6 +44,16 @@
   apt:
     name: code
     state: present
+
+- name: Install Yggdrasil
+  apt:
+    name: yggdrasil
+    state: present
+- name: Disable autoload & stop yggdrasil service
+  service:
+    name: yggdrasil
+    state: stopped
+    enabled: no
 
 - name: Install Resilio Sync
   apt:
