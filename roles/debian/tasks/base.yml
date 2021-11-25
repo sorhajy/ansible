@@ -130,6 +130,17 @@
       - python-dev
       - pipenv
       - virtualenv
+      - libffi-dev
+      - libgdbm-dev
+      - libsqlite3-dev
+      - zlib1g-dev
+      - libkrb5-dev
+      - heimdal-dev
+      - linux-headers-amd64
+      - zfsutils-linux
+      - zfs-dkms
+      - zfs-zed
+      - spl
 
 - name: Install VM packages
   apt:
