@@ -57,8 +57,9 @@
       - android-file-transfer
       - android-tools
       - snapd
-      - akmod-nvidia #! Nvidia Only
+      # - akmod-nvidia #! Nvidia Only
       - redhat-lsb-core
+      - corectrl
 
 - name: Install base packages
   dnf:

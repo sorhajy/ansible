@@ -80,10 +80,10 @@
     name: com.leinardi.gst
     state: present
 
-- name: Install Nvidia GPU util # ! Nvidia only
-  flatpak:
-    name: com.leinardi.gwe
-    state: present
+# - name: Install Nvidia GPU util # ! Nvidia only
+#   flatpak:
+#     name: com.leinardi.gwe
+#     state: present
 
 - name: Install Delta Chat
   flatpak:
