@@ -38,6 +38,7 @@
       - iperf
       - iperf3
       - jq
+      - jo
       - netcat
       - nmap
       - openldap
@@ -60,6 +61,18 @@
       # - akmod-nvidia #! Nvidia Only
       - redhat-lsb-core
       - corectrl
+      - zsh
+      - zsh-syntax-highlighting
+      - zsh-autosuggestions
+      - ufw
+      - screen
+      - locate
+      - perl-Image-ExifTool
+      - compsize
+      - adb-enhanced
+      - mdadm
+      - sushi
+      - wine
 
 - name: Install base packages
   dnf:
