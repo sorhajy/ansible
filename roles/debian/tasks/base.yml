@@ -64,10 +64,10 @@
       - gnome-sushi
       - wine
       # ! Only for Nvidia GPU
-      - nvidia-detect
-      - nvidia-kernel-dkms
-      - nvidia-driver
-      - nvidia-cuda-toolkit 
+      # - nvidia-detect
+      # - nvidia-kernel-dkms
+      # - nvidia-driver
+      # - nvidia-cuda-toolkit 
       - firmware-misc-nonfree
 
 - name: Install monitor packages
