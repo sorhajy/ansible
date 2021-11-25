@@ -45,13 +45,6 @@
       name: fedora
       tasks_from: docker
 
-- name: Configure remote access packages
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: fedora
-      tasks_from: remote_access
-
 - name: Configure packages from additional repo
   hosts: localhost
   tasks:
