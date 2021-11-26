@@ -86,6 +86,8 @@
       - qemu
       - qemu-kvm
       - libvirt-daemon
+      - libvirt
+      - libvirt-devel
       - ebtables
       - virt-manager
       - bridge-utils
@@ -104,6 +106,7 @@
     packages:
       - VirtualBox
       - kmod-VirtualBox
+      - akmod-VirtualBox
       - virtualbox-guest-additions
 
 - name: Install vagrant

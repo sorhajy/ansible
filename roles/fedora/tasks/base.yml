@@ -72,6 +72,9 @@
       - mdadm
       - sushi
       - wine
+      - libxml2-devel
+      - make
+      - ruby-devel
 
 - name: Install base packages
   dnf:
