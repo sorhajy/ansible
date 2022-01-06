@@ -90,6 +90,11 @@
     name: chat.delta
     state: present
 
+- name: Install Tribler
+  flatpak:
+    name: org.tribler.Tribler
+    state: present
+
 - name: Install Jitsi Meet
   flatpak:
     name: org.jitsi.jitsi-meet

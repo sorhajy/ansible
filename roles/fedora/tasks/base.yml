@@ -75,6 +75,7 @@
       - libxml2-devel
       - make
       - ruby-devel
+      - lm-sensors
 
 - name: Install base packages
   dnf:
@@ -103,6 +104,29 @@
     packages:
       - gnome-system-monitor
       - gsmartcontrol
+
+- name: Install DBs packages
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - postgresql
+      - postgresql-contrib
+      - postgresql-server
+      - community-mysql
+      - community-mysql-server
+
+- name: Disable autoload & stop Postgres service
+  service:
+    name: postgresql
+    state: stopped
+    enabled: no
+- name: Disable autoload & stop MySQL service
+  service:
+    name: mysqld
+    state: stopped
+    enabled: no
 
 - name: Check root SSH dir
   file: 
