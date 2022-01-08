@@ -52,7 +52,7 @@
 
 - name: Install Skype
   flatpak:
-    name: com.skype.Client 
+    name: com.skype.Client
     state: present
 
 - name: Install Element

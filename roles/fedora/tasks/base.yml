@@ -75,7 +75,6 @@
       - libxml2-devel
       - make
       - ruby-devel
-      - lm-sensors
 
 - name: Install base packages
   dnf:
@@ -89,8 +88,6 @@
       - gparted
       - geany
       - sushi # A quick previewer for Nautilus
-      - devhelp # API documentation browser
-      - timeshift
       - flameshot
       - hashcat
       - gnome-tweaks
