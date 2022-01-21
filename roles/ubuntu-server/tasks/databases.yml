@@ -41,6 +41,14 @@
     packages:
       - default-mysql-server
       - default-mysql-client
+      - python3-pymysql
+- name: Set MySQL root Password
+  become: true
+  mysql_user:
+    login_unix_socket: "/var/run/mysqld/mysqld.sock"
+    name: "root"
+    password: "{{ mysql_password }}"
+    state: present
 - name: Disable autoload & stop MySQL service
   become: true
   service:
