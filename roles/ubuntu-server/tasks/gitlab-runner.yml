@@ -1,0 +1,44 @@
+---
+- name: Install gitlab runner
+  become: true
+  shell: curl -L "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh" | sudo bash
+  args:
+    creates: /usr/bin/gitlab-runner
+
+- name: Add gitlab-runner user to docker group
+  become: true
+  user:
+    name: gitlab-runner
+    append: yes
+    groups: docker
+
+- name: Register gitlab docker runner
+  when: gitlab_runner_in_docker|bool == true
+  become: true
+  command: |
+    gitlab-runner register \
+    --non-interactive \
+    --url "https://gitlab.com/" \
+    --registration-token "{{ gitlab_runner_reg_token }}" \
+    --executor "docker" \
+    --docker-image alpine:latest \
+    --description "{{ gitlab_runner_description }}" \
+    --tag-list "{{ gitlab_runner_tag }}" \
+    --run-untagged="false" \
+    --locked="true" \
+    --access-level="ref_protected"
+
+- name: Register gitlab shell runner
+  when: gitlab_runner_shell == true
+  become: true
+  command: |
+    gitlab-runner register \
+    --non-interactive \
+    --url "https://gitlab.com/" \
+    --registration-token "{{ gitlab_runner_reg_token }}" \
+    --executor "shell" \
+    --description "{{ gitlab_runner_description }}" \
+    --tag-list "{{ gitlab_runner_tag }}" \
+    --run-untagged="false" \
+    --locked="true" \
+    --access-level="ref_protected"

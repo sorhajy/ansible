@@ -34,6 +34,14 @@
       name: ubuntu-server
       tasks_from: docker
 
+# Install GitLab-runner from official repo
+- name: Install & configure GitLab-runner packages
+  hosts: servers
+  tasks:
+  - include_role:
+      name: ubuntu-server
+      tasks_from: gitlab-runner
+
 # Install SDK packages
 - name: Configure SDK & DevTools
   hosts: servers
