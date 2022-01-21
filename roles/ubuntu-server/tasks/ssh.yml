@@ -1,0 +1,67 @@
+---
+- name: Check root SSH dir
+  become: true
+  file: 
+    path: "/root/.ssh"
+    state: directory
+
+- name: Inspect root SSH key
+  become: true
+  openssh_keypair:
+    path: "/root/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    state: present
+    force: no
+
+- name: Create non-privileged user
+  become: true
+  user:
+    name: "{{ server_user }}"
+    password_lock: yes
+    state: present
+    shell: /bin/bash
+    system: no
+    createhome: yes
+    home: "/home/{{ server_user }}"
+
+- name: Check user SSH dir
+  become: true
+  file: 
+    path: "/home/{{ server_user }}/.ssh"
+    state: directory
+    owner: "{{ server_user }}"
+    group: "{{ server_user }}"
+    mode: "0775"
+
+- name: Inspect user authorized_keys
+  become: true
+  file:
+    path: "/home/{{ server_user}}/.ssh/authorized_keys"
+    state: touch
+    force: no
+    owner: "{{ server_user }}"
+    group: "{{ server_user }}"
+    mode: "0664"
+
+- name: Inspect user ssh-config
+  become: true
+  file:
+    path: "/home/{{ server_user}}/.ssh/config"
+    state: touch
+    force: no
+    owner: "{{ server_user }}"
+    group: "{{ server_user }}"
+    mode: "0664"
+
+- name: Inspect user SSH key
+  become: true
+  openssh_keypair:
+    path: "/home/{{ server_user }}/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    state: present
+    force: no
+    owner: "{{ server_user }}"
+    group: "{{ server_user }}"
+    mode: "0600"

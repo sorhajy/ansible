@@ -1,0 +1,77 @@
+- name: Install Redis
+  become: true
+  apt: 
+    name: redis
+    state: present
+- name: Disable Redis
+  become: true
+  service:
+    name: redis-server
+    enabled: no
+    state: stopped
+
+
+- name: Install PostgreSQL
+  become: true
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - postgresql
+    - postgresql-contrib
+    - postgresql-common
+    - postgresql-client
+    - postgresql-client-common
+    - python3-psycopg2
+- name: Disable autoload & stop PostgreSQL service
+  become: true
+  service:
+    name: postgresql
+    enabled: no
+    state: stopped
+
+
+- name: Install MySQL
+  become: true
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - default-mysql-server
+      - default-mysql-client
+- name: Disable autoload & stop MySQL service
+  become: true
+  service:
+    name: mysql
+    state: stopped
+    enabled: no
+
+
+- name: Add ClickHouse GPG key
+  become: true
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: E0C56BD4
+- name: Add ClickHouse repo
+  become: true
+  apt_repository:
+    repo: "deb http://repo.yandex.ru/clickhouse/deb/stable/ main/"
+    state: present
+- name: Install ClickHouse
+  become: true
+  apt: 
+    name: "{{ packages }}"
+    state: present
+    update_cache: true
+  vars:
+    packages:
+      - clickhouse-server
+      - clickhouse-client
+- name: Disable autoload & stop ClickHouse service
+  become: true
+  service:
+    name: clickhouse-server
+    state: stopped
+    enabled: no

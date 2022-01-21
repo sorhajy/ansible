@@ -1,0 +1,34 @@
+---
+- name: Install Nginx
+  become: true
+  apt: 
+    name: nginx-full
+    state: present
+- name: Disable autoload & stop Nginx
+  become: true
+  service:
+    name: nginx
+    enabled: no
+    state: stopped
+
+- name: Install Apache
+  become: true
+  apt: 
+    name: apache2
+    state: present
+- name: Disable autoload & stop Apache
+  become: true
+  service:
+    name: apache2
+    enabled: no
+    state: stopped
+
+- name: Install CertBot
+  become: true
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - certbot
+    - python3-certbot-nginx

@@ -1,0 +1,42 @@
+server
+{
+    # имя сервера 
+    server_name {{ domain }};
+
+    listen *:80;
+
+    access_log /var/log/nginx/{{ domain }}-access.log;
+    error_log  /var/log/nginx/{{ domain }}-error.log;
+
+    # Корневая папка сервера
+    root {{ site_dir }};
+
+    gzip on;
+
+    location / {
+        gzip_proxied any;
+        gzip_types
+            text/css
+            text/javascript
+            text/xml
+            text/plain
+            application/javascript
+            application/x-javascript
+            application/json;
+
+        proxy_pass http://localhost:{{ ssr_port }};
+    }
+
+    location ~ /.well-known {
+        location ~ /.well-known/acme-challenge/(.*) {
+            default_type "text/plain";
+            root /var/www/letsencrypt;
+        }
+    }
+
+    location ~ /\. {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
+}

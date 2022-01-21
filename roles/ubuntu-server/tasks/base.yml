@@ -1,0 +1,76 @@
+---
+- name: Install base requirements
+  become: true
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - fail2ban
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - wget
+      - gnupg-agent
+      - software-properties-common
+      - ufw
+      - ssh
+      - screen
+      - vim
+      - htop
+      - iotop
+      - ncdu
+      - net-tools
+      - zram-config
+      - zram-tools
+      - locate
+      - autossh
+      - iperf
+      - iperf3
+      - jq
+      - jo
+      - netcat
+      - pv
+      - qrencode
+      - rsync
+      - sshfs
+      - telnet
+      - tree
+      - watch
+      - dirmngr
+      - zstd
+      - snapd
+
+- name: Enable autoload & start ufw service
+  become: true
+  service:
+    name: ufw
+    state: started
+    enabled: yes
+
+- name: Allow all access to port 22
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '22'
+
+- name: Allow all access from RFC1918 networks to this host
+  become: true
+  community.general.ufw:
+    rule: allow
+    src: '{{ item }}'
+  loop:
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+
+- name: Reject everything and enable UFW
+  become: true
+  community.general.ufw:
+    state: enabled
+    policy: reject
+
+- name: Reload UFW
+  become: true
+  community.general.ufw:
+    state: reloaded

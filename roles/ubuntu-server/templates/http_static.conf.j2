@@ -1,0 +1,31 @@
+server
+{
+    # имя сервера 
+    server_name {{ domain }};
+
+    listen *:80;
+    access_log /var/log/nginx/{{ domain }}-access.log;
+    error_log  /var/log/nginx/{{ domain }}-error.log;
+
+    # Корневая папка сайта, в ней лежит файл index.html
+    root {{ site_dir }};
+
+    gzip on;
+
+    location / {
+        try_files $uri /index.html;
+    }
+
+    location ~ /.well-known {
+        location ~ /.well-known/acme-challenge/(.*) {
+            default_type "text/plain";
+            root /var/www/letsencrypt;
+        }
+    }
+
+    location ~ /\. {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
+}

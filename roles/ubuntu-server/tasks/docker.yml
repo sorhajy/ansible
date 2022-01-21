@@ -1,0 +1,39 @@
+---
+
+- name: Add Docker GPG key
+  become: true
+  apt_key:
+    url: "https://download.docker.com/linux/ubuntu/gpg"
+    state: present
+- name: Add Docker repo
+  become: true
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
+
+- name: Install Docker packages
+  become: true
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: true
+  vars:
+    packages:
+      - docker-ce-cli
+      - docker-ce
+      - containerd.io
+      - docker-compose
+
+- name: Disable & stop Docker service
+  become: true
+  service:
+    name: docker
+    state: stopped
+    enabled: false
+
+- name: Add the user Docker groups
+  become: true
+  user:
+    name: "{{ server_user }}"
+    groups: docker
+    append: yes

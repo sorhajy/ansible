@@ -1,0 +1,69 @@
+---
+
+# Updating apt cache
+- name: Configure system started
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu-server
+      tasks_from: start
+
+
+
+# Install base OS packages
+- name: Configure base system packages
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu-server
+      tasks_from: base
+
+# Configure SSH
+- name: Configure SSH
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu-server
+      tasks_from: ssh
+
+# Install Docker & Docker-compose from official repo
+- name: Configure Docker packages
+  hosts: servers
+  tasks:
+  - include_role:
+      name: ubuntu-server
+      tasks_from: docker
+
+# Install SDK packages
+- name: Configure SDK & DevTools
+  hosts: servers
+  tasks:
+  - include_role:
+      name: ubuntu-server
+      tasks_from: sdk
+
+# Install WebServers packages
+- name: Install and configure WebServers
+  hosts: webservers
+  tasks:
+  - include_role:
+      name: ubuntu-server
+      tasks_from: webservers
+
+# # Install databases packages
+- name: Install and configure databases
+  hosts: databases
+  tasks:
+  - include_role:
+      name: ubuntu-server
+      tasks_from: databases
+
+
+
+# Clear apt cache & useless dependencies
+- name: Configure system finished
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu-server
+      tasks_from: end
