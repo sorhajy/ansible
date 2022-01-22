@@ -8,6 +8,14 @@
 
 
 
+# Configure SWAP file
+- name: Configure SWAP file on server
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu-server
+      tasks_from: swapfile
+
 # Install base OS packages
 - name: Configure base system packages
   hosts: all

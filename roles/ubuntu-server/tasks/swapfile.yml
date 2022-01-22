@@ -1,0 +1,45 @@
+- name: Inspect swapfile
+  stat: path=/swapfile
+  become: true
+  register: swapfile
+
+- name: Disable swapfile
+  become: true
+  ignore_errors: true
+  command: "swapoff /swapfile"
+  when:  (swapfile_resize == "true")
+
+- name: Remove swapfile entry from fstab if it exists
+  become: true
+  mount: name=swapfile src=/swapfile fstype=swap opts=sw passno=0 dump=0 state=absent
+  when:  (swapfile_resize == "true") or (swapfile.stat.isreg is undefined) or (not swapfile.stat.isreg)
+
+- name: Create the file to be used for swap
+  become: true
+  command: dd if=/dev/zero of=/swapfile bs=1M count={{ swapfile_size }}
+  when:  (swapfile_resize == "true") or (swapfile.stat.isreg is undefined) or (not swapfile.stat.isreg)
+
+- name: Format the file for swap
+  become: true
+  command: mkswap /swapfile
+  when:  (swapfile_resize == "true") or (swapfile.stat.isreg is undefined) or (not swapfile.stat.isreg)
+
+- name: Change swap file permissions
+  become: true
+  file: path=/swapfile owner=root group=root mode=0600
+  when:  (swapfile_resize == "true") or (swapfile.stat.isreg is undefined) or (not swapfile.stat.isreg)
+
+- name: Add the file to the system as a swap file
+  become: true
+  command: swapon /swapfile
+  when:  (swapfile_resize == "true") or (swapfile.stat.isreg is undefined) or (not swapfile.stat.isreg)
+
+- name: Write swap entry in fstab
+  become: true
+  mount: name=swapfile src=/swapfile fstype=swap opts=sw passno=0 dump=0 state=present
+  when:  (swapfile_resize == "true") or (swapfile.stat.isreg is undefined) or (not swapfile.stat.isreg)
+
+- name: Enable swapfile
+  become: true
+  command: "swapon /swapfile"
+  when:  (swapfile_resize == "true") or ((swapfile.stat.isreg is undefined) and (not swapfile.stat.isreg))
