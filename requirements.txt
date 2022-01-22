@@ -1,6 +1,7 @@
 Ansible galaxy:
 
 community.general
+community.postgresql
 
 PIP:
 redis

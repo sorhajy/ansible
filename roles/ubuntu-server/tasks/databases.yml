@@ -29,6 +29,7 @@
     state: stopped
 
 
+
 - name: Install PostgreSQL
   become: true
   apt: 
@@ -42,12 +43,62 @@
     - postgresql-client
     - postgresql-client-common
     - python3-psycopg2
+    - python3-ipaddr
+
+- name: Start PostgreSQL service
+  become: true
+  service:
+    name: postgresql
+    state: started
+
+- name: Change postgres password
+  become: true
+  become_method: enable
+  command: sudo su postgres -c "psql -c \"ALTER USER postgres WITH PASSWORD '{{ postgres_password }}';\""
+
+- name: Collect PostgreSQL version
+  community.postgresql.postgresql_info:
+    login_host: "127.0.0.1"
+    login_user: "postgres"
+    login_password: "{{ postgres_password }}"
+    filter: ver*
+  register: postgres_version
+
+- name: Configure PostgreSQL connection
+  become: true
+  community.postgresql.postgresql_pg_hba:
+    dest: /etc/postgresql/{{postgres_version.version.major}}/main/pg_hba.conf
+    contype: host
+    users: all
+    source: "0.0.0.0/0"
+    databases: all
+    method: md5
+    create: true
+
+- name: Set listen interface
+  become: true
+  community.postgresql.postgresql_set:
+    login_host: "127.0.0.1"
+    login_user: "postgres"
+    login_password: "{{ postgres_password }}"
+    name: listen_addresses
+    value: "*"
+
+- name: Reload configuration
+  community.postgresql.postgresql_query:
+    login_host: "127.0.0.1"
+    login_user: "postgres"
+    login_password: "{{ postgres_password }}"
+    db: postgres
+    query: "SELECT pg_reload_conf();"
+
 - name: Disable autoload & stop PostgreSQL service
   become: true
   service:
     name: postgresql
     enabled: no
     state: stopped
+
 
 
 - name: Install MySQL
@@ -73,6 +124,7 @@
     name: mysql
     state: stopped
     enabled: no
+
 
 
 - name: Add ClickHouse GPG key
