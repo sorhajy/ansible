@@ -1,4 +1,3 @@
----
 - name: Check root SSH dir
   become: true
   file: 

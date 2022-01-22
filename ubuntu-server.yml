@@ -1,5 +1,3 @@
----
-
 # Updating apt cache
 - name: Configure system started
   hosts: all

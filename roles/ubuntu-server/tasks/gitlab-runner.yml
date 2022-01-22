@@ -1,4 +1,3 @@
----
 - name: Install gitlab runner
   become: true
   shell: curl -L "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh" | sudo bash

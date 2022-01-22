@@ -1,5 +1,3 @@
----
-
 - name: Remove useless packages from the cache
   become: true
   apt:
