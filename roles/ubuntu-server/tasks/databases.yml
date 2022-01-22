@@ -64,7 +64,7 @@
     filter: ver*
   register: postgres_version
 
-- name: Configure PostgreSQL connection
+- name: Configure PostgreSQL allow connection
   become: true
   community.postgresql.postgresql_pg_hba:
     dest: /etc/postgresql/{{postgres_version.version.major}}/main/pg_hba.conf
@@ -75,7 +75,7 @@
     method: md5
     create: true
 
-- name: Set listen interface
+- name: Set PostgreSQL listen interface
   become: true
   community.postgresql.postgresql_set:
     login_host: "127.0.0.1"
@@ -84,7 +84,7 @@
     name: listen_addresses
     value: "*"
 
-- name: Reload configuration
+- name: Reload PostgreSQL configuration
   community.postgresql.postgresql_query:
     login_host: "127.0.0.1"
     login_user: "postgres"
@@ -111,13 +111,42 @@
       - default-mysql-server
       - default-mysql-client
       - python3-pymysql
+
+- name: Start MySQL service
+  become: true
+  service:
+    name: mysql
+    state: started
+
 - name: Set MySQL root Password
+  ignore_errors: true
   become: true
   mysql_user:
     login_unix_socket: "/var/run/mysqld/mysqld.sock"
+    # login_password: "{{ mysql_root_password }}"
     name: "root"
     password: "{{ mysql_root_password }}"
     state: present
+
+- name: Configure listen interface
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/mysql/mysql.conf.d/mysqld.cnf 
+    regexp: '^bind-address		= 127.0.0.1'
+    line: 'bind-address		= 0.0.0.0'
+    owner: root
+    group: root
+    mode: '0644'
+- name: Configure listen mysqlx interface
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/mysql/mysql.conf.d/mysqld.cnf 
+    regexp: '^mysqlx-bind-address	= 127.0.0.1'
+    line: 'mysqlx-bind-address	= 0.0.0.0'
+    owner: root
+    group: root
+    mode: '0644'
+
 - name: Disable autoload & stop MySQL service
   become: true
   service:
