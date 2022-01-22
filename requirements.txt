@@ -1,0 +1,6 @@
+Ansible galaxy:
+
+community.general
+
+PIP:
+redis

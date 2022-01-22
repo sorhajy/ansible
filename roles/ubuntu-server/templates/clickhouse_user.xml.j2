@@ -1,0 +1,13 @@
+<clickhouse>
+    <users>
+      <{{ clickhouse_user }}>
+          <profile>default</profile>
+            <networks>
+                  <ip>::/0</ip>
+            </networks>
+          <password>{{ clickhouse_password }}</password>
+          <!-- <password_sha256_hex>...</password_sha256_hex> -->
+          <quota>default</quota>
+      </{{ clickhouse_user }}>
+    </users>
+</clickhouse>

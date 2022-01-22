@@ -64,7 +64,7 @@
       name: ubuntu-server
       tasks_from: webservers
 
-# # Install databases packages
+# Install databases packages
 - name: Install and configure databases
   hosts: databases
   tasks:

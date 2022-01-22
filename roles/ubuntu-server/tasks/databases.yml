@@ -3,7 +3,25 @@
   apt: 
     name: redis
     state: present
-- name: Disable Redis
+- name: Configure Redis password
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/redis/redis.conf
+    regexp: '^# requirepass foobared'
+    line: "requirepass {{ redis_password }}"
+    owner: redis
+    group: redis
+    mode: '0640'
+- name: Configure Redis listen interface
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/redis/redis.conf
+    regexp: '^bind 127.0.0.1 ::1'
+    line: "# bind 127.0.0.1 ::1"
+    owner: redis
+    group: redis
+    mode: '0640'
+- name: Disable autostart & stop Redis
   become: true
   service:
     name: redis-server
@@ -47,7 +65,7 @@
   mysql_user:
     login_unix_socket: "/var/run/mysqld/mysqld.sock"
     name: "root"
-    password: "{{ mysql_password }}"
+    password: "{{ mysql_root_password }}"
     state: present
 - name: Disable autoload & stop MySQL service
   become: true
@@ -77,6 +95,11 @@
     packages:
       - clickhouse-server
       - clickhouse-client
+- name: Configure ClickHouse user
+  become: true
+  template:
+    src: roles/ubuntu-server/templates/clickhouse_user.xml.j2
+    dest: /etc/clickhouse-server/users.d/{{ clickhouse_user }}.xml
 - name: Disable autoload & stop ClickHouse service
   become: true
   service:
