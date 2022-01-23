@@ -1,4 +1,3 @@
-# Updating apt cache
 - name: Configure system started
   hosts: all
   tasks:
@@ -8,7 +7,6 @@
 
 
 
-# Configure SWAP file
 - name: Configure SWAP file on server
   hosts: all
   tasks:
@@ -16,7 +14,6 @@
       name: ubuntu-server
       tasks_from: swapfile
 
-# Install base OS packages
 - name: Configure base system packages
   hosts: all
   tasks:
@@ -24,7 +21,13 @@
       name: ubuntu-server
       tasks_from: base
 
-# Configure SSH
+- name: Configure SDK & DevTools
+  hosts: all
+  tasks:
+  - include_role:
+      name: ubuntu-server
+      tasks_from: sdk
+
 - name: Configure SSH
   hosts: all
   tasks:
@@ -32,15 +35,20 @@
       name: ubuntu-server
       tasks_from: ssh
 
-# Install Docker & Docker-compose from official repo
-- name: Configure Docker packages
+- name: Install Docker & Docker-compose from official repo
   hosts: servers
   tasks:
   - include_role:
       name: ubuntu-server
       tasks_from: docker
 
-# Install GitLab-runner from official repo
+# - name: Configure Docker Swarm
+#   hosts: swarm
+#   tasks:
+#   - include_role:
+#       name: ubuntu-server
+#       tasks_from: docker-swarm
+
 - name: Install & configure GitLab-runner packages
   hosts: servers
   tasks:
@@ -48,15 +56,6 @@
       name: ubuntu-server
       tasks_from: gitlab-runner
 
-# Install SDK packages
-- name: Configure SDK & DevTools
-  hosts: servers
-  tasks:
-  - include_role:
-      name: ubuntu-server
-      tasks_from: sdk
-
-# Install WebServers packages
 - name: Install and configure WebServers
   hosts: webservers
   tasks:
@@ -64,7 +63,6 @@
       name: ubuntu-server
       tasks_from: webservers
 
-# Install databases packages
 - name: Install and configure databases
   hosts: databases
   tasks:
@@ -74,8 +72,7 @@
 
 
 
-# Clear apt cache & useless dependencies
-- name: Configure system finished
+- name: Configure system finished (Clear apt cache & useless dependencies)
   hosts: all
   tasks:
   - include_role:

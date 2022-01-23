@@ -28,6 +28,7 @@
       - cmake
 
 - name: Update pip
+  become: true
   ignore_errors: true
   pip:
     name:

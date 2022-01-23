@@ -1,0 +1,21 @@
+- name: Install Python modules
+  become: true
+  pip:
+    name: docker-py
+    state: latest
+
+- name: Inspect swarm manager
+  when: ("{{ role }}" == "manager") and ("{{ is_swarm }}" == "true")
+  community.docker.docker_swarm:
+    state: present
+    advertise_addr: "{{ ansible_host }}"
+    rotate_manager_token: false
+  register: swarm_init
+
+- name: Inspect swarm worker
+  when: ("{{ role }}" == "worker") and ("{{ is_swarm }}" == "true")
+  community.docker.docker_swarm:
+    state: join
+    join_token: swarm_init.JoinTokens.Worker
+    advertise_addr: "{{ ansible_host }}"
+    remote_addrs: "master-01"

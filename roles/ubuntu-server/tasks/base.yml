@@ -40,6 +40,13 @@
       - zstd
       - snapd
 
+- name: Enable autoload & start zram service
+  become: true
+  service:
+    name: zram-config
+    state: started
+    enabled: yes
+
 - name: Enable autoload & start ufw service
   become: true
   service:
