@@ -1,0 +1,19 @@
+---
+
+- name: Install collection community.network
+  become: true
+  community.general.ansible_galaxy_install:
+    type: collection
+    name: community.network
+
+- name: Install collection community.docker
+  become: true
+  community.general.ansible_galaxy_install:
+    type: collection
+    name: community.docker
+
+- name: Install collection community.postgresql
+  become: true
+  community.general.ansible_galaxy_install:
+    type: collection
+    name: community.postgresql

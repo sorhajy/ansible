@@ -8,6 +8,13 @@
       name: fedora
       tasks_from: start
 
+- name: Configure ansible galaxy collection
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: fedora
+      tasks_from: ansible_galaxy
+
 
 
 - name: Configure wallpaper
