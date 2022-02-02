@@ -44,6 +44,17 @@
   - libvirtd-ro.socket
   - libvirtd-tcp.socket
 
+- name: Install virtualbox
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - VirtualBox
+      - kmod-VirtualBox
+      - akmod-VirtualBox
+      - virtualbox-guest-additions
+
 - name: Install vagrant
   dnf:
     name: vagrant

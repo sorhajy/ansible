@@ -11,8 +11,8 @@
   vars:
     packages:
       - fedora-workstation-repositories
-      # - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_release.stdout }}.noarch.rpm"
-      # - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_release.stdout }}.noarch.rpm"
+      - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_release.stdout }}.noarch.rpm"
+      - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_release.stdout }}.noarch.rpm"
       - ca-certificates
       - dkms
       - kernel-devel
