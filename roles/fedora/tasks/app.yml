@@ -1,16 +1,5 @@
 ---
 
-- name: Install Social
-  dnf:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - telegram-desktop
-      - thunderbird
-      - pidgin
-
-
 - name: Install office apps
   dnf:
     name: "{{ packages }}"
@@ -18,23 +7,6 @@
   vars:
     packages:
     - gnome-calendar
-    - libreoffice
-    - scribus
-    - freecad
-    - librecad
-
-
-- name: Install browsers
-  dnf:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - firefox
-      - chromium
-      - torbrowser-launcher
-      # - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb # ! Optional. Proprietary.
-
 
 - name: Install file managing & share packages
   dnf:
@@ -42,40 +14,8 @@
     state: present
   vars:
     packages:
-      - transmission
       - syncthing
-      - filezilla
-      - meld
-      - onionshare
       - persepolis
-
-
-- name: Install media editor
-  dnf:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - blender
-      # - nvidia-cuda-toolkit # ! Only for Nvidia GPU
-      - gimp
-      - inkscape
-      - vlc
-      - obs-studio
-      - HandBrake-gui
-      - audacity
-
-
-- name: Install Remmina
-  dnf:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - remmina
-      - remmina-plugins-rdp
-      - remmina-plugins-vnc
-
 
 - name: Install KVM packages
   dnf:
@@ -92,28 +32,22 @@
       - virt-manager
       - bridge-utils
 
-- name: Enable libvirt service
-  service:
-    name: libvirtd
-    state: started
-    enabled: yes
-
-- name: Install virtualbox
-  dnf:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - VirtualBox
-      - kmod-VirtualBox
-      - akmod-VirtualBox
-      - virtualbox-guest-additions
+- name: Start & enable libvirt
+  service: 
+    name: {{ item }} 
+    state: started 
+    enabled: yes 
+  with_item:
+  - libvirtd-admin.socket
+  - libvirtd-tls.socket
+  - libvirtd.socket
+  - libvirtd-ro.socket
+  - libvirtd-tcp.socket
 
 - name: Install vagrant
   dnf:
     name: vagrant
     state: present
-
 
 - name: Install VPNs
   dnf:
@@ -129,31 +63,12 @@
       - NetworkManager-openconnect-gnome
       - NetworkManager-openvpn-gnome
       - tor
-      # - i2pd
 
 - name: Disable autoload & stop tor service
   service:
     name: tor
     state: stopped
     enabled: no
-
-# - name: Disable autoload & stop i2p service
-#   service:
-#     name: i2p
-#     state: stopped
-#     enabled: no
-
-# - name: Disable autoload & stop i2pd service
-#   service:
-#     name: i2pd
-#     state: stopped
-#     enabled: no
-
-# - name: Disable autoload & stop shadowsocks service
-#   service:
-#     name: shadowsocks-libev
-#     state: stopped
-#     enabled: no
 
 - name: Install wine & steam
   dnf:

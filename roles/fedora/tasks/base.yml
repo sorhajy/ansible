@@ -11,8 +11,8 @@
   vars:
     packages:
       - fedora-workstation-repositories
-      - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_release.stdout }}.noarch.rpm"
-      - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_release.stdout }}.noarch.rpm"
+      # - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_release.stdout }}.noarch.rpm"
+      # - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_release.stdout }}.noarch.rpm"
       - ca-certificates
       - dkms
       - kernel-devel
@@ -76,18 +76,82 @@
       - make
       - ruby-devel
 
+- name: Enable autoload & start sshd service
+  service:
+    name: sshd
+    state: started
+    enabled: yes
+
+- name: Disable autoload & stop firewalld service
+  service:
+    name: firewalld
+    state: stopped
+    enabled: no
+
+- name: Enable autoload & start ufw service
+  become: true
+  service:
+    name: ufw
+    state: started
+    enabled: yes
+
+- name: Disable UFW
+  become: true
+  when: (fresh_configure == "true")
+  community.general.ufw:
+    state: disabled
+
+- name: Reset UFW
+  become: true
+  when: (fresh_configure == "true")
+  community.general.ufw:
+    state: reset
+
+- name: Allow all access to port 22
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '22'
+
+- name: Allow all access from RFC1918 networks to this host
+  become: true
+  community.general.ufw:
+    rule: allow
+    src: '{{ item }}'
+  loop:
+    - 127.0.0.0/8
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+- name: Allow all access from Docker networks to this host
+  become: true
+  community.general.ufw:
+    rule: allow
+    src: '{{ item }}'
+  loop:
+    # Docker subnet
+    - 172.17.0.0/16
+    - 172.18.0.0/16
+
+- name: Reject everything and enable UFW
+  become: true
+  community.general.ufw:
+    state: enabled
+    policy: reject
+
+- name: Reload UFW
+  become: true
+  community.general.ufw:
+    state: reloaded
+
 - name: Install base packages
   dnf:
     name: "{{ packages }}"
     state: present
   vars:
     packages:
-      - keepassxc
       - guake
-      - copyq
       - gparted
-      - geany
-      - sushi # A quick previewer for Nautilus
       - flameshot
       - hashcat
       - gnome-tweaks
@@ -101,29 +165,6 @@
     packages:
       - gnome-system-monitor
       - gsmartcontrol
-
-- name: Install DBs packages
-  dnf:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - postgresql
-      - postgresql-contrib
-      - postgresql-server
-      - community-mysql
-      - community-mysql-server
-
-- name: Disable autoload & stop Postgres service
-  service:
-    name: postgresql
-    state: stopped
-    enabled: no
-- name: Disable autoload & stop MySQL service
-  service:
-    name: mysqld
-    state: stopped
-    enabled: no
 
 - name: Check root SSH dir
   file: 

@@ -17,6 +17,13 @@
       name: fedora
       tasks_from: wallpaper
 
+- name: Configure packages from additional repo
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: fedora
+      tasks_from: additional_repo
+
 - name: Configure base
   hosts: localhost
   tasks:
@@ -44,13 +51,6 @@
   - include_role:
       name: fedora
       tasks_from: docker
-
-- name: Configure packages from additional repo
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: fedora
-      tasks_from: additional_repo
 
 - name: Configure packages by snap
   hosts: localhost

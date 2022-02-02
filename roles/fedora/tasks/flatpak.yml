@@ -10,69 +10,135 @@
 - name: Add Flathub repo
   command: "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
 
+- name: Install Firefox
+  flatpak:
+    name: org.mozilla.firefox
+    state: present
+- name: Install Chromium
+  flatpak:
+    name: org.chromium.Chromium
+    state: present
+- name: Install TorBrowser
+  flatpak:
+    name: com.github.micahflee.torbrowser-launcher
+    state: present
+
+# Social
+- name: Install Telegram
+  flatpak:
+    name: org.telegram.desktop
+    state: present
+- name: Install Zoom
+  flatpak:
+    name: us.zoom.Zoom
+    state: present
+- name: Install Skype
+  flatpak:
+    name: com.skype.Client
+    state: present
+- name: Install Element
+  flatpak:
+    name: im.riot.Riot
+    state: present
+- name: Install Slack
+  flatpak:
+    name: com.slack.Slack
+    state: present
+- name: Install Jami
+  flatpak:
+    name: net.jami.Jami
+    state: present
+- name: Install Delta Chat
+  flatpak:
+    name: chat.delta
+    state: present
+- name: Install Jitsi Meet
+  flatpak:
+    name: org.jitsi.jitsi-meet
+    state: present
+- name: Install Pidgin
+  flatpak:
+    name: im.pidgin.Pidgin
+    state: present
+
+# Office
+- name: Install LibreOffice
+  flatpak:
+    name: org.libreoffice.LibreOffice
+    state: present
+- name: Install Scribus
+  flatpak:
+    name: net.scribus.Scribus
+    state: present
+- name: Install FreeCAD
+  flatpak:
+    name: org.freecadweb.FreeCAD
+    state: present
 - name: Install OnlyOffice
   flatpak:
     name: org.onlyoffice
     state: present
+- name: Install Thunderbird
+  flatpak:
+    name: org.mozilla.Thunderbird
+    state: present
+- name: Install Obsidian # ! Proprietary
+  flatpak:
+    name: md.obsidian.Obsidian
+    state: present
 
+# IDE
 - name: Install PyCharm
   flatpak:
     name: com.jetbrains.PyCharm-Community
     state: present
-
 - name: Install IDEA
   flatpak:
     name: com.jetbrains.IntelliJ-IDEA-Community
     state: present
-
 - name: Install Android Studio
   flatpak:
     name: com.google.AndroidStudio
     state: present
-
 - name: Install Postman
   flatpak:
     name: com.getpostman.Postman
     state: present
-
 - name: Install DBeaver CE
   flatpak:
     name: io.dbeaver.DBeaverCommunity
     state: present
+- name: Install Meld
+  flatpak:
+    name: org.gnome.meld
+    state: present
+- name: Install Geany
+  flatpak:
+    name: org.geany.Geany
+    state: present
 
+# Custom
+- name: Install NautilusPreviewer (Sushi)
+  flatpak:
+    name: org.gnome.NautilusPreviewer
+    state: present
+- name: Install KeePassXC
+  flatpak:
+    name: org.keepassxc.KeePassXC
+    state: present
 - name: Install Electrum
   flatpak:
     name: org.electrum.electrum
     state: present
 
-- name: Install Zoom
+- name: Install CopyQ
   flatpak:
-    name: us.zoom.Zoom
+    name: com.github.hluk.copyq
     state: present
 
-- name: Install Skype
+- name: Install OnionShare
   flatpak:
-    name: com.skype.Client
-    state: present
-
-- name: Install Element
-  flatpak:
-    name: im.riot.Riot
-    state: present
-
-- name: Install Slack
-  flatpak:
-    name: com.slack.Slack
-    state: present
-
-- name: Install Jami
-  flatpak:
-    name: net.jami.Jami
-    state: present
-
-- name: Install Obsidian # ! Proprietary
-  flatpak:
-    name: md.obsidian.Obsidian
+    name: org.onionshare.OnionShare
     state: present
 
 - name: Install GTK Stress Testing
@@ -80,26 +146,67 @@
     name: com.leinardi.gst
     state: present
 
+- name: Install Filezilla
+  flatpak:
+    name: org.filezillaproject.Filezilla
+    state: present
+
 # - name: Install Nvidia GPU util # ! Nvidia only
 #   flatpak:
 #     name: com.leinardi.gwe
 #     state: present
 
-- name: Install Delta Chat
+- name: Install i2pd
   flatpak:
-    name: chat.delta
+    name: website.i2pd.i2pd
+    state: present
+- name: Install Shadowsocks
+  flatpak:
+    name: org.shadowsocks.qt5client
     state: present
 
+- name: Install Remmina
+  flatpak:
+    name: org.remmina.Remmina
+    state: present
+
+- name: Install Transmission
+  flatpak:
+    name: com.transmissionbt.Transmission
+    state: present
 - name: Install Tribler
   flatpak:
     name: org.tribler.Tribler
     state: present
 
-- name: Install Jitsi Meet
+- name: Install VLC
   flatpak:
-    name: org.jitsi.jitsi-meet
+    name: org.videolan.VLC
     state: present
-
+- name: Install HandBrake
+  flatpak:
+    name: fr.handbrake.ghb
+    state: present
+- name: Install Audacity
+  flatpak:
+    name: org.audacityteam.Audacity
+    state: present
+- name: Install OBS
+  flatpak:
+    name: com.obsproject.Studio
+    state: present
+- name: Install GIMP
+  flatpak:
+    name: org.gimp.GIMP
+    state: present
+- name: Install Inkscape
+  flatpak:
+    name: org.inkscape.Inkscape
+    state: present
+- name: Install Blender
+  flatpak:
+    name: org.blender.Blender
+    state: present
 - name: Install Natron
   flatpak:
     name: fr.natron.Natron

@@ -31,23 +31,54 @@
       - python3-devel
       - wireshark
 
+- name: Install PostgreSQL packages
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - postgresql
+      - postgresql-contrib
+      - postgresql-server
+- name: Disable autoload & stop Postgres service
+  service:
+    name: postgresql
+    state: stopped
+    enabled: no
+
+- name: Install MySQL packages
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - community-mysql
+      - community-mysql-server
+- name: Disable autoload & stop MySQL service
+  service:
+    name: mysqld
+    state: stopped
+    enabled: no
+
 - name: Install Redis
   dnf:
     name: redis
     state: present
-
-- name: Configure Redis
+- name: Disable autoload & stop Redis
   service:
     name: redis
     enabled: no
     state: stopped
 
-- name: Install Nginx
+- name: Install Nginx packages
   dnf:
-    name: nginx
+    name: "{{ packages }}"
     state: present
-
-- name: Configure Nginx
+  vars:
+    packages:
+      - nginx
+      - nginx-all-modules
+- name: Disable autoload & stop Nginx
   service:
     name: nginx
     enabled: no
