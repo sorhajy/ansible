@@ -1,0 +1,13 @@
+---
+
+- name: Install Docker packages
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - podman
+      - podman-docker
+      - podman-plugins
+      - podman-compose
+      - buildah

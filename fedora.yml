@@ -52,12 +52,18 @@
       name: fedora
       tasks_from: git
 
-- name: Configure Docker packages # Install Docker & Docker-compose from official repo
+- name: Configure Podman packages
   hosts: localhost
   tasks:
   - include_role:
       name: fedora
-      tasks_from: docker
+      tasks_from: podman
+# - name: Configure Docker packages # Install Docker & Docker-compose from official repo
+#   hosts: localhost
+#   tasks:
+#   - include_role:
+#       name: fedora
+#       tasks_from: docker
 
 - name: Configure packages by snap
   hosts: localhost
