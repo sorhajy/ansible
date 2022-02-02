@@ -1,6 +1,6 @@
 ---
 
-- name: Create snap symbolic link 
+- name: Create snap symbolic link
   file:
     src: "/var/lib/snapd/snap"
     dest: "/snap"
@@ -22,7 +22,8 @@
     classic: yes
   vars:
     packages:
-    - sosumi # MacOS VM
+    # - sosumi # MacOS VM
+    - google-cloud-cli
 
 - name: Install network snap packages
   snap:
