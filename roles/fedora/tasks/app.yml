@@ -43,6 +43,9 @@
   - libvirtd.socket
   - libvirtd-ro.socket
   - libvirtd-tcp.socket
+  - virtnetworkd-ro.socket
+  - virtnetworkd-admin.socket
+  - virtnetworkd.socket
 
 - name: Install virtualbox
   dnf:
