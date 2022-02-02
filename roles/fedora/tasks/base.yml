@@ -105,13 +105,11 @@
 
 - name: Disable UFW
   become: true
-  when: (fresh_configure == "true")
   community.general.ufw:
     state: disabled
 
 - name: Reset UFW
   become: true
-  when: (fresh_configure == "true")
   community.general.ufw:
     state: reset
 
