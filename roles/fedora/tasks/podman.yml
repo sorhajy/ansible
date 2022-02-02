@@ -1,6 +1,6 @@
 ---
 
-- name: Install Docker packages
+- name: Install Podman packages
   dnf:
     name: "{{ packages }}"
     state: present
