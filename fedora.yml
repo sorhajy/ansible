@@ -24,12 +24,6 @@
       name: fedora
       tasks_from: wallpaper
 
-- name: Configure packages from additional repo
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: fedora
-      tasks_from: additional_repo
 
 - name: Configure base
   hosts: localhost
@@ -37,6 +31,13 @@
   - include_role:
       name: fedora
       tasks_from: base
+
+- name: Configure packages from additional repo
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: fedora
+      tasks_from: additional_repo
 
 - name: Configure Apps
   hosts: localhost

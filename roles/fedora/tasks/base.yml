@@ -63,6 +63,7 @@
       - exif
       - youtube-dl
       - zstd
+      - lz4
       - android-file-transfer
       - android-tools
       - snapd
@@ -83,6 +84,39 @@
       - libxml2-devel
       - make
       - ruby-devel
+      - i2pd
+      - zfs
+
+- name: Enable autoload & start I2Pd service
+  service:
+    name: i2pd
+    state: started
+    enabled: yes
+
+- name: Enable autoload & start I2Pd service
+  service:
+    name: tor
+    state: started
+    enabled: yes
+
+- name: Add the ZFS module
+  become: true
+  community.general.modprobe:
+    name: zfs
+    state: present
+- name: Check ZFS autoload file
+  become: true
+  file:
+    path: /etc/modules-load.d/zfs.conf
+    state: touch
+- name: Configure Redis listen interface
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/modules-load.d/zfs.conf
+    line: "zfs"
+    owner: root
+    group: root
+    mode: '0644'
 
 - name: Enable autoload & start sshd service
   service:
@@ -149,28 +183,6 @@
   become: true
   community.general.ufw:
     state: reloaded
-
-- name: Install base packages
-  dnf:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - guake
-      - gparted
-      - flameshot
-      - hashcat
-      - gnome-tweaks
-      - kdiskmark
-
-- name: Install monitor packages
-  dnf:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - gnome-system-monitor
-      - gsmartcontrol
 
 - name: Check root SSH dir
   file: 

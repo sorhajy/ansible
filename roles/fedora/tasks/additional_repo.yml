@@ -11,7 +11,18 @@
     owner: root
     group: root
     mode: '0644'
-- name: Install VScode
-  dnf:
-    name: code
-    state: present
+
+- name: Add PyCharm repo
+  community.general.copr:
+    state: enabled
+    name: 'phracek/PyCharm'
+
+- name: Add i2pd repo
+  community.general.copr:
+    state: enabled
+    name: 'supervillain/i2pd'
+
+- name: Add ZFS repo
+  become: true
+  shell: dnf install -y https://zfsonlinux.org/fedora/zfs-release$(rpm -E %dist).noarch.rpm
+

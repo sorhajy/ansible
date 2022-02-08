@@ -1,5 +1,61 @@
 ---
 
+- name: Install base packages
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - guake
+      - gparted
+      - flameshot
+      - hashcat
+      - gnome-tweaks
+      - kdiskmark
+      - firefox
+      - chromium
+      - torbrowser-launcher
+      - telegram-desktop
+      - pidgin
+      - libreoffice
+      - scribus
+      - freecad
+      - thunderbird
+      - pycharm-community
+      - meld
+      - geany
+      - keepassxc
+      - electrum
+      - copyq
+      - onionshare
+      - filezilla
+      - remmina
+      - remmina-gnome-session
+      - remmina-plugins-rdp
+      - remmina-plugins-vnc
+      - transmission
+      - vlc
+      - HandBrake-gui
+      - audacity
+      - obs-studio
+      - gimp
+      - inkscape
+      - blender
+
+- name: Install VScode
+  dnf:
+    name: code
+    state: present
+
+- name: Install monitor packages
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - gnome-system-monitor
+      - gsmartcontrol
+
 - name: Install office apps
   dnf:
     name: "{{ packages }}"
@@ -46,17 +102,6 @@
   - virtnetworkd-ro.socket
   - virtnetworkd-admin.socket
   - virtnetworkd.socket
-
-- name: Install virtualbox
-  dnf:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - VirtualBox
-      - kmod-VirtualBox
-      - akmod-VirtualBox
-      - virtualbox-guest-additions
 
 - name: Install vagrant
   dnf:
