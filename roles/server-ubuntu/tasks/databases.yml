@@ -179,7 +179,7 @@
 - name: Configure ClickHouse user
   become: true
   template:
-    src: roles/ubuntu-server/templates/clickhouse_user.xml.j2
+    src: roles/server-ubuntu/templates/clickhouse_user.xml.j2
     dest: /etc/clickhouse-server/users.d/{{ clickhouse_user }}.xml
 - name: Disable autoload & stop ClickHouse service
   become: true

@@ -18,7 +18,6 @@
     packages:
     # - sosumi # * MacOS VM
     - pycharm-community
-    - go
     - google-cloud-sdk
 
 - name: Install develop snap packages
@@ -50,7 +49,6 @@
     packages:
     - zoom-client
     - skype
-    - ssb-patchwork
 
 - name: Install network snap packages
   snap:

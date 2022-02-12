@@ -1,5 +1,23 @@
 ---
 
+- name: Install collection community.network
+  become: true
+  community.general.ansible_galaxy_install:
+    type: collection
+    name: community.network
+
+- name: Install collection community.docker
+  become: true
+  community.general.ansible_galaxy_install:
+    type: collection
+    name: community.docker
+
+- name: Install collection community.postgresql
+  become: true
+  community.general.ansible_galaxy_install:
+    type: collection
+    name: community.postgresql
+
 - name: Install system packages and libs
   apt:
     name: "{{ packages }}"
@@ -8,10 +26,13 @@
     packages:
       - apt-transport-https
       - ca-certificates
+      - software-properties-common
+      - gnupg-agent
+      - dirmngr
+      - openssh-client
+      - openssh-server
       - curl
       - wget
-      - gnupg-agent
-      - software-properties-common
       - ufw
       - ssh
       - screen
@@ -27,80 +48,229 @@
       - mat2
       - arp-scan
       - autossh
-      - cmake
+      - netcat
+      - nmap
+      - qrencode
+      - rsync
+      - speedtest-cli
+      - smartmontools
+      - telnet
+      - tree
+      - watch
+      - snapd
+      - pv
+      - dkms
+      - bzip2
+      - zstd
+      - lz4
+      - adb
+      - android-tools-adb
+      - android-platform-tools-base
+      - zsh
+      - zsh-syntax-highlighting
+      - zsh-autosuggestions
+
+- name: Install filesystems packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - mdadm
+      - fuse
+      - sshfs
+      - zfs-dkms
+      - zfsutils-linux
+      - btrfs-progs
+      - btrfs-compsize
+      - apt-btrfs-snapshot
+      - zfs-auto-snapshot
+
+- name: Install CLI utils
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - wine
       - libimage-exiftool-perl
       - exif
       - iperf
       - iperf3
       - jq
       - jo
-      - netcat
-      - nmap
+      - youtube-dl
+      - yt-dlp
+
+- name: Install Java
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - openjdk-11-jdk
+      - openjdk-11-jre
+
+- name: Install DevTools
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - ansible
+      - golang
+      - wireshark
+      - build-essential
+      - git
+      - gcc
+      - make
+      - cmake
+      - ninja-build
+      - ruby-dev
+      - clang
       - ldap-utils
+      - libxml2
+      - libxml2-dev
+      - libgtk-3-dev
+      - libblkid-dev
+      - liblzma-dev
+      - libsasl2-dev
+      - libldap2-dev
+      - libssl-dev
+      - python3
+      - python3-pip
+      - python3-dev
+      - python-dev
       - pipenv
       - virtualenv
-      - pv
-      - qrencode
-      - rsync
-      - speedtest-cli
-      - smartmontools
-      - sshfs
-      - telnet
-      - tree
-      - watch
-      - dirmngr
-      - youtube-dl
-      - zstd
-      - btrfs-compsize
-      - android-file-transfer
-      - android-platform-tools-base
-      - snapd
 
-- name: Install base packages
-  apt:
+- name: Install databases
+  apt: 
     name: "{{ packages }}"
     state: present
   vars:
     packages:
-      - gnome-tweaks
-      - gnome-usage
-      - timeshift
-      - flameshot
-      - gnome-dictionary
-      - gnome-sushi
-      - gparted
-      - keepassxc
-      - guake
-      - copyq
-
-- name: Install monitor packages
-  apt:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - deja-dup
-      - hardinfo
-      - cpupower-gui
-      - gnome-system-monitor
-      - gsmartcontrol
+    - redis
+    - redis-tools
+    - redis-server
+    - postgresql
+    - postgresql-client
+    - mysql-client
+    - mysql-server
 
 - name: Enable autoload & start ufw service
+  become: true
   service:
     name: ufw
     state: started
     enabled: yes
+- name: Reset UFW
+  become: true
+  community.general.ufw:
+    state: reset
+- name: Allow all access to port 22
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '22'
+- name: Allow all access from RFC1918 networks to this host
+  become: true
+  community.general.ufw:
+    rule: allow
+    src: '{{ item }}'
+  loop:
+    - 127.0.0.0/8
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+- name: Allow all access from Docker networks to this host
+  become: true
+  community.general.ufw:
+    rule: allow
+    src: '{{ item }}'
+  loop:
+    # Docker subnet
+    - 172.17.0.0/16
+    - 172.18.0.0/16
+- name: Reject everything and enable UFW
+  become: true
+  community.general.ufw:
+    state: enabled
+    policy: reject
+- name: Reload UFW
+  become: true
+  community.general.ufw:
+    state: reloaded
 
+- name: Install VPNs
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - wireguard
+      - wireguard-tools
+      - openconnect
+      - network-manager-l2tp
+      - network-manager-l2tp-gnome
+      - network-manager-openconnect-gnome
+      - network-manager-openvpn-gnome
+      - shadowsocks-libev
+      - tor
+      - i2p
+      - i2pd
+
+- name: Configure enabled services
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  with_items:
+  - ufw
+  - sshd
+
+- name: Configure disabled services
+  service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  with_items:
+  - tor
+  - i2p
+  - i2pd
+  - shadowsocks-libev
+  - redis-server
+  - postgresql
+  - mysql
+
+# Configure directory
 - name: Check root SSH dir
   file: 
     path: "/root/.ssh"
     state: directory
-
-- name: Check SSH dir
+- name: Check user SSH dir
   file: 
     path: "/home/{{ os_user }}/.ssh"
     state: directory
 
+- name: Create user GIT dir
+  file:
+    path: "/home/{{ os_user }}/git"
+    state: directory
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: "0755"
+  become: true
+  become_user: "{{ os_user }}"
+- name: Create git lib dir
+  file:
+    path: "/opt/git"
+    state: directory
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: "0777"
+
+# Configure SSH keys
 - name: Inspect root SSH key
   openssh_keypair:
     path: "/root/.ssh/id_rsa"
@@ -109,7 +279,6 @@
     state: present
     force: no
   become: true
-
 - name: Inspect user SSH key
   openssh_keypair:
     path: "/home/{{ os_user }}/.ssh/id_rsa"

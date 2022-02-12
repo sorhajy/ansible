@@ -1,0 +1,150 @@
+---
+
+- name: Install base packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - gnome-tweaks
+      - gnome-usage
+      - timeshift
+      - flameshot
+      - gnome-dictionary
+      - gnome-sushi
+      - gparted
+      - keepassxc
+      - guake
+      - copyq
+
+- name: Install wine & steam
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - playonlinux
+      - steam
+
+- name: Install monitor packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - deja-dup
+      - hardinfo
+      - cpupower-gui
+      - gnome-system-monitor
+      - gsmartcontrol
+
+- name: Install KVM packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - qemu
+      - qemu-kvm
+      - libvirt-daemon
+      - ebtables
+      - virt-manager
+      - bridge-utils
+
+- name: Enable libvirt service
+  service:
+    name: libvirtd
+    state: started
+    enabled: yes
+
+- name: Install virtualbox
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - virtualbox
+      - virtualbox-dkms
+      # - virtualbox-ext-pack #TODO Install manual
+      - virtualbox-guest-additions-iso
+      - virtualbox-guest-dkms
+
+- name: Install vagrant
+  apt:
+    name: vagrant
+    state: present
+
+- name: Install Social
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - telegram-desktop
+      - jami
+      - thunderbird
+      - pidgin
+
+- name: Install browsers
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - firefox
+      - chromium-browser
+      - torbrowser-launcher
+      # - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb # ! Optional. Proprietary.
+
+
+- name: Install file managing & share packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - transmission
+      - syncthing
+      - filezilla
+      - meld
+      - onionshare
+      - persepolis
+      - android-file-transfer
+
+
+- name: Install media editor
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      # - nvidia-cuda-toolkit # ! Only for Nvidia GPU
+      - gimp
+      - vlc
+      - handbrake
+      - blender
+      - inkscape
+      - obs-studio
+      - audacity
+
+- name: Install Remmina
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - remmina
+      - remmina-plugin-rdp
+      - remmina-plugin-vnc
+
+- name: Install office
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - gnome-calendar
+      - libreoffice
+      - scribus
+      - freecad
+      - librecad
