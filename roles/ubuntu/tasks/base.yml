@@ -143,6 +143,7 @@
       - python-dev
       - pipenv
       - virtualenv
+      - rust-all
 
 - name: Install databases
   apt: 
