@@ -69,6 +69,7 @@
       - zsh
       - zsh-syntax-highlighting
       - zsh-autosuggestions
+      - apt-mirror
 
 - name: Install filesystems packages
   apt:

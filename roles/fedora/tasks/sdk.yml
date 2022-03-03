@@ -18,6 +18,7 @@
   vars:
     packages:
       - "@Development Tools"
+      - "@development-tools"
       - git
       - ansible
       - cmake
