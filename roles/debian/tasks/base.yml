@@ -69,7 +69,6 @@
       - zfsutils-linux
       - btrfs-progs
       - btrfs-compsize
-      - apt-btrfs-snapshot
       - zfs-auto-snapshot
 
 - name: Install CLI utils
@@ -152,7 +151,6 @@
       - libsqlite3-dev
       - zlib1g-dev
       - libkrb5-dev
-      - heimdal-dev
       - linux-headers-amd64
       - android-sdk
       - adb
@@ -185,6 +183,21 @@
       - ebtables
       - bridge-utils
       - vagrant
+- name: Add the user libvirt groups
+  user:
+    name: "{{ os_user }}"
+    groups: libvirt
+    append: yes
+
+- name: Start & enable libvirt
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+  - libvirtd-admin.socket
+  - libvirtd.socket
+  - libvirtd-ro.socket
 
 - name: Install DBs
   apt: 
@@ -336,7 +349,7 @@
     group: "{{ os_user }}"
     mode: '0640'
 
-- name: Install VimPlug
-  become: true
-  become_user: "{{ os_user }}"
-  command: 'vim -c ":PlugInstall" -c ":q" -c ":q"'
+# - name: Install VimPlug
+#   become: true
+#   become_user: "{{ os_user }}"
+#   command: 'vim -c ":PlugInstall" -c ":q" -c ":q"'
