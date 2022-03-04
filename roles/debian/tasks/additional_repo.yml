@@ -13,36 +13,13 @@
     filename: docker
     state: present
 
-- name: Add VirtualBox 2016 GPG key
+- name: Add VScodium GPG key
   apt_key:
-    url: "https://www.virtualbox.org/download/oracle_vbox_2016.asc"
-    state: present
-- name: Add VirtualBox GPG key
-  apt_key:
-    url: "https://www.virtualbox.org/download/oracle_vbox.asc"
-    state: present
-- name: Add VirtualBox repo
-  apt_repository:
-    repo: "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian {{ lsb_release.stdout }} contrib"
-    filename: virtualbox
-    state: present
-
-- name: Add VScode GPG key
-  apt_key:
-    url: "https://packages.microsoft.com/keys/microsoft.asc"
+    url: "https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg"
     state: present
 - name: Add VScode repo
   apt_repository:
-    repo: "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-    state: present
-
-- name: Add Resilio Sync GPG key
-  apt_key:
-    url: "https://linux-packages.resilio.com/resilio-sync/key.asc"
-    state: present
-- name: Add Resilio Sync repo
-  apt_repository:
-    repo: "deb http://linux-packages.resilio.com/resilio-sync/deb resilio-sync non-free"
+    repo: "deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://download.vscodium.com/debs vscodium main"
     state: present
 
 - name: Add yggdrasil GPG key
@@ -63,15 +40,14 @@
     repo: "deb https://packages.riot.im/debian/ default main"
     state: present
 
-- name: Add Google Cloud SDK GPG key
+- name: Add DBeaver GPG key
   apt_key:
-    url: "https://packages.cloud.google.com/apt/doc/apt-key.gpg"
+    url: "https://dbeaver.io/debs/dbeaver.gpg.key"
     state: present
-- name: Add Google Cloud SDK repo
+- name: Add DBeaver repo
   apt_repository:
-    repo: "deb https://packages.cloud.google.com/apt cloud-sdk main"
+    repo: "deb https://dbeaver.io/debs/dbeaver-ce /"
     state: present
-
 
 - name: Update cache after update repo
   apt:
@@ -100,17 +76,6 @@
     groups: docker
     append: yes
 
-
-- name: Install VirtualBox
-  apt:
-    name: virtualbox
-    state: present
-
-- name: Install VScode
-  apt:
-    name: code
-    state: present
-
 - name: Install Yggdrasil
   apt:
     name: yggdrasil
@@ -121,27 +86,17 @@
     state: stopped
     enabled: no
 
-- name: Install Google Cloud SDK
-  apt:
-    name: google-cloud-sdk
-    state: present
-
-- name: Install Resilio Sync
-  apt:
-    name: resilio-sync
-    state: present
-- name: Add user into Resilio Sync group
-  user:
-    name: "{{ os_user }}"
-    groups: rslsync
-    append: yes
-- name: Disable autoload & stop Resilio Sync service
-  service:
-    name: resilio-sync
-    state: stopped
-    enabled: no
-
 - name: Install Element
   apt:
     name: element-desktop
+    state: present
+
+- name: Install VScodium
+  apt:
+    name: codium
+    state: present
+
+- name: Install DBeaver
+  apt:
+    name: dbeaver-ce
     state: present

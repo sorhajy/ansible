@@ -25,17 +25,12 @@
       - net-tools
       - firejail
       - zram-tools
+      - dphys-swapfile
       - locate
       - mat2
       - arp-scan
       - autossh
       - cmake
-      - libimage-exiftool-perl
-      - exif
-      - iperf
-      - iperf3
-      - jq
-      - jo
       - netcat
       - hashcat
       - nmap
@@ -45,30 +40,52 @@
       - rsync
       - speedtest-cli
       - smartmontools
-      - sshfs
       - telnet
       - tree
       - watch
       - dirmngr
-      - youtube-dl
       - zstd
-      - btrfs-compsize
-      - android-file-transfer
-      - android-sdk
-      - adb
-      - fastboot
-      - apkinfo
-      - apktool
       - snapd
-      - mdadm
       - gnome-sushi
-      - wine
-      # ! Only for Nvidia GPU
-      # - nvidia-detect
-      # - nvidia-kernel-dkms
-      # - nvidia-driver
-      # - nvidia-cuda-toolkit 
       - firmware-misc-nonfree
+      - openssh-client
+      - openssh-server
+      - screen
+      - bzip2
+      - lz4
+      - apt-mirror
+
+- name: Install filesystems packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - mdadm
+      - fuse3
+      - sshfs
+      - zfs-dkms
+      - zfs-zed
+      - zfsutils-linux
+      - btrfs-progs
+      - btrfs-compsize
+      - apt-btrfs-snapshot
+      - zfs-auto-snapshot
+
+- name: Install CLI utils
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - wine
+      - libimage-exiftool-perl
+      - exif
+      - iperf
+      - iperf3
+      - jq
+      - jo
+      - youtube-dl
 
 - name: Install monitor packages
   apt:
@@ -97,6 +114,7 @@
       - shadowsocks-libev
       - tor
       - i2pd
+      - proxychains4
 
 - name: Install DevTools
   apt: 
@@ -112,21 +130,20 @@
       - build-essential
       - git
       - watch
+      - make
       - cmake
       - ninja-build
       - gcc
       - rustc
+      - rust-gdb
+      - rust-lldb
+      - rust-src
       - golang
       - clang
-      - libgtk-3-dev
-      - libblkid-dev
-      - liblzma-dev
-      - libsasl2-dev
-      - libldap2-dev
-      - libssl-dev
       - python3
       - python3-pip
       - python3-dev
+      - python
       - python-dev
       - pipenv
       - virtualenv
@@ -137,10 +154,21 @@
       - libkrb5-dev
       - heimdal-dev
       - linux-headers-amd64
-      - zfsutils-linux
-      - zfs-dkms
-      - zfs-zed
-      - spl
+      - android-sdk
+      - adb
+      - fastboot
+      - apkinfo
+      - apktool
+      - ruby-dev
+      - clang
+      - libxml2
+      - libxml2-dev
+      - libgtk-3-dev
+      - libblkid-dev
+      - liblzma-dev
+      - libsasl2-dev
+      - libldap2-dev
+      - libssl-dev
 
 - name: Install VM packages
   apt:
@@ -165,11 +193,88 @@
   vars:
     packages:
       - redis
+      - redis-tools
+      - redis-server
       - postgresql
       - postgresql-client
       - default-mysql-server
       - default-mysql-client
       - sqlite3
+
+# Services
+- name: Enable autoload & start ufw service
+  service:
+    name: ufw
+    state: started
+    enabled: yes
+- name: Reset UFW
+  become: true
+  community.general.ufw:
+    state: reset
+- name: Allow all access to port 22
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '22'
+- name: Allow all access from RFC1918 networks to this host
+  become: true
+  community.general.ufw:
+    rule: allow
+    src: '{{ item }}'
+  loop:
+    - 127.0.0.0/8
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+- name: Allow all access from Docker networks to this host
+  become: true
+  community.general.ufw:
+    rule: allow
+    src: '{{ item }}'
+  loop:
+    # Docker subnet
+    - 172.17.0.0/16
+    - 172.18.0.0/16
+- name: Reject everything and enable UFW
+  become: true
+  community.general.ufw:
+    state: enabled
+    policy: reject
+- name: Reload UFW
+  become: true
+  community.general.ufw:
+    state: reloaded
+
+- name: Configure enabled services
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  with_items:
+  - ufw
+  - sshd
+  - libvirtd
+
+- name: Configure disabled services
+  service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  with_items:
+  - tor
+  - i2pd
+  - shadowsocks-libev
+  - redis-server
+  - postgresql
+  - mysql
+
+- name: Copy wallpaper
+  copy:
+    src: "files/Wallpaper"
+    dest: "/home/{{os_user}}/Pictures/"
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: '0444'
 
 - name: Check root SSH dir
   file: 
@@ -235,53 +340,3 @@
   become: true
   become_user: "{{ os_user }}"
   command: 'vim -c ":PlugInstall" -c ":q" -c ":q"'
-
-# Services
-- name: Enable autoload & start ufw service
-  service:
-    name: ufw
-    state: started
-    enabled: yes
-- name: Enable libvirt service
-  service:
-    name: libvirtd
-    state: started
-    enabled: yes
-- name: Disable Redis
-  service:
-    name: redis-server
-    enabled: no
-    state: stopped
-- name: Disable PostgreSQL
-  service:
-    name: postgresql
-    enabled: no
-    state: stopped
-- name: Disable MySQL
-  service:
-    name: mysql
-    enabled: no
-    state: stopped
-- name: Disable autoload & stop tor service
-  service:
-    name: tor
-    state: stopped
-    enabled: no
-- name: Disable autoload & stop i2pd service
-  service:
-    name: i2pd
-    state: stopped
-    enabled: no
-- name: Disable autoload & stop shadowsocks service
-  service:
-    name: shadowsocks-libev
-    state: stopped
-    enabled: no
-
-- name: Copy wallpaper
-  copy:
-    src: "files/Wallpaper"
-    dest: "/home/{{os_user}}/Pictures/"
-    owner: "{{ os_user }}"
-    group: "{{ os_user }}"
-    mode: '0444'

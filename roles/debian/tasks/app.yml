@@ -15,6 +15,8 @@
       - copyq
       - wireshark
       - virt-manager
+      - electrum
+      - android-file-transfer
 
 - name: Install browsers
   apt:
@@ -25,7 +27,6 @@
       - firefox-esr
       - chromium
       - torbrowser-launcher
-      # - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb # ! Optional. Proprietary.
 
 - name: Install file managing & share packages
   apt:

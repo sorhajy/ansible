@@ -2,11 +2,15 @@
 
 - name: Add contrib repo
   command: "apt-add-repository contrib"
-  ignore_errors: yes
+  ignore_errors: true
 
 - name: Add non-free repo
   command: "apt-add-repository non-free"
-  ignore_errors: yes
+  ignore_errors: true
+
+- name: Add i386 binary
+  command: "dpkg --add-architecture i386"
+  ignore_errors: true
 
 - name: Update apt cache
   apt:

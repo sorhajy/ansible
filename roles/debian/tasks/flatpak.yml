@@ -21,11 +21,6 @@
     name: com.getpostman.Postman
     state: present
 
-- name: Install Dbeaver
-  flatpak:
-    name: io.dbeaver.DBeaverCommunity 
-    state: present
-
 - name: Install OnlyOffice
   flatpak:
     name: org.onlyoffice
@@ -36,20 +31,10 @@
     name: org.tribler.Tribler
     state: present
 
-- name: Install Electrum
-  flatpak:
-    name: org.electrum.electrum
-    state: present
-
 - name: Install GTK Stress Testing
   flatpak:
     name: com.leinardi.gst
     state: present
-
-# - name: Install Nvidia GPU util # ! Nvidia only
-#   flatpak:
-#     name: com.leinardi.gwe
-#     state: present
 
 - name: Install Obsidian # ! Proprietary
   flatpak:
