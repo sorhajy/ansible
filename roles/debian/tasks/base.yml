@@ -167,6 +167,8 @@
       - libsasl2-dev
       - libldap2-dev
       - libssl-dev
+      - sqlite-devel
+      - libbz2-dev
 
 - name: Install VM packages
   apt:
