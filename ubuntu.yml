@@ -8,13 +8,6 @@
       name: ubuntu
       tasks_from: start
 
-- name: Configure wallpaper
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: ubuntu
-      tasks_from: wallpaper
-
 - name: Configure base
   hosts: localhost
   tasks:
@@ -28,13 +21,6 @@
   - include_role:
       name: ubuntu
       tasks_from: docker
-
-- name: Configure packages from PPA # Install packages from PPA repo
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: ubuntu
-      tasks_from: ppa
 
 - name: Configure packages from additional repo
   hosts: localhost

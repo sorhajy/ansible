@@ -1,0 +1,67 @@
+call plug#begin('~/.vim/plugged')
+
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+Plug 'jiangmiao/auto-pairs'
+
+"Git plugin
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+"search in proj
+Plug 'ctrlpvim/ctrlp.vim'
+
+"Move coursor
+Plug 'easymotion/vim-easymotion'
+
+"Color schemes
+Plug 'morhetz/gruvbox'
+
+call plug#end()
+
+colorscheme gruvbox
+set background=dark
+
+set encoding=utf8
+set number
+syntax on
+set showmatch
+set visualbell
+set hlsearch
+set smartcase
+set expandtab
+set shiftwidth=4
+set smartindent
+set smarttab
+set softtabstop=4
+set tabstop=4
+set ruler
+:syntax on
+:set list
+set ignorecase
+set smartcase
+set incsearch
+:set mouse=a
+
+"Plug mapping
+map <C-n> :NERDTreeToggle<CR>
+map <Leader> <Plug>(easymotion-prefix)
+
+"Удобное управление окнами
+map <silent> <C-h> :call WinMove('h')<CR>
+map <silent> <C-j> :call WinMove('j')<CR>
+map <silent> <C-k> :call WinMove('k')<CR>
+map <silent> <C-l> :call WinMove('l')<CR>
+function! WinMove(key)
+  let t:curwin = winnr()
+  exec "wincmd ".a:key
+  if (t:curwin == winnr())
+    if (match(a:key,'[jk]'))
+      wincmd v
+    else
+      wincmd s
+    endif
+    exec "wincmd ".a:key
+  endif
+endfunction
+

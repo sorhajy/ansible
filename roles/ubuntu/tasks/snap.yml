@@ -27,8 +27,8 @@
     classic: no
   vars:
     packages:
-    - postman
-    - dbeaver-ce
+    # - postman
+    # - dbeaver-ce
     - ngrok
 
 - name: Install social snap packages with classic

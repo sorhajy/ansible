@@ -350,8 +350,3 @@
     owner: "{{ os_user }}"
     group: "{{ os_user }}"
     mode: '0640'
-
-# - name: Install VimPlug
-#   become: true
-#   become_user: "{{ os_user }}"
-#   command: 'vim -c ":PlugInstall" -c ":q" -c ":q"'

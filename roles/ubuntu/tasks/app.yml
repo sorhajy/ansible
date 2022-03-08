@@ -7,15 +7,13 @@
   vars:
     packages:
       - gnome-tweaks
-      - gnome-usage
-      - timeshift
       - flameshot
-      - gnome-dictionary
       - gnome-sushi
       - gparted
       - keepassxc
       - guake
       - copyq
+      - wireshark
 
 - name: Install wine & steam
   apt:
@@ -118,7 +116,6 @@
     state: present
   vars:
     packages:
-      # - nvidia-cuda-toolkit # ! Only for Nvidia GPU
       - gimp
       - vlc
       - handbrake

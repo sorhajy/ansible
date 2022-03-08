@@ -9,15 +9,6 @@
     repo: "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
     state: present
 
-- name: Add Resilio Sync GPG key
-  apt_key:
-    url: "https://linux-packages.resilio.com/resilio-sync/key.asc"
-    state: present
-- name: Add Resilio Sync repo
-  apt_repository:
-    repo: "deb http://linux-packages.resilio.com/resilio-sync/deb resilio-sync non-free"
-    state: present
-
 - name: Add yggdrasil GPG key
   apt_key:
     url: "https://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/key.txt"
@@ -63,11 +54,6 @@
     name: yggdrasil
     state: stopped
     enabled: no
-
-- name: Install Resilio Sync
-  apt:
-    name: resilio-sync
-    state: present
 
 - name: Install Element
   apt:

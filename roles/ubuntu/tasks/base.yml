@@ -70,6 +70,8 @@
       - zsh-syntax-highlighting
       - zsh-autosuggestions
       - apt-mirror
+      # - dphys-swapfile
+      - hashcat
 
 - name: Install filesystems packages
   apt:
@@ -78,7 +80,7 @@
   vars:
     packages:
       - mdadm
-      - fuse
+      - fuse3
       - sshfs
       - zfs-dkms
       - zfsutils-linux
@@ -120,7 +122,6 @@
     packages:
       - ansible
       - golang
-      - wireshark
       - build-essential
       - git
       - gcc
@@ -290,3 +291,24 @@
     force: no
   become: true
   become_user: "{{ os_user }}"
+
+- name: Copy wallpaper
+  copy:
+    src: "files/Wallpaper"
+    dest: "/home/{{os_user}}/Pictures/"
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: '0444'
+
+- name: Install VimPlug
+  become: true
+  become_user: "{{ os_user }}"
+  command: "curl -s -fLo /home/{{ os_user }}/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+
+- name: Config vimrc
+  template:
+    src: vimrc.j2
+    dest: "/home/{{ os_user }}/.vimrc"
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: '0640'
