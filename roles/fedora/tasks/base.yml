@@ -14,6 +14,14 @@
       - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_release.stdout }}.noarch.rpm"
       - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_release.stdout }}.noarch.rpm"
 
+- name: Remove usless system packages
+  dnf:
+    name: "{{ packages }}"
+    state: absent
+  vars:
+    packages:
+    - zfs-fuse
+
 - name: Install system packages
   dnf:
     name: "{{ packages }}"
@@ -85,6 +93,7 @@
       - make
       - ruby-devel
       - i2pd
+      - tor
       - zfs
       - hashcat
 
@@ -94,7 +103,7 @@
     state: started
     enabled: yes
 
-- name: Enable autoload & start I2Pd service
+- name: Enable autoload & start TOR service
   service:
     name: tor
     state: started

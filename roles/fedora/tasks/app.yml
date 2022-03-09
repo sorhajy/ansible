@@ -121,13 +121,6 @@
       - NetworkManager-l2tp-gnome
       - NetworkManager-openconnect-gnome
       - NetworkManager-openvpn-gnome
-      - tor
-
-- name: Disable autoload & stop tor service
-  service:
-    name: tor
-    state: stopped
-    enabled: no
 
 - name: Install wine & steam
   dnf:
