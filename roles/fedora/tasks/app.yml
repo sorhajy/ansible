@@ -9,7 +9,6 @@
       - guake
       - gparted
       - flameshot
-      - hashcat
       - gnome-tweaks
       - kdiskmark
       - firefox
@@ -21,7 +20,6 @@
       - scribus
       - freecad
       - thunderbird
-      - pycharm-community
       - meld
       - geany
       - keepassxc
@@ -41,6 +39,8 @@
       - gimp
       - inkscape
       - blender
+      - pycharm-community
+      - https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm
 
 - name: Install VScode
   dnf:

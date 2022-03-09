@@ -58,14 +58,6 @@
   flatpak:
     name: com.google.AndroidStudio
     state: present
-- name: Install Postman
-  flatpak:
-    name: com.getpostman.Postman
-    state: present
-- name: Install DBeaver CE
-  flatpak:
-    name: io.dbeaver.DBeaverCommunity
-    state: present
 
 # Custom
 - name: Install GTK Stress Testing

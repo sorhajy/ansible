@@ -26,3 +26,6 @@
   become: true
   shell: dnf install -y https://zfsonlinux.org/fedora/zfs-release$(rpm -E %dist).noarch.rpm
 
+- name: Update dnf cache
+  dnf:
+    update_cache: yes

@@ -86,6 +86,7 @@
       - ruby-devel
       - i2pd
       - zfs
+      - hashcat
 
 - name: Enable autoload & start I2Pd service
   service:
