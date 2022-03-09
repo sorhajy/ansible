@@ -94,6 +94,8 @@
       - ruby-devel
       - i2pd
       - tor
+      - obfs4
+      - proxychains-ng
       - zfs
       - hashcat
 
