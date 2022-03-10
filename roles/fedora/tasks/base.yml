@@ -94,6 +94,7 @@
       - ruby-devel
       - i2pd
       - tor
+      - yggdrasil
       - obfs4
       - proxychains-ng
       - zfs

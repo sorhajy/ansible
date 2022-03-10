@@ -22,6 +22,11 @@
     state: enabled
     name: 'supervillain/i2pd'
 
+- name: Add yggdrasil repo
+  community.general.copr:
+    state: enabled
+    name: 'rany/yggdrasil'
+
 - name: Add ZFS repo
   become: true
   shell: dnf install -y https://zfsonlinux.org/fedora/zfs-release$(rpm -E %dist).noarch.rpm
