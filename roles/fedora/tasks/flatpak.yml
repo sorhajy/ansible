@@ -49,33 +49,13 @@
     name: md.obsidian.Obsidian
     state: present
 
-# IDE
-- name: Install IDEA
-  flatpak:
-    name: com.jetbrains.IntelliJ-IDEA-Community
-    state: present
-- name: Install Android Studio
-  flatpak:
-    name: com.google.AndroidStudio
-    state: present
-
 # Custom
 - name: Install GTK Stress Testing
   flatpak:
     name: com.leinardi.gst
     state: present
 
-- name: Install Shadowsocks
-  flatpak:
-    name: org.shadowsocks.qt5client
-    state: present
-
 - name: Install Tribler
   flatpak:
     name: org.tribler.Tribler
-    state: present
-
-- name: Install Natron
-  flatpak:
-    name: fr.natron.Natron
     state: present

@@ -1,13 +1,13 @@
 ---
 
-- name: Add VScode GPG key
+- name: Add VScodium GPG key
   ansible.builtin.rpm_key:
     state: present
-    key: https://packages.microsoft.com/keys/microsoft.asc
-- name: Add VScode repo
+    key: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/-/raw/master/pub.gpg
+- name: Add VScodium repo
   template:
-    src: vscode.repo.j2
-    dest: "/etc/yum.repos.d/vscode.repo"
+    src: vscodium.repo.j2
+    dest: "/etc/yum.repos.d/vscodium.repo"
     owner: root
     group: root
     mode: '0644'
@@ -34,3 +34,15 @@
 - name: Update dnf cache
   dnf:
     update_cache: yes
+
+- name: Install packages from additional repos
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - codium
+      - pycharm-community
+      - https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm
+      - i2pd
+      - yggdrasil

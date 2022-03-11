@@ -11,7 +11,7 @@
     dest: "/home/{{ os_user }}/.local/share/applications/ApacheDirectoryStudio.desktop"
     owner: "{{ os_user }}"
     group: "{{ os_user }}"
-    mode: '0777'
+    mode: '0755'
 
 - name: Install Postman
   unarchive:

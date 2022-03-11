@@ -17,8 +17,6 @@
       - telegram-desktop
       - pidgin
       - libreoffice
-      - scribus
-      - freecad
       - thunderbird
       - meld
       - geany
@@ -34,18 +32,6 @@
       - transmission
       - vlc
       - HandBrake-gui
-      - audacity
-      - obs-studio
-      - gimp
-      - inkscape
-      - blender
-      - pycharm-community
-      - https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm
-
-- name: Install VScode
-  dnf:
-    name: code
-    state: present
 
 - name: Install monitor packages
   dnf:
