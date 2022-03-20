@@ -97,6 +97,7 @@
       - proxychains-ng
       - zfs
       - hashcat
+      - supervisor
 
 - name: Enable autoload & start I2Pd service
   service:
