@@ -48,6 +48,16 @@
   flatpak:
     name: md.obsidian.Obsidian
     state: present
+# Compress Image
+- name: Install Curtail
+  flatpak:
+    name: com.github.huluti.Curtail
+    state: present
+# Metadata Clenaer
+- name: Install MetadataCleaner
+  flatpak:
+    name: fr.romainvigier.MetadataCleaner
+    state: present
 
 # Custom
 - name: Install GTK Stress Testing

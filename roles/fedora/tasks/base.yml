@@ -98,6 +98,8 @@
       - zfs
       - hashcat
       - supervisor
+      - arm-image-installer
+      - deja-dup
 
 - name: Enable autoload & start I2Pd service
   service:

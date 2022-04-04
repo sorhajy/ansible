@@ -32,6 +32,8 @@
       - transmission
       - vlc
       - HandBrake-gui
+      - gnome-todo
+      - gnome-boxes
 
 - name: Install monitor packages
   dnf:
