@@ -1,5 +1,19 @@
 ---
 
+- name: Check lsb_release
+  command: "rpm -E %fedora"
+  register: fedora_release
+
+- name: Install RPMfusion repo
+  dnf:
+    name: "{{ packages }}"
+    state: present
+    disable_gpg_check: true
+  vars:
+    packages:
+      - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_release.stdout }}.noarch.rpm"
+      - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_release.stdout }}.noarch.rpm"
+
 - name: Add Virtualbox GPG key
   ansible.builtin.rpm_key:
     state: present
@@ -65,6 +79,5 @@
     packages:
       - codium
       - pycharm-community
-      - https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm
       - i2pd
       - yggdrasil

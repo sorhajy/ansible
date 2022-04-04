@@ -6,7 +6,6 @@
     state: present
   vars:
     packages:
-      - guake
       - gparted
       - flameshot
       - gnome-tweaks
@@ -16,33 +15,21 @@
       - torbrowser-launcher
       - telegram-desktop
       - pidgin
-      - libreoffice
-      - thunderbird
       - meld
       - geany
       - keepassxc
       - electrum
       - copyq
-      - onionshare
-      - filezilla
       - remmina
       - remmina-gnome-session
       - remmina-plugins-rdp
       - remmina-plugins-vnc
-      - transmission
       - vlc
       - HandBrake-gui
-      - gnome-todo
       - gnome-boxes
-
-- name: Install monitor packages
-  dnf:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
       - gnome-system-monitor
       - gsmartcontrol
+      - https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm
 
 - name: Install office apps
   dnf:
@@ -51,6 +38,9 @@
   vars:
     packages:
     - gnome-calendar
+    - libreoffice
+    - thunderbird
+    - gnome-todo
 
 - name: Install file managing & share packages
   dnf:
@@ -60,6 +50,9 @@
     packages:
       - syncthing
       - persepolis
+      - transmission
+      - filezilla
+      - onionshare
 
 - name: Install KVM packages
   dnf:
@@ -95,20 +88,6 @@
   dnf:
     name: vagrant
     state: present
-
-- name: Install VPNs
-  dnf:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - wireguard
-      - wireguard-tools
-      - openconnect
-      - NetworkManager-l2tp
-      - NetworkManager-l2tp-gnome
-      - NetworkManager-openconnect-gnome
-      - NetworkManager-openvpn-gnome
 
 - name: Install wine & steam
   dnf:
