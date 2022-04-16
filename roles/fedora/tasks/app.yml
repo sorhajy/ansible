@@ -30,6 +30,8 @@
       - gnome-system-monitor
       - gsmartcontrol
       - https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm
+      - deja-dup
+      - wireshark
 
 - name: Install office apps
   dnf:

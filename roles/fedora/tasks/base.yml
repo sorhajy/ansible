@@ -85,7 +85,6 @@
       - hashcat
       - supervisor
       - arm-image-installer
-      - deja-dup
 
 - name: Install NetTools
   dnf:
@@ -151,7 +150,7 @@
     state: started
     enabled: yes
 
-- name: Disable UFW
+- name: Stop UFW
   become: true
   community.general.ufw:
     state: disabled
