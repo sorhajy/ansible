@@ -92,12 +92,12 @@
     db: postgres
     query: "SELECT pg_reload_conf();"
 
-- name: Disable autoload & stop PostgreSQL service
+- name: Enable autoload & start PostgreSQL service
   become: true
   service:
     name: postgresql
-    enabled: no
-    state: stopped
+    enabled: true
+    state: started
 
 
 
@@ -147,12 +147,12 @@
     group: root
     mode: '0644'
 
-- name: Disable autoload & stop MySQL service
+- name: Enable autoload & start MySQL service
   become: true
   service:
     name: mysql
-    state: stopped
-    enabled: no
+    state: started
+    enabled: true
 
 
 
@@ -185,5 +185,5 @@
   become: true
   service:
     name: clickhouse-server
-    state: stopped
-    enabled: no
+    state: started
+    enabled: true
