@@ -44,6 +44,7 @@
       - netcat
       - nmap
       - openldap
+      - openldap-devel
       - pipenv
       - virtualenv
       - pv
@@ -85,6 +86,75 @@
       - hashcat
       - supervisor
       - arm-image-installer
+      - "@Development Tools"
+      - "@development-tools"
+      - git
+      - ansible
+      - ninja-build
+      - clang
+      - clang-devel
+      - golang
+      - python3
+      - python3-pip
+      - python3-devel
+      - python-devel
+      - java-11-openjdk
+      - java-11-openjdk-devel
+
+
+- name: Install PostgreSQL packages
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - postgresql
+      - postgresql-contrib
+      - postgresql-server
+      - postgresql-server-devel
+- name: Disable autoload & stop Postgres service
+  service:
+    name: postgresql
+    state: stopped
+    enabled: no
+
+- name: Install MySQL packages
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - community-mysql
+      - community-mysql-server
+- name: Disable autoload & stop MySQL service
+  service:
+    name: mysqld
+    state: stopped
+    enabled: no
+
+- name: Install Redis
+  dnf:
+    name: redis
+    state: present
+- name: Disable autoload & stop Redis
+  service:
+    name: redis
+    enabled: no
+    state: stopped
+
+- name: Install Nginx packages
+  dnf:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - nginx
+      - nginx-all-modules
+- name: Disable autoload & stop Nginx
+  service:
+    name: nginx
+    enabled: no
+    state: stopped
 
 - name: Install NetTools
   dnf:
@@ -227,3 +297,29 @@
     force: no
   become: true
   become_user: "{{ os_user }}"
+
+- name: Create user GIT dir
+  file:
+    path: "/home/{{ os_user }}/git"
+    state: directory
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: "0755"
+  become: true
+  become_user: "{{ os_user }}"
+
+- name: Create git lib dir
+  file:
+    path: "{{ git_lib }}"
+    state: directory
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: "0777"
+
+- name: Copy wallpaper
+  copy:
+    src: "files/Wallpaper"
+    dest: "/home/{{os_user}}/Pictures/"
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: '0444'

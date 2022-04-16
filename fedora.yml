@@ -15,16 +15,6 @@
       name: fedora
       tasks_from: ansible_galaxy
 
-
-
-- name: Configure wallpaper
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: fedora
-      tasks_from: wallpaper
-
-
 - name: Configure additional repo
   hosts: localhost
   tasks:
@@ -46,25 +36,18 @@
       name: fedora
       tasks_from: app
 
-- name: Git Configure
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: fedora
-      tasks_from: git
-
-- name: Configure Podman packages
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: fedora
-      tasks_from: podman
-# - name: Configure Docker packages # Install Docker & Docker-compose from official repo
+# - name: Configure Podman packages
 #   hosts: localhost
 #   tasks:
 #   - include_role:
 #       name: fedora
-#       tasks_from: docker
+#       tasks_from: podman
+- name: Configure Docker packages
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: fedora
+      tasks_from: docker
 
 - name: Configure packages by snap
   hosts: localhost

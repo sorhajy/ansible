@@ -1,9 +1,0 @@
----
-
-- name: Copy wallpaper
-  copy:
-    src: "files/Wallpaper"
-    dest: "/home/{{os_user}}/Pictures/"
-    owner: "{{ os_user }}"
-    group: "{{ os_user }}"
-    mode: '0444'
