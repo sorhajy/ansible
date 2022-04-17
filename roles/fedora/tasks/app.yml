@@ -42,7 +42,6 @@
     - gnome-calendar
     - libreoffice
     - thunderbird
-    - gnome-todo
 
 - name: Install file managing & share packages
   dnf:

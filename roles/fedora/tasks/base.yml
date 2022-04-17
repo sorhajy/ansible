@@ -75,7 +75,6 @@
       - adb-enhanced
       - mdadm
       - sushi
-      - wine
       - libxml2-devel
       - make
       - ruby-devel
