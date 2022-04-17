@@ -4,3 +4,4 @@ https://extensions.gnome.org/extension/1269/gnome-vagrant-indicator/
 https://extensions.gnome.org/extension/1065/docker-status/
 https://extensions.gnome.org/extension/8/places-status-indicator/
 https://extensions.gnome.org/extension/7/removable-drive-menu/
+https://extensions.gnome.org/extension/779/clipboard-indicator/
