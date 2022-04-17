@@ -57,6 +57,7 @@
       - tree
       - exif
       - youtube-dl
+      - yt-dlp
       - zstd
       - lz4
       - android-file-transfer
@@ -99,6 +100,12 @@
       - python-devel
       - java-11-openjdk
       - java-11-openjdk-devel
+      - s3cmd
+      - pwgen
+      - rust
+      - cargo
+      - sqlite
+      - sqlite-devel
 
 
 - name: Install PostgreSQL packages

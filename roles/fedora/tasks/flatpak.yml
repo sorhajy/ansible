@@ -10,6 +10,11 @@
 - name: Add Flathub repo
   command: "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
 
+- name: Install Anydesk
+  flatpak:
+    name: com.anydesk.Anydesk
+    state: present
+
 - name: Install Zoom
   flatpak:
     name: us.zoom.Zoom
@@ -25,6 +30,10 @@
 - name: Install Slack
   flatpak:
     name: com.slack.Slack
+    state: present
+- name: Install MS Teams
+  flatpak:
+    name: com.microsoft.Teams
     state: present
 - name: Install Jami
   flatpak:
