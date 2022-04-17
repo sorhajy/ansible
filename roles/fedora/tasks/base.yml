@@ -106,7 +106,7 @@
       - cargo
       - sqlite
       - sqlite-devel
-
+      - gnome-shell-extension-gsconnect
 
 - name: Install PostgreSQL packages
   dnf:
