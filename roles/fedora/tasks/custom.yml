@@ -5,6 +5,11 @@
     dest: /opt/
     remote_src: yes
 
+- name: Clear PyCharm dir
+  file:
+    path: /opt/PyCharmCE
+    state: absent
+
 - name: Rename PyCharm dir
   become: true
   shell: mv /opt/{{ PyCharmCE_dir }} /opt/PyCharmCE

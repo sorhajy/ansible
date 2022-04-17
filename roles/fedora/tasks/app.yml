@@ -9,6 +9,7 @@
       - gparted
       - flameshot
       - gnome-tweaks
+      - gnome-extensions-app
       - kdiskmark
       - firefox
       - chromium
