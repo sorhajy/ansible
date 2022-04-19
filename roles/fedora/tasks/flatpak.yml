@@ -14,6 +14,10 @@
   flatpak:
     name: org.keepassxc.KeePassXC
     state: present
+- name: Install VSCodium
+  flatpak:
+    name: com.vscodium.codium
+    state: present
 
 - name: Install Electrum
   flatpak:
