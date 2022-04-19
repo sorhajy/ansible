@@ -57,9 +57,6 @@
   community.general.copr:
     state: enabled
     name: 'rany/yggdrasil'
-- name: Create yggdrasil config file
-  become: true
-  shell: yggdrasil -genconf > /etc/yggdrasil.conf
 
 - name: Add ZFS repo
   become: true
@@ -103,3 +100,7 @@
       - yggdrasil
       - yandex-browser-stable
       - yandex-disk
+
+- name: Create yggdrasil config file
+  become: true
+  shell: yggdrasil -genconf > /etc/yggdrasil.conf
