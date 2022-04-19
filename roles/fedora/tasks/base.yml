@@ -33,7 +33,6 @@
       - gnome-usage
       - zram
       - mlocate
-      - gnome-dictionary
       - arp-scan
       - autossh
       - cmake
@@ -60,12 +59,10 @@
       - yt-dlp
       - zstd
       - lz4
-      - android-file-transfer
       - android-tools
       - snapd
       # - akmod-nvidia #! Nvidia Only
       - redhat-lsb-core
-      - corectrl
       - zsh
       - zsh-syntax-highlighting
       - zsh-autosuggestions
