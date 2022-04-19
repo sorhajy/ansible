@@ -108,7 +108,7 @@
       - sqlite-devel
       - gnome-shell-extension-gsconnect
 
-- name: Install PostgreSQL packages
+- name: Install Databases
   dnf:
     name: "{{ packages }}"
     state: present
@@ -118,35 +118,9 @@
       - postgresql-contrib
       - postgresql-server
       - postgresql-server-devel
-- name: Disable autoload & stop Postgres service
-  service:
-    name: postgresql
-    state: stopped
-    enabled: no
-
-- name: Install MySQL packages
-  dnf:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
       - community-mysql
       - community-mysql-server
-- name: Disable autoload & stop MySQL service
-  service:
-    name: mysqld
-    state: stopped
-    enabled: no
-
-- name: Install Redis
-  dnf:
-    name: redis
-    state: present
-- name: Disable autoload & stop Redis
-  service:
-    name: redis
-    enabled: no
-    state: stopped
+      - redis
 
 - name: Install Nginx packages
   dnf:
@@ -156,11 +130,6 @@
     packages:
       - nginx
       - nginx-all-modules
-- name: Disable autoload & stop Nginx
-  service:
-    name: nginx
-    enabled: no
-    state: stopped
 
 - name: Install NetTools
   dnf:
@@ -176,17 +145,29 @@
       - NetworkManager-openconnect-gnome
       - NetworkManager-openvpn-gnome
 
-- name: Enable autoload & start I2Pd service
+- name: Configure enabled services
   service:
-    name: i2pd
+    name: "{{ item }}"
     state: started
-    enabled: yes
+    enabled: true
+  with_items:
+    - sshd
+    - ufw
+    - i2pd
+    - tor
+    - yggdrasil
 
-- name: Enable autoload & start TOR service
+- name: Configure disabled services
   service:
-    name: tor
-    state: started
-    enabled: yes
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  with_items:
+    - firewalld
+    - nginx
+    - redis
+    - mysqld
+    - postgresql
 
 - name: Add the ZFS module
   become: true
@@ -206,25 +187,6 @@
     owner: root
     group: root
     mode: '0644'
-
-- name: Enable autoload & start sshd service
-  service:
-    name: sshd
-    state: started
-    enabled: yes
-
-- name: Disable autoload & stop firewalld service
-  service:
-    name: firewalld
-    state: stopped
-    enabled: no
-
-- name: Enable autoload & start ufw service
-  become: true
-  service:
-    name: ufw
-    state: started
-    enabled: yes
 
 - name: Stop UFW
   become: true

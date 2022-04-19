@@ -10,37 +10,10 @@
       - gnome-tweaks
       - gnome-extensions-app
       - kdiskmark
-      - firefox
-      - chromium
       - torbrowser-launcher
-      - telegram-desktop
-      - pidgin
-      - meld
-      - geany
-      - keepassxc
-      - electrum
-      - remmina
-      - remmina-gnome-session
-      - remmina-plugins-rdp
-      - remmina-plugins-vnc
-      - vlc
-      - HandBrake-gui
       - gnome-boxes
       - gnome-system-monitor
       - gsmartcontrol
-      - https://dbeaver.io/files/dbeaver-ce-latest-stable.x86_64.rpm
-      - deja-dup
-      - wireshark
-
-- name: Install office apps
-  dnf:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-    - gnome-calendar
-    - libreoffice
-    - thunderbird
 
 - name: Install file managing & share packages
   dnf:
@@ -50,10 +23,6 @@
     packages:
       - syncthing
       - persepolis
-      - transmission
-      - qbittorrent
-      - filezilla
-      - onionshare
 
 - name: Install KVM packages
   dnf:

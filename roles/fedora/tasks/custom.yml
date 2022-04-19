@@ -35,16 +35,3 @@
     owner: "{{ os_user }}"
     group: "{{ os_user }}"
     mode: '0755'
-
-- name: Install Postman
-  unarchive:
-    src: 'https://dl.pstmn.io/download/latest/linux64'
-    dest: /opt/
-    remote_src: yes
-- name: Create Postman link into Launcher
-  template:
-    src: Postman.j2
-    dest: "/home/{{ os_user }}/.local/share/applications/Postman.desktop"
-    owner: "{{ os_user }}"
-    group: "{{ os_user }}"
-    mode: '0755'
