@@ -24,10 +24,6 @@
     name: org.electrum.electrum
     state: present
 
-- name: Install Firefox
-  flatpak:
-    name: org.mozilla.firefox
-    state: present
 - name: Install Chromium
   flatpak:
     name: org.chromium.Chromium

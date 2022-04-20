@@ -9,7 +9,6 @@
     - zfs-fuse
     - libreoffice
     - libreoffice-*
-    - firefox
 
 - name: Install system packages
   dnf:
