@@ -15,7 +15,6 @@
       - gnome-system-monitor
       - gsmartcontrol
       - android-file-transfer
-      - corectrl
 
 - name: Install file managing & share packages
   dnf:
