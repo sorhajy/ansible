@@ -33,3 +33,4 @@
   vars:
     packages:
     - ipfs-desktop
+    - kdiskmark

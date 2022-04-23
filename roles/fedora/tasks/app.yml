@@ -10,8 +10,6 @@
       - gparted
       - gnome-tweaks
       - gnome-extensions-app
-      - kdiskmark
-      - gnome-boxes
       - gnome-system-monitor
       - gsmartcontrol
       - android-file-transfer
