@@ -15,6 +15,7 @@
       - gnome-system-monitor
       - gsmartcontrol
       - android-file-transfer
+      - wireshark
 
 - name: Install file managing & share packages
   dnf:

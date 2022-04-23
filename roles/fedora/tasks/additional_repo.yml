@@ -14,6 +14,18 @@
       - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_release.stdout }}.noarch.rpm"
       - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_release.stdout }}.noarch.rpm"
 
+- name: Add VScode GPG key
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://packages.microsoft.com/keys/microsoft.asc
+- name: Add VScode repo
+  template:
+    src: vscode.repo.j2
+    dest: "/etc/yum.repos.d/vscode.repo"
+    owner: root
+    group: root
+    mode: '0644'
+
 - name: Add Virtualbox GPG key
   ansible.builtin.rpm_key:
     state: present
@@ -72,6 +84,7 @@
     state: present
   vars:
     packages:
+      - code
       - i2pd
       - yggdrasil
       - yandex-disk
