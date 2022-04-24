@@ -223,6 +223,11 @@
     # Docker subnet
     - 172.17.0.0/16
     - 172.18.0.0/16
+- name: Allow IPv6
+  become: true
+  community.general.ufw:
+    rule: allow
+    proto: ipv6
 
 - name: Reject everything and enable UFW
   become: true
