@@ -15,11 +15,6 @@
     name: org.keepassxc.KeePassXC
     state: present
 
-- name: Install Gnome Boxes
-  flatpak:
-    name: org.gnome.Boxes
-    state: present
-
 - name: Install Electrum
   flatpak:
     name: org.electrum.electrum
