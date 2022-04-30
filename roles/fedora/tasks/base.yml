@@ -146,6 +146,7 @@
     - i2pd
     - tor
     - yggdrasil
+    - resilio-sync
 
 - name: Configure disabled services
   service:

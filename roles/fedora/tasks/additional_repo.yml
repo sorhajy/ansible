@@ -109,6 +109,7 @@
     packages:
       - code
       - i2pd
+      - resilio-sync
       - yggdrasil
       - yandex-disk
       - yandex-browser-stable
