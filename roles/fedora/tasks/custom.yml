@@ -14,7 +14,7 @@
   become: true
   shell: mv /opt/{{ PyCharmCE_dir }} /opt/PyCharmCE
 
-- name: Create PyCharm Ce link into Launcher
+- name: Create PyCharm CE link into Launcher
   template:
     src: PyCharmCE.j2
     dest: "/home/{{ os_user }}/.local/share/applications/PyCharmCE.desktop"
