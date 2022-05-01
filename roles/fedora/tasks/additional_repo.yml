@@ -114,6 +114,17 @@
       - yandex-disk
       - yandex-browser-stable
 
+- name: Configure ResilioSync groups
+  user:
+    name: "{{ os_user }}"
+    groups: rslsync
+    append: yes
+- name: Configure ResilioSync groups
+  user:
+    name: rslsync
+    groups: "{{ os_user }}"
+    append: yes
+
 - name: Create yggdrasil config file
   become: true
   shell: yggdrasil -genconf > /etc/yggdrasil.conf

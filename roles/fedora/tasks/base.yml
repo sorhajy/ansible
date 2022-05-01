@@ -170,7 +170,7 @@
   file:
     path: /etc/modules-load.d/zfs.conf
     state: touch
-- name: Configure Redis listen interface
+- name: Configure ZFS
   become: true
   ansible.builtin.lineinfile:
     path: /etc/modules-load.d/zfs.conf
