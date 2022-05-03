@@ -10,11 +10,6 @@
 - name: Add Flathub repo
   command: "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
 
-- name: Install KeePassXC
-  flatpak:
-    name: org.keepassxc.KeePassXC
-    state: present
-
 - name: Install Electrum
   flatpak:
     name: org.electrum.electrum
