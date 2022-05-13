@@ -124,6 +124,13 @@
     name: rslsync
     groups: "{{ os_user }}"
     append: yes
+- name: Configure ResilioSync service
+  template:
+    src: resilio-sync.service.j2
+    dest: "/usr/lib/systemd/system/resilio-sync.service"
+    owner: root
+    group: root
+    mode: '0644'
 
 - name: Create yggdrasil config file
   become: true

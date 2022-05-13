@@ -1,0 +1,30 @@
+[Unit]
+Description=Resilio Sync service
+Documentation=https://help.resilio.com
+After=network.target
+
+[Service]
+Type=forking
+UMask=0002
+Restart=on-failure
+PermissionsStartOnly=true
+
+User={{os_user}}
+Group={{os_user}}
+Environment="SYNC_USER={{os_user}}"
+Environment="SYNC_GROUP={{os_user}}"
+
+Environment="SYNC_RUN_DIR=/var/run/resilio-sync"
+Environment="SYNC_LIB_DIR=/var/lib/resilio-sync"
+Environment="SYNC_CONF_DIR=/etc/resilio-sync"
+
+PIDFile=/home/{{os_user}}/.config/resilio-sync/sync.pid
+#PIDFile=/var/run/resilio-sync/sync.pid
+
+ExecStartPre=/bin/mkdir -p ${SYNC_RUN_DIR} ${SYNC_LIB_DIR}
+ExecStartPre=/bin/chown -R ${SYNC_USER}:${SYNC_GROUP} ${SYNC_RUN_DIR} ${SYNC_LIB_DIR}
+ExecStart=/usr/bin/rslsync --config ${SYNC_CONF_DIR}/config.json
+ExecStartPost=/bin/sleep 1
+
+[Install]
+WantedBy=multi-user.target
