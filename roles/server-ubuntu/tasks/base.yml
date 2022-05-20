@@ -51,7 +51,7 @@
   become: true
   service:
     name: ufw
-    state: started
+    state: stopped
     enabled: yes
 
 - name: Disable UFW
@@ -82,7 +82,13 @@
     - 10.0.0.0/8
     - 172.16.0.0/12
     - 192.168.0.0/16
-    # Docker subnet
+
+- name: Allow all access from Docker networks to this host
+  become: true
+  community.general.ufw:
+    rule: allow
+    src: '{{ item }}'
+  loop:
     - 172.17.0.0/16
     - 172.18.0.0/16
 
