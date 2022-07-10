@@ -4,6 +4,12 @@
   args:
     creates: /usr/bin/gitlab-runner
 
+- name: Install gitlab-runner
+  become: true
+  apt:
+    name: gitlab-runner
+    state: present
+
 - name: Add gitlab-runner user to docker group
   become: true
   user:

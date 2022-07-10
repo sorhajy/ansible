@@ -75,6 +75,16 @@
     method: md5
     create: true
 
+- name: Configure PostgreSQL listen interface
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/postgresql/{{postgres_version.version.major}}/main/postgresql.conf
+    regexp: "^#listen_addresses = 'localhost'"
+    line: "listen_addresses = '*'"
+    owner: postgres
+    group: postgres
+    mode: '0644'
+
 - name: Set PostgreSQL listen interface
   become: true
   community.postgresql.postgresql_set:

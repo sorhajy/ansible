@@ -47,7 +47,7 @@
     state: started
     enabled: yes
 
-- name: Enable autoload & start ufw service
+- name: Enable autoload & stop ufw service
   become: true
   service:
     name: ufw

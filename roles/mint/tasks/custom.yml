@@ -1,1 +1,12 @@
 ---
+- name: Install Apache Directory Studio
+  unarchive:
+    src: '{{ Apache_Directory_Studio_URL }}'
+    dest: /opt/
+    remote_src: yes
+
+- name: Install Postman
+  unarchive:
+    src: 'https://dl.pstmn.io/download/latest/linux64'
+    dest: /opt/
+    remote_src: yes

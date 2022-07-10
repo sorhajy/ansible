@@ -1,6 +1,18 @@
 ---
 
-- name: Install base packages
+- name: Install collection community.network
+  become: true
+  community.general.ansible_galaxy_install:
+    type: collection
+    name: community.network
+
+- name: Install collection community.docker
+  become: true
+  community.general.ansible_galaxy_install:
+    type: collection
+    name: community.docker
+
+- name: Install system packages and libs
   apt:
     name: "{{ packages }}"
     state: present
@@ -8,10 +20,13 @@
     packages:
       - apt-transport-https
       - ca-certificates
+      - software-properties-common
+      - gnupg-agent
+      - dirmngr
+      - openssh-client
+      - openssh-server
       - curl
       - wget
-      - gnupg-agent
-      - software-properties-common
       - ufw
       - ssh
       - screen
@@ -21,59 +36,211 @@
       - ncdu
       - net-tools
       - firejail
-      - timeshift
-      - flameshot
       - zram-config
       - zram-tools
       - locate
-      - gnome-sushi
-      - mat2
       - arp-scan
       - autossh
-      - cmake
-      - libimage-exiftool-perl
-      - iperf
-      - iperf3
-      - jq
-      - jo
       - netcat
       - nmap
-      - ldap-utils
-      - pipenv
-      - virtualenv
-      - pv
       - qrencode
       - rsync
       - speedtest-cli
       - smartmontools
-      - sshfs
       - telnet
       - tree
       - watch
-      - zstd
-      - android-file-transfer
-      - android-platform-tools-base
       - snapd
-      - gparted
-      - keepassxc
-      - copyq
+      - pv
+      - dkms
+      - bzip2
+      - zstd
+      - lz4
+      - adb
+      - android-tools-adb
+      - android-platform-tools-base
+      - zsh
+      - zsh-syntax-highlighting
+      - zsh-autosuggestions
+      - apt-mirror
 
-- name: Disable autoload & stop ufw service
+- name: Install filesystems packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - mdadm
+      - fuse3
+      - sshfs
+      - btrfs-progs
+      - btrfs-compsize
+
+- name: Install CLI utils
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - libimage-exiftool-perl
+      - exif
+      - iperf
+      - iperf3
+      - jq
+      - jo
+      - youtube-dl
+      - yt-dlp
+
+- name: Install Java
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - openjdk-11-jdk
+      - openjdk-11-jre
+
+- name: Install DevTools
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - ansible
+      - golang
+      - build-essential
+      - git
+      - gcc
+      - make
+      - cmake
+      - ninja-build
+      - ruby-dev
+      - clang
+      - ldap-utils
+      - libxml2
+      - libxml2-dev
+      - libgtk-3-dev
+      - libblkid-dev
+      - liblzma-dev
+      - libsasl2-dev
+      - libldap2-dev
+      - libssl-dev
+      - python3
+      - python3-pip
+      - python3-dev
+      - python-dev
+      - pipenv
+      - virtualenv
+      - rust-all
+
+- name: Install databases
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+    - redis
+    - redis-tools
+    - redis-server
+    - postgresql
+    - postgresql-client
+    - mysql-client
+    - mysql-server
+
+- name: Enable autoload & start ufw service
+  become: true
   service:
     name: ufw
-    state: stopped
-    enabled: no
+    state: started
+    enabled: yes
+- name: Reset UFW
+  become: true
+  community.general.ufw:
+    state: reset
+- name: Allow all access to port 22
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '22'
+- name: Allow all access from RFC1918 networks to this host
+  become: true
+  community.general.ufw:
+    rule: allow
+    src: '{{ item }}'
+  loop:
+    - 127.0.0.0/8
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 192.168.0.0/16
+- name: Allow all access from Docker networks to this host
+  become: true
+  community.general.ufw:
+    rule: allow
+    src: '{{ item }}'
+  loop:
+    # Docker subnet
+    - 172.17.0.0/16
+    - 172.18.0.0/16
+- name: Reject everything and enable UFW
+  become: true
+  community.general.ufw:
+    state: enabled
+    policy: reject
+- name: Reload UFW
+  become: true
+  community.general.ufw:
+    state: reloaded
 
+- name: Install VPNs
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - wireguard
+      - wireguard-tools
+      - openconnect
+      - network-manager-l2tp
+      - network-manager-l2tp-gnome
+      - network-manager-openconnect-gnome
+      - network-manager-openvpn-gnome
+      - shadowsocks-libev
+
+- name: Configure enabled services
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  with_items:
+  - ufw
+  - sshd
+
+- name: Configure disabled services
+  service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  with_items:
+  - shadowsocks-libev
+  - redis-server
+  - postgresql
+  - mysql
+
+# Configure directory
 - name: Check root SSH dir
   file: 
     path: "/root/.ssh"
     state: directory
 
-- name: Check SSH dir
-  file: 
-    path: "/home/{{ os_user }}/.ssh"
+- name: Create git lib dir
+  file:
+    path: "/opt/git"
     state: directory
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: "0777"
 
+# Configure SSH keys
 - name: Inspect root SSH key
   openssh_keypair:
     path: "/root/.ssh/id_rsa"
@@ -82,13 +249,3 @@
     state: present
     force: no
   become: true
-
-- name: Inspect user SSH key
-  openssh_keypair:
-    path: "/home/{{ os_user }}/.ssh/id_rsa"
-    type: rsa
-    size: 4096
-    state: present
-    force: no
-  become: true
-  become_user: "{{ os_user }}"

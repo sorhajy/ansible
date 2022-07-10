@@ -9,6 +9,24 @@
     repo: "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
     state: present
 
+- name: Add DBeaver GPG key
+  apt_key:
+    url: "https://dbeaver.io/debs/dbeaver.gpg.key"
+    state: present
+- name: Add DBeaver repo
+  apt_repository:
+    repo: "deb https://dbeaver.io/debs/dbeaver-ce /"
+    state: present
+
+- name: Add AnyDesk GPG key
+  apt_key:
+    url: "https://keys.anydesk.com/repos/DEB-GPG-KEY"
+    state: present
+- name: Add AnyDesk repo
+  apt_repository:
+    repo: "deb http://deb.anydesk.com/ all main"
+    state: present
+
 - name: Update cache after update repo
   apt:
     update_cache: yes
@@ -16,4 +34,14 @@
 - name: Install VScode
   apt:
     name: code
+    state: present
+
+- name: Install DBeaver
+  apt:
+    name: dbeaver-ce
+    state: present
+
+- name: Install AnyDesk
+  apt:
+    name: anydesk
     state: present

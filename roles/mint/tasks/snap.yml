@@ -1,5 +1,14 @@
 ---
 
+- name: Install system snap packages
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: no
+  vars:
+    packages:
+    - kdiskmark
+
 - name: Install develop snap packages with classic
   snap:
     name: "{{ packages }}"
@@ -8,7 +17,6 @@
   vars:
     packages:
     - pycharm-community
-    - go
 
 - name: Install develop snap packages
   snap:
@@ -17,24 +25,4 @@
     classic: no
   vars:
     packages:
-    - postman
-    - dbeaver-ce
-
-- name: Install social snap packages with classic
-  snap:
-    name: "{{ packages }}"
-    state: present
-    classic: yes
-  vars:
-    packages:
-    - slack
-
-- name: Install social snap packages
-  snap:
-    name: "{{ packages }}"
-    state: present
-    classic: no
-  vars:
-    packages:
-    - zoom-client
-    - skype
+    - ngrok

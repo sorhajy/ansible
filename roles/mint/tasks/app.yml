@@ -1,0 +1,131 @@
+---
+
+- name: Install base packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - flameshot
+      - gnome-sushi
+      - gparted
+      - keepassxc
+
+- name: Install Wine 
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - wine
+      - playonlinux
+
+- name: Install monitor packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - hardinfo
+      - cpupower-gui
+      - gnome-system-monitor
+      - gsmartcontrol
+
+- name: Install KVM packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - qemu
+      - qemu-kvm
+      - libvirt-daemon
+      - ebtables
+      - virt-manager
+      - bridge-utils
+
+- name: Enable libvirt service
+  service:
+    name: libvirtd
+    state: started
+    enabled: yes
+
+- name: Install virtualbox
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - virtualbox
+      - virtualbox-dkms
+      - virtualbox-guest-dkms
+
+- name: Install vagrant
+  apt:
+    name: vagrant
+    state: present
+
+- name: Install Social
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - telegram-desktop
+      - jami
+      - thunderbird
+
+- name: Install browsers
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - firefox
+      - chromium-browser
+      - torbrowser-launcher
+      - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb # ! Optional. Proprietary.
+
+
+- name: Install file managing & share packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - transmission
+      - syncthing
+      - filezilla
+      - meld
+      - persepolis
+      - android-file-transfer
+      - qbittorrent
+
+- name: Install media editor
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - gimp
+      - vlc
+      - handbrake
+
+- name: Install Remmina
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - remmina
+      - remmina-plugin-rdp
+      - remmina-plugin-vnc
+
+- name: Install office
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - gnome-calendar
+      - libreoffice
