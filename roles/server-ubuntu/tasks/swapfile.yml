@@ -41,5 +41,5 @@
 
 - name: Enable swapfile
   become: true
-  command: "swapon /swapfile"
-  when:  (swapfile_resize == "true") or ((swapfile.stat.isreg is undefined) and (not swapfile.stat.isreg))
+  command: "swapon -a"
+  # when:  (swapfile_resize == "true") or ((swapfile.stat.isreg is undefined) and (not swapfile.stat.isreg))

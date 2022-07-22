@@ -16,6 +16,7 @@
       - gsmartcontrol
       - android-file-transfer
       - wireshark
+      - kdiskmark
 
 - name: Install file managing & share packages
   dnf:
