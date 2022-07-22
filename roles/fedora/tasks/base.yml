@@ -24,7 +24,7 @@
       - firejail
       - gnome-usage
       - zram
-      - mlocate
+      - plocate
       - arp-scan
       - autossh
       - cmake
