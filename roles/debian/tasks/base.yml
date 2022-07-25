@@ -77,11 +77,9 @@
       - mdadm
       - fuse3
       - sshfs
-      - zfs-dkms
-      - zfs-zed
-      - zfsutils-linux
       - btrfs-progs
       - btrfs-compsize
+      - zfs-fuse
 
 - name: Install monitor packages
   apt:

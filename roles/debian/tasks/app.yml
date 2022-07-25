@@ -19,6 +19,7 @@
       - kdiff3
       - kdevelop
       - kcalc
+      - kbackup
 
 - name: Install base Apps
   apt:
@@ -52,3 +53,4 @@
       - wine-binfmt
       - winetricks
       - playonlinux
+      - steam
