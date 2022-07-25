@@ -29,24 +29,6 @@
     repo: "deb http://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/ debian yggdrasil"
     state: present
 
-- name: Add Element GPG key
-  apt_key:
-    url: "https://packages.riot.im/debian/riot-im-archive-keyring.gpg"
-    state: present
-- name: Add Element repo
-  apt_repository:
-    repo: "deb https://packages.riot.im/debian/ default main"
-    state: present
-
-- name: Add DBeaver GPG key
-  apt_key:
-    url: "https://dbeaver.io/debs/dbeaver.gpg.key"
-    state: present
-- name: Add DBeaver repo
-  apt_repository:
-    repo: "deb https://dbeaver.io/debs/dbeaver-ce /"
-    state: present
-
 - name: Update cache after update repo
   apt:
     update_cache: yes
@@ -84,17 +66,7 @@
     state: stopped
     enabled: no
 
-- name: Install Element
-  apt:
-    name: element-desktop
-    state: present
-
 - name: Install VScodium
   apt:
     name: codium
-    state: present
-
-- name: Install DBeaver
-  apt:
-    name: dbeaver-ce
     state: present

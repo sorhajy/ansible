@@ -15,3 +15,12 @@
 - name: Update apt cache
   apt:
     update_cache: yes
+
+- name: Remove Unused apps
+  apt:
+    name: "{{ packages }}"
+    state: absent
+  vars:
+    packages:
+      - libreoffice*
+      - firefox-esr

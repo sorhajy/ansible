@@ -9,21 +9,19 @@
       - zsh
       - zsh-syntax-highlighting
       - zsh-autosuggestions
+      - bash
+      - bash-completion
       - apt-transport-https
       - ca-certificates
-      - curl
-      - wget
       - gnupg-agent
       - software-properties-common
       - ufw
       - ssh
-      - screen
       - vim
       - htop
       - iotop
       - ncdu
       - net-tools
-      - firejail
       - zram-tools
       - dphys-swapfile
       - locate
@@ -31,26 +29,12 @@
       - arp-scan
       - autossh
       - cmake
-      - netcat
-      - hashcat
-      - nmap
       - ldap-utils
-      - pv
-      - qrencode
-      - rsync
-      - speedtest-cli
-      - smartmontools
-      - telnet
-      - tree
-      - watch
       - dirmngr
       - zstd
-      - snapd
-      - gnome-sushi
       - firmware-misc-nonfree
       - openssh-client
       - openssh-server
-      - screen
       - bzip2
       - lz4
       - apt-mirror
@@ -77,7 +61,6 @@
     state: present
   vars:
     packages:
-      - wine
       - libimage-exiftool-perl
       - exif
       - iperf
@@ -85,6 +68,23 @@
       - jq
       - jo
       - youtube-dl
+      - screen
+      - curl
+      - wget
+      - tree
+      - watch
+      - telnet
+      - snapd
+      - hdparm
+      - pv
+      - qrencode
+      - rsync
+      - speedtest-cli
+      - smartmontools
+      - netcat
+      - hashcat
+      - nmap
+      - firejail
 
 - name: Install monitor packages
   apt:
@@ -94,8 +94,6 @@
     packages:
       - hardinfo
       - cpupower-gui
-      - gnome-system-monitor
-      - gsmartcontrol
 
 - name: Install VPN & net-tools
   apt:
@@ -231,6 +229,16 @@
   community.general.ufw:
     rule: allow
     port: '22'
+- name: Allow all access to port 80
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '80'
+- name: Allow all access to port 443
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '443'
 - name: Allow all access from RFC1918 networks to this host
   become: true
   community.general.ufw:
@@ -269,6 +277,8 @@
   - ufw
   - sshd
   - libvirtd
+  - tor
+  - i2pd
 
 - name: Configure disabled services
   service:
@@ -276,8 +286,6 @@
     state: stopped
     enabled: false
   with_items:
-  - tor
-  - i2pd
   - shadowsocks-libev
   - redis-server
   - postgresql
