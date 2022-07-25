@@ -30,5 +30,5 @@
       - wine64
       - wine64-tools
       - wine-binfmt
-      - winetrick
+      - winetricks
       - playonlinux

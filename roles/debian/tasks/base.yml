@@ -17,19 +17,10 @@
       - software-properties-common
       - ufw
       - ssh
-      - vim
-      - htop
       - iotop
-      - ncdu
       - net-tools
       - zram-tools
       - dphys-swapfile
-      - locate
-      - mat2
-      - arp-scan
-      - autossh
-      - cmake
-      - ldap-utils
       - dirmngr
       - zstd
       - firmware-misc-nonfree
@@ -38,29 +29,19 @@
       - bzip2
       - lz4
       - apt-mirror
-
-- name: Install filesystems packages
-  apt:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - mdadm
-      - fuse3
-      - sshfs
-      - zfs-dkms
-      - zfs-zed
-      - zfsutils-linux
-      - btrfs-progs
-      - btrfs-compsize
-      - zfs-auto-snapshot
-
-- name: Install CLI utils
-  apt:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
+      #
+      - mesa-utils
+      - mesa-utils-extra
+      - mesa-va-drivers
+      - mesa-vdpau-drivers
+      - mesa-vulkan-drivers
+      #
+      - vim
+      - htop
+      - autossh
+      - locate
+      - mat2
+      - arp-scan
       - libimage-exiftool-perl
       - exif
       - iperf
@@ -85,6 +66,22 @@
       - hashcat
       - nmap
       - firejail
+      - ncdu
+
+- name: Install filesystems packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - mdadm
+      - fuse3
+      - sshfs
+      - zfs-dkms
+      - zfs-zed
+      - zfsutils-linux
+      - btrfs-progs
+      - btrfs-compsize
 
 - name: Install monitor packages
   apt:
@@ -165,8 +162,8 @@
       - libsasl2-dev
       - libldap2-dev
       - libssl-dev
-      - sqlite-devel
       - libbz2-dev
+      - ldap-utils
 
 - name: Install VM packages
   apt:
