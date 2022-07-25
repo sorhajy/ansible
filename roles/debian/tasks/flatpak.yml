@@ -66,6 +66,10 @@
   flatpak:
     name: fr.handbrake.ghb
     state: present
+- name: Install Krita
+  flatpak:
+    name: org.kde.krita
+    state: present
 - name: Install GIMP
   flatpak:
     name: org.gimp.GIMP
@@ -112,6 +116,10 @@
   flatpak:
     name: im.riot.Riot
     state: present
+- name: Install NeoChat
+  flatpak:
+    name: org.kde.neochat
+    state: present
 - name: Install Slack
   flatpak:
     name: com.slack.Slack
@@ -127,6 +135,10 @@
 - name: Install Jitsi Meet
   flatpak:
     name: org.jitsi.jitsi-meet
+    state: present
+- name: Install Discord
+  flatpak:
+    name: com.discordapp.Discord
     state: present
 
 # Office

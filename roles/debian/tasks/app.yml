@@ -1,4 +1,25 @@
 ###
+- name: Install KDE Apps
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - gwenview
+      - okular
+      - kwrite
+      - ktorrent
+      - kget
+      - falkon
+      - ark
+      - okteta
+      - kontact
+      - konversation
+      - krusader
+      - kdiff3
+      - kdevelop
+      - kcalc
+
 - name: Install base Apps
   apt:
     name: "{{ packages }}"
@@ -17,7 +38,6 @@
   vars:
     packages:
       - syncthing
-      - meld
       - persepolis
 
 - name: Install Win compatibility tools
