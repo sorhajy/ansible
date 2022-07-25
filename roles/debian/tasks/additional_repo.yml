@@ -60,11 +60,14 @@
   apt:
     name: yggdrasil
     state: present
-- name: Disable autoload & stop yggdrasil service
+- name: Create yggdrasil config file
+  become: true
+  shell: yggdrasil -genconf > /etc/yggdrasil.conf
+- name: Enable autoload & start yggdrasil service
   service:
     name: yggdrasil
-    state: stopped
-    enabled: no
+    state: started
+    enabled: yes
 
 - name: Install VScodium
   apt:
