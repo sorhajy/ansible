@@ -20,6 +20,7 @@
       - kdevelop
       - kcalc
       - kbackup
+      - kdenlive
 
 - name: Install base Apps
   apt:
@@ -27,19 +28,30 @@
     state: present
   vars:
     packages:
+      - syncthing
       - gparted
       - wireshark
       - virt-manager
       - android-file-transfer
-
-- name: Install file managing & share packages
-  apt:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - syncthing
-      - persepolis
+      - keepassxc
+      - remmina
+      - remmina-plugin-rdp
+      - remmina-plugin-vnc
+      - electrum
+      - firefox-esr
+      - chromium
+      - vlc
+      - handbrake
+      - krita
+      - gimp
+      - inkscape
+      - obs-studio
+      - audacity
+      - thunderbird
+      - pidgin
+      - libreoffice
+      - libreoffice-plasma
+      - onionshare
 
 - name: Install Win compatibility tools
   apt:

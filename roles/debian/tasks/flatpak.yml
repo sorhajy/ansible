@@ -12,26 +12,26 @@
   command: "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
 
 # System
-- name: Install DejaDup
-  flatpak:
-    name: org.gnome.DejaDup
-    state: present
-- name: Install KeePassXC
-  flatpak:
-    name: org.keepassxc.KeePassXC
-    state: present
-- name: Install Remmina
-  flatpak:
-    name: org.remmina.Remmina
-    state: present
+# - name: Install DejaDup
+#   flatpak:
+#     name: org.gnome.DejaDup
+#     state: present
+# - name: Install KeePassXC
+#   flatpak:
+#     name: org.keepassxc.KeePassXC
+#     state: present
+# - name: Install Remmina
+#   flatpak:
+#     name: org.remmina.Remmina
+#     state: present
 - name: Install Anydesk
   flatpak:
     name: com.anydesk.Anydesk
     state: present
-- name: Install Electrum
-  flatpak:
-    name: org.electrum.electrum 
-    state: present
+# - name: Install Electrum
+#   flatpak:
+#     name: org.electrum.electrum 
+#     state: present
 
 # Dev
 - name: Install PyCharm
@@ -48,62 +48,62 @@
     state: present
 
 # Browser
-- name: Install Firefox
-  flatpak:
-    name: org.mozilla.firefox
-    state: present
-- name: Install Chromium
-  flatpak:
-    name: org.chromium.Chromium
-    state: present
+# - name: Install Firefox
+#   flatpak:
+#     name: org.mozilla.firefox
+#     state: present
+# - name: Install Chromium
+#   flatpak:
+#     name: org.chromium.Chromium
+#     state: present
 
 # Media
-- name: Install VLC
-  flatpak:
-    name: org.videolan.VLC
-    state: present
-- name: Install handBrake
-  flatpak:
-    name: fr.handbrake.ghb
-    state: present
-- name: Install Krita
-  flatpak:
-    name: org.kde.krita
-    state: present
-- name: Install GIMP
-  flatpak:
-    name: org.gimp.GIMP
-    state: present
-- name: Install Inkscape
-  flatpak:
-    name: org.inkscape.Inkscape
-    state: present
-- name: Install OBS
-  flatpak:
-    name: com.obsproject.Studio
-    state: present
-- name: Install Audacity
-  flatpak:
-    name: org.audacityteam.Audacity
-    state: present
-- name: Install KDEnlive
-  flatpak:
-    name: org.kde.kdenlive
-    state: present
+# - name: Install VLC
+#   flatpak:
+#     name: org.videolan.VLC
+#     state: present
+# - name: Install handBrake
+#   flatpak:
+#     name: fr.handbrake.ghb
+#     state: present
+# - name: Install Krita
+#   flatpak:
+#     name: org.kde.krita
+#     state: present
+# - name: Install GIMP
+#   flatpak:
+#     name: org.gimp.GIMP
+#     state: present
+# - name: Install Inkscape
+#   flatpak:
+#     name: org.inkscape.Inkscape
+#     state: present
+# - name: Install OBS
+#   flatpak:
+#     name: com.obsproject.Studio
+#     state: present
+# - name: Install Audacity
+#   flatpak:
+#     name: org.audacityteam.Audacity
+#     state: present
+# - name: Install KDEnlive
+#   flatpak:
+#     name: org.kde.kdenlive
+#     state: present
 
 # Social
 - name: Install Telegram
   flatpak:
     name: org.telegram.desktop
     state: present
-- name: Install Thunderbird
-  flatpak:
-    name: org.mozilla.Thunderbird
-    state: present
-- name: Install Pidgin
-  flatpak:
-    name: im.pidgin.Pidgin
-    state: present
+# - name: Install Thunderbird
+#   flatpak:
+#     name: org.mozilla.Thunderbird
+#     state: present
+# - name: Install Pidgin
+#   flatpak:
+#     name: im.pidgin.Pidgin
+#     state: present
 - name: Install Zoom
   flatpak:
     name: us.zoom.Zoom
@@ -146,37 +146,37 @@
   flatpak:
     name: org.onlyoffice
     state: present
-- name: Install LibreOffice
-  flatpak:
-    name: org.libreoffice.LibreOffice
-    state: present
+# - name: Install LibreOffice
+#   flatpak:
+#     name: org.libreoffice.LibreOffice
+#     state: present
 
 # Files
 # - name: Install Kget
 #   flatpak:
 #     name: org.kde.kget
 #     state: present
-- name: Install Transmission
-  flatpak:
-    name: com.transmissionbt.Transmission
-    state: present
-- name: Install Filezilla
-  flatpak:
-    name: org.filezillaproject.Filezilla
-    state: present
+# - name: Install Transmission
+#   flatpak:
+#     name: com.transmissionbt.Transmission
+#     state: present
+# - name: Install Filezilla
+#   flatpak:
+#     name: org.filezillaproject.Filezilla
+#     state: present
 - name: Install Tribler
   flatpak:
     name: org.tribler.Tribler
     state: present
-- name: Install OnionShare
-  flatpak:
-    name: org.onionshare.OnionShare
-    state: present
+# - name: Install OnionShare
+#   flatpak:
+#     name: org.onionshare.OnionShare
+#     state: present
 
-- name: Install GTK Stress Testing
-  flatpak:
-    name: com.leinardi.gst
-    state: present
+# - name: Install GTK Stress Testing
+#   flatpak:
+#     name: com.leinardi.gst
+#     state: present
 
 - name: Install Obsidian # ! Proprietary
   flatpak:
@@ -184,7 +184,7 @@
     state: present
 
 # Compress Image
-- name: Install Curtail
-  flatpak:
-    name: com.github.huluti.Curtail
-    state: present
+# - name: Install Curtail
+#   flatpak:
+#     name: com.github.huluti.Curtail
+#     state: present
