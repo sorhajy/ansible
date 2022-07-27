@@ -66,4 +66,4 @@
       - wine-binfmt
       - winetricks
       - playonlinux
-      - steam
+      # - steam
