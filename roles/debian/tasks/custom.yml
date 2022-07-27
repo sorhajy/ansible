@@ -1,6 +1,37 @@
 ---
+- name: Install PyCharm CE
+  unarchive:
+    src: '{{ PyCharmCE_URL }}'
+    dest: /opt/
+    remote_src: yes
+
+- name: Clear PyCharm dir
+  file:
+    path: /opt/PyCharmCE
+    state: absent
+
+- name: Rename PyCharm dir
+  become: true
+  shell: mv /opt/{{ PyCharmCE_dir }} /opt/PyCharmCE
+
+- name: Create PyCharm CE link into Launcher
+  template:
+    src: PyCharmCE.j2
+    dest: "/usr/share/applications/PyCharmCE.desktop"
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: '0755'
+
 - name: Install Apache Directory Studio
   unarchive:
     src: '{{ Apache_Directory_Studio_URL }}'
     dest: /opt/
     remote_src: yes
+
+- name: Create Apache Directory Studio link into Launcher
+  template:
+    src: ApacheDirectoryStudio.j2
+    dest: /usr/share/applications/ApacheDirectoryStudio.desktop"
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: '0755'

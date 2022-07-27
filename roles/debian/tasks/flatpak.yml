@@ -24,28 +24,28 @@
 #   flatpak:
 #     name: org.remmina.Remmina
 #     state: present
-- name: Install Anydesk
-  flatpak:
-    name: com.anydesk.Anydesk
-    state: present
+# - name: Install Anydesk
+#   flatpak:
+#     name: com.anydesk.Anydesk
+#     state: present
 # - name: Install Electrum
 #   flatpak:
 #     name: org.electrum.electrum 
 #     state: present
 
 # Dev
-- name: Install PyCharm
-  flatpak:
-    name: com.jetbrains.PyCharm-Community
-    state: present
+# - name: Install PyCharm
+#   flatpak:
+#     name: com.jetbrains.PyCharm-Community
+#     state: present
 - name: Install Postman
   flatpak:
     name: com.getpostman.Postman
     state: present
-- name: Install DBeaver
-  flatpak:
-    name: io.dbeaver.DBeaverCommunity
-    state: present
+# - name: Install DBeaver
+#   flatpak:
+#     name: io.dbeaver.DBeaverCommunity
+#     state: present
 
 # Browser
 # - name: Install Firefox
@@ -92,10 +92,10 @@
 #     state: present
 
 # Social
-- name: Install Telegram
-  flatpak:
-    name: org.telegram.desktop
-    state: present
+# - name: Install Telegram
+#   flatpak:
+#     name: org.telegram.desktop
+#     state: present
 # - name: Install Thunderbird
 #   flatpak:
 #     name: org.mozilla.Thunderbird
@@ -112,10 +112,10 @@
   flatpak:
     name: com.skype.Client
     state: present
-- name: Install Element
-  flatpak:
-    name: im.riot.Riot
-    state: present
+# - name: Install Element
+#   flatpak:
+#     name: im.riot.Riot
+#     state: present
 - name: Install NeoChat
   flatpak:
     name: org.kde.neochat
