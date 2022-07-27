@@ -32,7 +32,7 @@
 - name: Add Yandex browser GPG key
   apt_key:
     state: present
-    key: https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG
+    url: "https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG"
 - name: Add Yandex browser repo
   apt_repository:
     repo: "deb [arch=amd64] http://repo.yandex.ru/yandex-browser/deb stable main"
