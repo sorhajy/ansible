@@ -20,6 +20,42 @@
     repo: "deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://download.vscodium.com/debs vscodium main"
     state: present
 
+- name: Add AnyDesk GPG key
+  apt_key:
+    url: "https://keys.anydesk.com/repos/DEB-GPG-KEY"
+    state: present
+- name: Add AnyDesk repo
+  apt_repository:
+    repo: "deb http://deb.anydesk.com/ all main"
+    state: present
+
+- name: Add Yandex browser GPG key
+  apt_key:
+    state: present
+    key: https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG
+- name: Add Yandex browser repo
+  apt_repository:
+    repo: "deb [arch=amd64] http://repo.yandex.ru/yandex-browser/deb stable main"
+    state: present
+
+- name: Add Element GPG key
+  apt_key:
+    url: "https://packages.riot.im/debian/riot-im-archive-keyring.gpg"
+    state: present
+- name: Add Element repo
+  apt_repository:
+    repo: "deb https://packages.riot.im/debian/ default main"
+    state: present
+
+- name: Add DBeaver GPG key
+  apt_key:
+    url: "https://dbeaver.io/debs/dbeaver.gpg.key"
+    state: present
+- name: Add DBeaver repo
+  apt_repository:
+    repo: "deb https://dbeaver.io/debs/dbeaver-ce /"
+    state: present
+
 - name: Add yggdrasil GPG key
   apt_key:
     url: "https://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/key.txt"
@@ -56,10 +92,20 @@
     groups: docker
     append: yes
 
-- name: Install Yggdrasil
+
+- name: Install additional repo Apps
   apt:
-    name: yggdrasil
+    name: "{{ packages }}"
     state: present
+  vars:
+    packages:
+      - yggdrasil
+      - codium
+      - anydesk
+      - element-desktop
+      - dbeaver-ce
+      - yandex-browser-stable
+
 - name: Create yggdrasil config file
   become: true
   shell: yggdrasil -genconf > /etc/yggdrasil.conf
@@ -68,8 +114,3 @@
     name: yggdrasil
     state: started
     enabled: yes
-
-- name: Install VScodium
-  apt:
-    name: codium
-    state: present
