@@ -14,6 +14,13 @@
   become: true
   shell: mv /opt/{{ PyCharmCE_dir }} /opt/PyCharmCE
 
+- name: Configure permissions for PyCharm
+  file:
+    dest: /opt/PyCharmCE
+    owner: "{{ aiohttp_user }}"
+    group: "{{ aiohttp_user }}"
+    recurse: yes
+
 - name: Create PyCharm CE link into Launcher
   template:
     src: PyCharmCE.j2
@@ -31,7 +38,7 @@
 - name: Create Apache Directory Studio link into Launcher
   template:
     src: ApacheDirectoryStudio.j2
-    dest: /usr/share/applications/ApacheDirectoryStudio.desktop"
+    dest: /usr/share/applications/ApacheDirectoryStudio.desktop
     owner: "{{ os_user }}"
     group: "{{ os_user }}"
     mode: '0755'

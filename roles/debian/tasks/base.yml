@@ -29,6 +29,7 @@
       - bzip2
       - lz4
       - apt-mirror
+      - fail2ban
       #
       - mesa-utils
       - mesa-utils-extra
