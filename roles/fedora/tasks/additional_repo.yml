@@ -26,40 +26,6 @@
     group: root
     mode: '0644'
 
-- name: Add ResilioSync GPG key
-  ansible.builtin.rpm_key:
-    state: present
-    key: https://linux-packages.resilio.com/resilio-sync/key.asc
-- name: Add ResilioSync repo
-  template:
-    src: resilio-sync.repo.j2
-    dest: "/etc/yum.repos.d/resilio-sync.repo"
-    owner: root
-    group: root
-    mode: '0644'
-
-- name: Add Virtualbox GPG key
-  ansible.builtin.rpm_key:
-    state: present
-    key: https://www.virtualbox.org/download/oracle_vbox.asc
-- name: Add Virtualbox repo
-  template:
-    src: virtualbox.repo.j2
-    dest: "/etc/yum.repos.d/virtualbox.repo"
-    owner: root
-    group: root
-    mode: '0644'
-- name: Install virtualbox
-  dnf:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - VirtualBox
-      - kmod-VirtualBox
-      - akmod-VirtualBox
-      - virtualbox-guest-additions
-
 - name: Add i2pd repo
   community.general.copr:
     state: enabled
@@ -70,21 +36,6 @@
     state: enabled
     name: 'rany/yggdrasil'
 
-- name: Add ZFS repo
-  become: true
-  shell: dnf install -y https://zfsonlinux.org/fedora/zfs-release$(rpm -E %dist).noarch.rpm
-
-- name: Add Yandex Disk GPG key
-  ansible.builtin.rpm_key:
-    state: present
-    key: https://repo.yandex.ru/yandex-disk/YANDEX-DISK-KEY.GPG
-- name: Add Yandex Disk repo
-  template:
-    src: yandex-disk.repo.j2
-    dest: "/etc/yum.repos.d/yandex-disk.repo"
-    owner: root
-    group: root
-    mode: '0644'
 - name: Add Yandex browser GPG key
   ansible.builtin.rpm_key:
     state: present
@@ -109,28 +60,8 @@
     packages:
       - code
       - i2pd
-      - resilio-sync
       - yggdrasil
-      - yandex-disk
       - yandex-browser-stable
-
-- name: Configure ResilioSync groups
-  user:
-    name: "{{ os_user }}"
-    groups: rslsync
-    append: yes
-- name: Configure ResilioSync groups
-  user:
-    name: rslsync
-    groups: "{{ os_user }}"
-    append: yes
-- name: Configure ResilioSync service
-  template:
-    src: resilio-sync.service.j2
-    dest: "/usr/lib/systemd/system/resilio-sync.service"
-    owner: root
-    group: root
-    mode: '0644'
 
 - name: Create yggdrasil config file
   become: true

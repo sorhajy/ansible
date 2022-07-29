@@ -71,7 +71,6 @@
       - tor
       - obfs4
       - proxychains-ng
-      - zfs
       - hashcat
       - supervisor
       - arm-image-installer
@@ -96,7 +95,8 @@
       - cargo
       - sqlite
       - sqlite-devel
-      - gnome-shell-extension-gsconnect
+      # - gnome-shell-extension-gsconnect
+      - zfs-fuse
 
 - name: Install Databases
   dnf:
@@ -146,7 +146,6 @@
     - i2pd
     - tor
     - yggdrasil
-    - resilio-sync
 
 - name: Configure disabled services
   service:
@@ -160,24 +159,6 @@
     - mysqld
     - postgresql
 
-- name: Add the ZFS module
-  become: true
-  community.general.modprobe:
-    name: zfs
-    state: present
-- name: Check ZFS autoload file
-  become: true
-  file:
-    path: /etc/modules-load.d/zfs.conf
-    state: touch
-- name: Configure ZFS
-  become: true
-  ansible.builtin.lineinfile:
-    path: /etc/modules-load.d/zfs.conf
-    line: "zfs"
-    owner: root
-    group: root
-    mode: '0644'
 
 - name: Stop UFW
   become: true
@@ -274,7 +255,7 @@
 
 - name: Create git lib dir
   file:
-    path: "{{ git_lib }}"
+    path: "/opt/git"
     state: directory
     owner: "{{ os_user }}"
     group: "{{ os_user }}"

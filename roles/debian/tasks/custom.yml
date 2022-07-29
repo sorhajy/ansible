@@ -17,8 +17,8 @@
 - name: Configure permissions for PyCharm
   file:
     dest: /opt/PyCharmCE
-    owner: "{{ aiohttp_user }}"
-    group: "{{ aiohttp_user }}"
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
     recurse: yes
 
 - name: Create PyCharm CE link into Launcher

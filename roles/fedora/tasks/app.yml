@@ -6,26 +6,58 @@
     state: present
   vars:
     packages:
+      # browser
       - firefox
+      - chromium
+      # system
       - keepassxc
       - gparted
-      - gnome-boxes
-      - gnome-tweaks
-      - gnome-extensions-app
-      - gnome-system-monitor
-      - gsmartcontrol
-      - android-file-transfer
       - wireshark
       - kdiskmark
-
-- name: Install file managing & share packages
-  dnf:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
+      - electrum
+      - remmina
+      - remmina-plugins-kwallet
+      - remmina-plugins-rdp
+      - remmina-plugins-vnc
+      - geany
+      # KDE
+      - yakuake
+      - gwenview
+      - okular
+      - kwrite
+      - ktorrent
+      - kget
+      - falkon
+      - ark
+      - okteta
+      - kontact
+      - konversation
+      - krusader
+      - kdiff3
+      - kdevelop
+      - kcalc
+      - kbackup
+      - kdenlive
+      # social
+      - telegram-desktop
+      - thunderbird
+      - pidgin
+      # office
+      - libreoffice
+      - libreoffice-plasma
+      # media
+      - audacity
+      - vlc
+      - HandBrake-gui
+      - krita
+      - gimp
+      - inkscape
+      - obs-studio
+      # files
       - syncthing
-      - persepolis
+      - onionshare
+      - android-file-transfer
+
 
 - name: Install KVM packages
   dnf:
