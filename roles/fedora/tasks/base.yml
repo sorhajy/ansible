@@ -97,6 +97,16 @@
       - sqlite-devel
       # - gnome-shell-extension-gsconnect
       - zfs-fuse
+      - krename
+      - xz
+      - lzip
+      - arj
+      - lha
+      - unace
+      - unrar
+      - lzma-sdk
+      - lzma-sdk-devel
+      - dpkg
 
 - name: Install Databases
   dnf:
