@@ -45,7 +45,6 @@
       - pidgin
       # office
       - libreoffice
-      - libreoffice-plasma
       # media
       - audacity
       - vlc
