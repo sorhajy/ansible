@@ -172,7 +172,16 @@
   community.general.ufw:
     rule: allow
     port: '22'
-
+- name: Allow all access to port 80
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '80'
+- name: Allow all access to port 443
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '443'
 - name: Allow all access from RFC1918 networks to this host
   become: true
   community.general.ufw:
