@@ -86,6 +86,10 @@
   flatpak:
     name: org.jitsi.jitsi-meet
     state: present
+- name: Install Discord
+  flatpak:
+    name: com.discordapp.Discord
+    state: present
 
 # Office
 - name: Install OnlyOffice

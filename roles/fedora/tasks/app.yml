@@ -40,7 +40,7 @@
       - kdenlive
       # social
       - telegram-desktop
-      - discord
+      # - discord
       - thunderbird
       - pidgin
       # office
