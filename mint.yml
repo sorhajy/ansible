@@ -8,12 +8,12 @@
       name: mint
       tasks_from: start
 
-- name: Configure wallpaper
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: mint
-      tasks_from: wallpaper
+# - name: Configure wallpaper
+#   hosts: localhost
+#   tasks:
+#   - include_role:
+#       name: mint
+#       tasks_from: wallpaper
 
 - name: Configure base
   hosts: localhost
