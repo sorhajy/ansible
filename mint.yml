@@ -8,13 +8,6 @@
       name: mint
       tasks_from: start
 
-# - name: Configure wallpaper
-#   hosts: localhost
-#   tasks:
-#   - include_role:
-#       name: mint
-#       tasks_from: wallpaper
-
 - name: Configure base
   hosts: localhost
   tasks:
@@ -22,96 +15,12 @@
       name: mint
       tasks_from: base
 
-- name: Configure SDK & DevTools # Install SDK packages
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: mint
-      tasks_from: sdk
-
-- name: Git Configure
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: mint
-      tasks_from: git
-
-- name: Configure VPN
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: mint
-      tasks_from: vpn
-
-- name: Configure browsers
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: mint
-      tasks_from: browsers
-
-- name: Configure social app
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: mint
-      tasks_from: social
-
-- name: Configure packages for files
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: mint
-      tasks_from: files
-
 - name: Configure Docker packages # Install Docker & Docker-compose from official repo
   hosts: localhost
   tasks:
   - include_role:
       name: mint
       tasks_from: docker
-
-- name: Configure virtualization packages # Install virtualization packages
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: mint
-      tasks_from: virtualization
-
-- name: Configure packages from PPA # Install packages from PPA repo
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: mint
-      tasks_from: ppa
-
-- name: Configure Office packages
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: mint
-      tasks_from: office
-
-- name: Configure Media packages
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: mint
-      tasks_from: media
-
-- name: Configure Wine packages
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: mint
-      tasks_from: wine
-
-- name: Configure remote access packages
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: mint
-      tasks_from: remote_access
 
 - name: Configure packages from additional repo
   hosts: localhost
