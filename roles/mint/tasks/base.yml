@@ -246,6 +246,9 @@
   file: 
     path: "/home/{{ os_user }}/.ssh"
     state: directory
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: "0755"
 
 # Configure SSH keys
 - name: Inspect root SSH key
