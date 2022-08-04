@@ -11,11 +11,6 @@
 - name: Add Flathub repo
   command: "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
 
-- name: Install Postman
-  flatpak:
-    name: com.getpostman.Postman
-    state: present
-
 - name: Install Zoom
   flatpak:
     name: us.zoom.Zoom
