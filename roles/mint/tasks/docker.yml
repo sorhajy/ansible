@@ -1,9 +1,5 @@
 ---
 
-- name: Check lsb_release
-  command: "lsb_release -cs"
-  register: lsb_release
-
 - name: Add Docker GPG key
   apt_key:
     url: "https://download.docker.com/linux/ubuntu/gpg"
