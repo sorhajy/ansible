@@ -162,6 +162,16 @@
   community.general.ufw:
     rule: allow
     port: '22'
+- name: Allow all access to port 80
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '80'
+- name: Allow all access to port 443
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '443'
 - name: Allow all access from RFC1918 networks to this host
   become: true
   community.general.ufw:
@@ -232,13 +242,10 @@
     path: "/root/.ssh"
     state: directory
 
-- name: Create git lib dir
-  file:
-    path: "/opt/git"
+- name: Check SSH dir
+  file: 
+    path: "/home/{{ os_user }}/.ssh"
     state: directory
-    owner: "{{ os_user }}"
-    group: "{{ os_user }}"
-    mode: "0777"
 
 # Configure SSH keys
 - name: Inspect root SSH key
@@ -249,3 +256,31 @@
     state: present
     force: no
   become: true
+
+- name: Inspect user SSH key
+  openssh_keypair:
+    path: "/home/{{ os_user }}/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    state: present
+    force: no
+  become: true
+  become_user: "{{ os_user }}"
+
+- name: Create user GIT dir
+  file:
+    path: "/home/{{ os_user }}/git"
+    state: directory
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: "0755"
+  become: true
+  become_user: "{{ os_user }}"
+
+- name: Create git lib dir
+  file:
+    path: "/opt/git"
+    state: directory
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: "0777"

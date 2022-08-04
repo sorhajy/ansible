@@ -83,7 +83,6 @@
     packages:
       - firefox
       - chromium-browser
-      - torbrowser-launcher
       - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb # ! Optional. Proprietary.
 
 
@@ -127,5 +126,4 @@
     state: present
   vars:
     packages:
-      - gnome-calendar
       - libreoffice
