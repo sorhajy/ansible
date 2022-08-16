@@ -6,6 +6,12 @@
       tasks_from: start
 
 
+- name: Configure SWAP file on server
+  hosts: all
+  tasks:
+  - include_role:
+      name: server-ubuntu
+      tasks_from: swapfile
 
 - name: Configure base system packages
   hosts: all
@@ -13,13 +19,6 @@
   - include_role:
       name: server-ubuntu
       tasks_from: base
-
-- name: Configure SWAP file on server
-  hosts: all
-  tasks:
-  - include_role:
-      name: server-ubuntu
-      tasks_from: swapfile
 
 - name: Configure SDK & DevTools
   hosts: all

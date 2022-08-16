@@ -39,13 +39,14 @@
       - dirmngr
       - zstd
       - snapd
+      - mc
 
-- name: Enable autoload & start zram service
-  become: true
-  service:
-    name: zram-config
-    state: started
-    enabled: yes
+# - name: Enable autoload & start zram service
+#   become: true
+#   service:
+#     name: zram-config
+#     state: started
+#     enabled: yes
 
 - name: Enable autoload & stop ufw service
   become: true
@@ -71,6 +72,16 @@
   community.general.ufw:
     rule: allow
     port: '22'
+- name: Allow all access to port 80
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '80'
+- name: Allow all access to port 443
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '443'
 
 - name: Allow all access from RFC1918 networks to this host
   become: true

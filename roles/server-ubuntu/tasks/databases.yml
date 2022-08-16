@@ -43,7 +43,7 @@
     - postgresql-client
     - postgresql-client-common
     - python3-psycopg2
-    - python3-ipaddr
+    # - python3-ipaddr
 
 - name: Start PostgreSQL service
   become: true
@@ -106,8 +106,8 @@
   become: true
   service:
     name: postgresql
-    enabled: true
-    state: started
+    enabled: false
+    state: stopped
 
 
 
@@ -161,8 +161,8 @@
   become: true
   service:
     name: mysql
-    state: started
-    enabled: true
+    state: stopped
+    enabled: false
 
 
 
@@ -195,5 +195,5 @@
   become: true
   service:
     name: clickhouse-server
-    state: started
-    enabled: true
+    state: stopped
+    enabled: false
