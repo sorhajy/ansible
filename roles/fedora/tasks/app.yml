@@ -11,6 +11,9 @@
       # - chromium
       #* system
       # - keepassxc
+      - gnome-boxes
+      - gnome-tweaks
+      - gnome-extensions-app
       - gparted
       - wireshark
       # - kdiskmark
