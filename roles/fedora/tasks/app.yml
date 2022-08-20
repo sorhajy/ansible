@@ -13,7 +13,7 @@
       # - keepassxc
       - gparted
       - wireshark
-      - kdiskmark
+      # - kdiskmark
       # - electrum
       # - remmina
       # - remmina-plugins-kwallet
