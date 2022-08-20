@@ -1,29 +1,29 @@
 ---
-- name: Install PyCharm CE
-  unarchive:
-    src: '{{ PyCharmCE_URL }}'
-    dest: /opt/
-    remote_src: yes
-- name: Clear PyCharm dir
-  file:
-    path: /opt/PyCharmCE
-    state: absent
-- name: Rename PyCharm dir
-  become: true
-  shell: mv /opt/{{ PyCharmCE_dir }} /opt/PyCharmCE
-- name: Configure permissions for PyCharm
-  file:
-    dest: /opt/PyCharmCE
-    owner: "{{ os_user }}"
-    group: "{{ os_user }}"
-    recurse: yes
-- name: Create PyCharm CE link into Launcher
-  template:
-    src: PyCharmCE.j2
-    dest: "/home/{{ os_user }}/.local/share/applications/PyCharmCE.desktop"
-    owner: "{{ os_user }}"
-    group: "{{ os_user }}"
-    mode: '0755'
+# - name: Install PyCharm CE
+#   unarchive:
+#     src: '{{ PyCharmCE_URL }}'
+#     dest: /opt/
+#     remote_src: yes
+# - name: Clear PyCharm dir
+#   file:
+#     path: /opt/PyCharmCE
+#     state: absent
+# - name: Rename PyCharm dir
+#   become: true
+#   shell: mv /opt/{{ PyCharmCE_dir }} /opt/PyCharmCE
+# - name: Configure permissions for PyCharm
+#   file:
+#     dest: /opt/PyCharmCE
+#     owner: "{{ os_user }}"
+#     group: "{{ os_user }}"
+#     recurse: yes
+# - name: Create PyCharm CE link into Launcher
+#   template:
+#     src: PyCharmCE.j2
+#     dest: "/home/{{ os_user }}/.local/share/applications/PyCharmCE.desktop"
+#     owner: "{{ os_user }}"
+#     group: "{{ os_user }}"
+#     mode: '0755'
 
 - name: Install Apache Directory Studio
   unarchive:
@@ -44,21 +44,21 @@
     group: "{{ os_user }}"
     mode: '0755'
 
-- name: Install Postman
-  unarchive:
-    src: 'https://dl.pstmn.io/download/latest/linux64'
-    dest: /opt/
-    remote_src: yes
-- name: Configure permissions for Postman
-  file:
-    dest: /opt/Postman
-    owner: "{{ os_user }}"
-    group: "{{ os_user }}"
-    recurse: yes
-- name: Create Postman link into Launcher
-  template:
-    src: Postman.j2
-    dest: /usr/share/applications/Postman.desktop
-    owner: "{{ os_user }}"
-    group: "{{ os_user }}"
-    mode: '0755'
+# - name: Install Postman
+#   unarchive:
+#     src: 'https://dl.pstmn.io/download/latest/linux64'
+#     dest: /opt/
+#     remote_src: yes
+# - name: Configure permissions for Postman
+#   file:
+#     dest: /opt/Postman
+#     owner: "{{ os_user }}"
+#     group: "{{ os_user }}"
+#     recurse: yes
+# - name: Create Postman link into Launcher
+#   template:
+#     src: Postman.j2
+#     dest: /usr/share/applications/Postman.desktop
+#     owner: "{{ os_user }}"
+#     group: "{{ os_user }}"
+#     mode: '0755'

@@ -6,58 +6,59 @@
     state: present
   vars:
     packages:
-      # browser
-      - firefox
-      - chromium
-      # system
-      - keepassxc
+      #* browser
+      # - firefox
+      # - chromium
+      #* system
+      # - keepassxc
       - gparted
       - wireshark
       - kdiskmark
-      - electrum
-      - remmina
-      - remmina-plugins-kwallet
-      - remmina-plugins-rdp
-      - remmina-plugins-vnc
-      - geany
-      - deja-dup
-      # KDE
-      - yakuake
-      - gwenview
-      - okular
-      - kwrite
-      - ktorrent
-      - kget
-      - falkon
-      - ark
-      - okteta
-      - korganizer
-      - kontact
-      - konversation
-      - krusader
-      - kdiff3
-      - kdevelop
-      - kcalc
-      - kbackup
-      - kdenlive
-      # social
-      - telegram-desktop
-      # - discord
-      - thunderbird
-      - pidgin
-      # office
-      - libreoffice
-      # media
-      - audacity
-      - vlc
-      - HandBrake-gui
-      - krita
-      - gimp
-      - inkscape
-      - obs-studio
-      # files
+      # - electrum
+      # - remmina
+      # - remmina-plugins-kwallet
+      # - remmina-plugins-rdp
+      # - remmina-plugins-vnc
+      # - geany
+      # - deja-dup
+      #* KDE
+      # - yakuake
+      # - gwenview
+      # - okular
+      # - kwrite
+      # - ktorrent
+      # - kget
+      # - falkon
+      # - ark
+      # - okteta
+      # - korganizer
+      # - kontact
+      # - konversation
+      # - krusader
+      # - kdiff3
+      # - kdevelop
+      # - kcalc
+      # - kbackup
+      # - kdenlive
+      #* social
+      # - telegram-desktop
+      #* - discord
+      # - thunderbird
+      # - pidgin
+      #* office
+      # - libreoffice
+      #* media
+      # - audacity
+      # - vlc
+      # - HandBrake-gui
+      # - krita
+      # - gimp
+      # - inkscape
+      # - obs-studio
+      #* files
       - syncthing
-      - onionshare
+      - persepolis
+      # - onionshare
       - android-file-transfer
 
 

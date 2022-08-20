@@ -22,7 +22,6 @@
       - ncdu
       - net-tools
       - firejail
-      - gnome-usage
       - zram
       - plocate
       - arp-scan
@@ -95,7 +94,7 @@
       - cargo
       - sqlite
       - sqlite-devel
-      # - gnome-shell-extension-gsconnect
+      - gnome-shell-extension-gsconnect
       - zfs-fuse
       - krename
       - xz
