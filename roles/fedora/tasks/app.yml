@@ -7,7 +7,7 @@
   vars:
     packages:
       #* browser
-      # - firefox
+      - firefox
       # - chromium
       #* system
       # - keepassxc

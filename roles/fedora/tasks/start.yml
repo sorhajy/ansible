@@ -10,7 +10,7 @@
     state: absent
   vars:
     packages:
-    - firefox
+    # - firefox
     # - zfs-fuse
     - libreoffice
     - libreoffice-*
