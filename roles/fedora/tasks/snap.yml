@@ -25,11 +25,11 @@
 #     - sosumi # MacOS VM
 #     - google-cloud-cli
 
-- name: Install network snap packages
-  snap:
-    name: "{{ packages }}"
-    state: present
-    classic: no
-  vars:
-    packages:
-    - ipfs-desktop
+# - name: Install network snap packages
+#   snap:
+#     name: "{{ packages }}"
+#     state: present
+#     classic: no
+#   vars:
+#     packages:
+#     - ipfs-desktop

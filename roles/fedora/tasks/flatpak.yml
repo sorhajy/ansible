@@ -27,10 +27,6 @@
   flatpak:
     name: org.chromium.Chromium
     state: present
-# - name: Install Falkon
-#   flatpak:
-#     name: org.kde.falkon
-#     state: present
 
 - name: Install Remmina
   flatpak:
@@ -128,22 +124,14 @@
   flatpak:
     name: org.mozilla.Thunderbird
     state: present
-- name: Install Gnome Calendar
-  flatpak:
-    name: org.gnome.Calendar
-    state: present
+# - name: Install Gnome Calendar
+#   flatpak:
+#     name: org.gnome.Calendar
+#     state: present
 - name: Install Obsidian # ! Proprietary
   flatpak:
     name: md.obsidian.Obsidian
     state: present
-# - name: Install Okular
-#   flatpak:
-#     name: org.kde.okular
-#     state: present
-# - name: Install gwenview
-#   flatpak:
-#     name: org.kde.gwenview
-#     state: present
 # Compress Image
 - name: Install Curtail
   flatpak:
@@ -195,6 +183,30 @@
   flatpak:
     name: com.leinardi.gst
     state: present
+- name: Install Gnome passwords
+  flatpak:
+    name: org.gnome.PasswordSafe
+    state: present
+- name: Install Gnome Boxes
+  flatpak:
+    name: org.gnome.Boxes
+    state: present
+- name: Install Gnome Connections
+  flatpak:
+    name: gnome-connections
+    state: present
+- name: Install Apache Directory Studio
+  flatpak:
+    name: org.apache.directory.studio
+    state: present
+# - name: Install Gnome sushi
+#   flatpak:
+#     name: org.gnome.NautilusPreviewer
+#     state: present
+# - name: Install Gnome tasks
+#   flatpak:
+#     name: org.gnome.GTG
+#     state: present
 
 # Files
 - name: Install Transmission
@@ -205,14 +217,18 @@
   flatpak:
     name: org.qbittorrent.qBittorrent
     state: present
-# - name: Install Kget
-#   flatpak:
-#     name: org.kde.kget
-#     state: present
-# - name: Install Ktorrent
-#   flatpak:
-#     name: org.kde.ktorrent
-#     state: present
+- name: Install Kget
+  flatpak:
+    name: org.kde.kget
+    state: present
+- name: Install Ktorrent
+  flatpak:
+    name: org.kde.ktorrent
+    state: present
+- name: Install ark
+  flatpak:
+    name: org.kde.ark
+    state: present
 - name: Install Tribler
   flatpak:
     name: org.tribler.Tribler

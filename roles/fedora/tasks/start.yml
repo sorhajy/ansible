@@ -10,10 +10,10 @@
     state: absent
   vars:
     packages:
-    # - firefox
-    # - zfs-fuse
     - libreoffice
     - libreoffice-*
+    - gnome-connections
+    - gnome-boxes
 
 - name: Install ansible-galaxy community.general collection
   become: true
