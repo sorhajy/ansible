@@ -36,14 +36,14 @@
   flatpak:
     name: com.anydesk.Anydesk
     state: present
-- name: Install Geany
-  flatpak:
-    name: org.geany.Geany
-    state: present
-- name: Install Meld
-  flatpak:
-    name: org.gnome.Meld
-    state: present
+# - name: Install Geany
+#   flatpak:
+#     name: org.geany.Geany
+#     state: present
+# - name: Install Meld
+#   flatpak:
+#     name: org.gnome.Meld
+#     state: present
 
 - name: Install PyCharm-CE
   flatpak:
