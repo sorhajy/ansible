@@ -48,6 +48,18 @@
       - akmod-VirtualBox
       - virtualbox-guest-additions
 
+- name: Add Yandex browser GPG key
+  ansible.builtin.rpm_key:
+    state: present
+    key: https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG
+- name: Add Yandex browser repo
+  template:
+    src: yandex-browser.repo.j2
+    dest: "/etc/yum.repos.d/yandex-browser.repo"
+    owner: root
+    group: root
+    mode: '0644'
+
 - name: Update dnf cache
   dnf:
     update_cache: yes
@@ -59,3 +71,4 @@
   vars:
     packages:
       - code
+      - yandex-browser-stable

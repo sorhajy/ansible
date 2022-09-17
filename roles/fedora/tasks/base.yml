@@ -6,78 +6,34 @@
     state: present
   vars:
     packages:
+      # base
       - fedora-workstation-repositories
+      - redhat-lsb-core
       - ca-certificates
       - dkms
+      - dpkg
       - kernel-devel
       - kernel-headers
-      - gcc
-      - bzip2
-      - curl
-      - wget
       - openssh
-      - vim
-      - htop
-      - iotop
-      - ncdu
-      - net-tools
-      - firejail
-      - zram
-      - plocate
-      - arp-scan
       - autossh
-      - cmake
-      - iperf
-      - iperf3
-      - jq
-      - jo
-      - netcat
-      - nmap
-      - openldap
-      - openldap-devel
-      - pipenv
-      - virtualenv
-      - pv
-      - qrencode
-      - rsync
-      - speedtest-cli
-      - smartmontools
       - sshfs
-      - telnet
-      - tree
-      - exif
-      - youtube-dl
-      - yt-dlp
-      - zstd
-      - lz4
-      - android-tools
-      - snapd
-      # - akmod-nvidia #! Nvidia Only
-      - redhat-lsb-core
+      - ufw
+      # system
+      - compsize
+      - mdadm
       - zsh
       - zsh-syntax-highlighting
       - zsh-autosuggestions
-      - ufw
-      - screen
-      - perl-Image-ExifTool
-      - compsize
-      - adb-enhanced
-      - mdadm
-      - sushi
-      - libxml2-devel
-      - make
-      - ruby-devel
-      - tor
-      - obfs4
-      - proxychains-ng
-      - hashcat
-      - supervisor
-      - arm-image-installer
+      - snapd
+      - zram
+      - zfs-fuse
+      # SDK & libs
       - "@Development Tools"
       - "@development-tools"
-      - git
-      - ansible
-      - ninja-build
+      - gcc
+      - bzip2
+      - cmake
+      - make
       - clang
       - clang-devel
       - golang
@@ -88,15 +44,10 @@
       - python-devel
       - java-11-openjdk
       - java-11-openjdk-devel
-      - s3cmd
-      - pwgen
       - rust
       - cargo
       - sqlite
       - sqlite-devel
-      - gnome-shell-extension-gsconnect
-      - zfs-fuse
-      - krename
       - xz
       - lzip
       - arj
@@ -105,7 +56,57 @@
       - unrar
       - lzma-sdk
       - lzma-sdk-devel
-      - dpkg
+      - zstd
+      - lz4
+      # tools
+      - curl
+      - wget
+      - vim
+      - htop
+      - iotop
+      - ncdu
+      - net-tools
+      - firejail
+      - plocate
+      - arp-scan
+      - iperf
+      - iperf3
+      - jq
+      - jo
+      - netcat
+      - nmap
+      - openldap
+      - openldap-devel
+      - pipenv
+      - pv
+      - qrencode
+      - rsync
+      - speedtest-cli
+      - smartmontools
+      - telnet
+      - tree
+      - exif
+      - youtube-dl
+      - yt-dlp
+      - android-tools
+      # - akmod-nvidia #! Nvidia Only
+      - screen
+      - perl-Image-ExifTool
+      - adb-enhanced
+      - libxml2-devel
+      - ruby-devel
+      - tor
+      - obfs4
+      - proxychains-ng
+      - hashcat
+      - supervisor
+      - arm-image-installer
+      - git
+      - ansible
+      - ninja-build
+      - s3cmd
+      - pwgen
+      - gnome-shell-extension-gsconnect
 
 - name: Install Databases
   dnf:
@@ -141,6 +142,8 @@
       - NetworkManager-l2tp-gnome
       - NetworkManager-openconnect-gnome
       - NetworkManager-openvpn-gnome
+      - NetworkManager-libreswan-gnome
+      - NetworkManager-strongswan-gnome
 
 - name: Configure enabled services
   service:
@@ -150,9 +153,7 @@
   with_items:
     - sshd
     - ufw
-    - i2pd
     - tor
-    - yggdrasil
 
 - name: Configure disabled services
   service:

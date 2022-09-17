@@ -9,8 +9,11 @@
       #* browser
       - firefox
       #* system
+      - gnome-connections
+      - gnome-boxes
       - gnome-tweaks
       - gnome-extensions-app
+      - gnome-firmware
       - gparted
       - wireshark
       - syncthing

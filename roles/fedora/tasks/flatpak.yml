@@ -187,22 +187,22 @@
   flatpak:
     name: org.gnome.PasswordSafe
     state: present
-- name: Install Gnome Boxes
-  flatpak:
-    name: org.gnome.Boxes
-    state: present
-- name: Install Gnome Connections
-  flatpak:
-    name: gnome-connections
-    state: present
+# - name: Install Gnome Boxes
+#   flatpak:
+#     name: org.gnome.Boxes
+#     state: present
+# - name: Install Gnome Connections
+#   flatpak:
+#     name: gnome-connections
+#     state: present
 - name: Install Apache Directory Studio
   flatpak:
     name: org.apache.directory.studio
     state: present
-# - name: Install Gnome sushi
-#   flatpak:
-#     name: org.gnome.NautilusPreviewer
-#     state: present
+- name: Install Gnome sushi
+  flatpak:
+    name: org.gnome.NautilusPreviewer
+    state: present
 # - name: Install Gnome tasks
 #   flatpak:
 #     name: org.gnome.GTG
