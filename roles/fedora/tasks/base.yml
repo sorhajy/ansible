@@ -78,9 +78,7 @@
       - nmap
       - openldap
       - openldap-devel
-      - pipenv
       - pv
-      - qrencode
       - rsync
       - speedtest-cli
       - smartmontools
@@ -99,7 +97,7 @@
       - proxychains-ng
       - hashcat
       - supervisor
-      - arm-image-installer
+      # - arm-image-installer
       - git
       - ansible
       - ninja-build
@@ -163,7 +161,6 @@
     - nginx
     - redis
     - postgresql
-
 
 - name: Stop UFW
   become: true
