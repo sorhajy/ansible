@@ -27,6 +27,7 @@
       - snapd
       - zram
       - zfs-fuse
+      - ethtool
       # SDK & libs
       - "@Development Tools"
       - "@development-tools"
