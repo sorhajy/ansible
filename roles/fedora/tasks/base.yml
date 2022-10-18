@@ -21,9 +21,9 @@
       # system
       - compsize
       - mdadm
-      - zsh
-      - zsh-syntax-highlighting
-      - zsh-autosuggestions
+      # - zsh
+      # - zsh-syntax-highlighting
+      # - zsh-autosuggestions
       - snapd
       - zram
       - zfs-fuse
@@ -32,7 +32,6 @@
       - "@Development Tools"
       - "@development-tools"
       - gcc
-      - bzip2
       - cmake
       - make
       - clang
@@ -49,6 +48,7 @@
       - sqlite
       - sqlite-devel
       - xz
+      - bzip2
       - lzip
       - arj
       - lha
@@ -86,12 +86,12 @@
       - telnet
       - tree
       - exif
+      - perl-Image-ExifTool
       - youtube-dl
       - yt-dlp
       - android-tools
       # - akmod-nvidia #! Nvidia Only
       - screen
-      - perl-Image-ExifTool
       - adb-enhanced
       - tor
       - obfs4
@@ -271,7 +271,7 @@
     state: directory
     owner: "{{ os_user }}"
     group: "{{ os_user }}"
-    mode: "0777"
+    # mode: "0777"
 
 - name: Copy wallpaper
   copy:
