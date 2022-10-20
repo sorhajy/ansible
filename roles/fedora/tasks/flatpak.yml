@@ -61,6 +61,10 @@
   flatpak:
     name: com.getpostman.Postman
     state: present
+- name: Install Jmeter
+  flatpak:
+    name: org.apache.jmeter
+    state: present
 - name: Install DejaDup
   flatpak:
     name: org.gnome.DejaDup
