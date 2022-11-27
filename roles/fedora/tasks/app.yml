@@ -15,9 +15,10 @@
       - gnome-extensions-app
       - gnome-firmware
       - gnome-shell-extension-gsconnect
-      - gparted
+      # - gparted
       - wireshark
       - syncthing
+      # - ulauncher
 
 - name: Install KVM packages
   dnf:
