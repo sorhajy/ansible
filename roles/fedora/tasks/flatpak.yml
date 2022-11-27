@@ -118,7 +118,7 @@
 # Office
 - name: Install OnlyOffice
   flatpak:
-    name: org.onlyoffice
+    name: org.onlyoffice.desktopeditors
     state: present
 - name: Install LibreOffice
   flatpak:
