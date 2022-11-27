@@ -24,7 +24,7 @@
       # - zsh
       # - zsh-syntax-highlighting
       # - zsh-autosuggestions
-      - snapd
+      # - snapd
       - zram
       - zfs-fuse
       # SDK & libs
