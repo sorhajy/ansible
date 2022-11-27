@@ -96,7 +96,7 @@
       - tor
       - obfs4
       - proxychains-ng
-      - hashcat
+      # - hashcat
       - supervisor
       # - arm-image-installer
       # - ninja-build
