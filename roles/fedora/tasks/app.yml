@@ -6,19 +6,15 @@
     state: present
   vars:
     packages:
-      #* browser
       - firefox
-      #* system
       - gnome-connections
       - gnome-boxes
       - gnome-tweaks
       - gnome-extensions-app
       - gnome-firmware
       - gnome-shell-extension-gsconnect
-      # - gparted
       - wireshark
       - syncthing
-      # - ulauncher
 
 - name: Install KVM packages
   dnf:
