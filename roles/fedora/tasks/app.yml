@@ -7,8 +7,6 @@
   vars:
     packages:
       - firefox
-      - gnome-connections
-      - gnome-boxes
       - gnome-tweaks
       - gnome-extensions-app
       - gnome-firmware
