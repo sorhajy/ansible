@@ -191,10 +191,10 @@
   flatpak:
     name: org.gnome.PasswordSafe
     state: present
-- name: Install Gnome Boxes
-  flatpak:
-    name: org.gnome.Boxes
-    state: present
+# - name: Install Gnome Boxes
+#   flatpak:
+#     name: org.gnome.Boxes
+#     state: present
 - name: Install Gnome Connections
   flatpak:
     name: org.gnome.Connections
