@@ -102,7 +102,7 @@
     db: postgres
     query: "SELECT pg_reload_conf();"
 
-- name: Enable autoload & start PostgreSQL service
+- name: Disable autostart & stop PostgreSQL service
   become: true
   service:
     name: postgresql
@@ -157,7 +157,7 @@
     group: root
     mode: '0644'
 
-- name: Enable autoload & start MySQL service
+- name: Disable autostart & stop MySQL service
   become: true
   service:
     name: mysql
