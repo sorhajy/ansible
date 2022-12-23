@@ -75,6 +75,7 @@
       - supervisor
       - s3cmd
       - pwgen
+      - sushi
 
 - name: Install Databases
   dnf:

@@ -160,26 +160,26 @@
 #   flatpak:
 #     name: org.kde.krita
 #     state: present
-- name: Install GIMP
-  flatpak:
-    name: org.gimp.GIMP
-    state: present
-- name: Install Inkscape
-  flatpak:
-    name: org.inkscape.Inkscape
-    state: present
-- name: Install OBS
-  flatpak:
-    name: com.obsproject.Studio
-    state: present
-- name: Install Audacity
-  flatpak:
-    name: org.audacityteam.Audacity
-    state: present
-- name: Install KDEnlive
-  flatpak:
-    name: org.kde.kdenlive
-    state: present
+# - name: Install GIMP
+#   flatpak:
+#     name: org.gimp.GIMP
+#     state: present
+# - name: Install Inkscape
+#   flatpak:
+#     name: org.inkscape.Inkscape
+#     state: present
+# - name: Install OBS
+#   flatpak:
+#     name: com.obsproject.Studio
+#     state: present
+# - name: Install Audacity
+#   flatpak:
+#     name: org.audacityteam.Audacity
+#     state: present
+# - name: Install KDEnlive
+#   flatpak:
+#     name: org.kde.kdenlive
+#     state: present
 
 
 # Custom
@@ -187,26 +187,26 @@
   flatpak:
     name: com.leinardi.gst
     state: present
-- name: Install Gnome passwords
-  flatpak:
-    name: org.gnome.PasswordSafe
-    state: present
+# - name: Install Gnome passwords
+#   flatpak:
+#     name: org.gnome.PasswordSafe
+#     state: present
 # - name: Install Gnome Boxes
 #   flatpak:
 #     name: org.gnome.Boxes
 #     state: present
-- name: Install Gnome Connections
-  flatpak:
-    name: org.gnome.Connections
-    state: present
+# - name: Install Gnome Connections
+#   flatpak:
+#     name: org.gnome.Connections
+#     state: present
 - name: Install Apache Directory Studio
   flatpak:
     name: org.apache.directory.studio
     state: present
-- name: Install Gnome sushi
-  flatpak:
-    name: org.gnome.NautilusPreviewer
-    state: present
+# - name: Install Gnome sushi
+#   flatpak:
+#     name: org.gnome.NautilusPreviewer
+#     state: present
 # - name: Install Gnome tasks
 #   flatpak:
 #     name: org.gnome.GTG
@@ -217,18 +217,18 @@
   flatpak:
     name: com.transmissionbt.Transmission
     state: present
-- name: Install qBittorrent
-  flatpak:
-    name: org.qbittorrent.qBittorrent
-    state: present
+# - name: Install qBittorrent
+#   flatpak:
+#     name: org.qbittorrent.qBittorrent
+#     state: present
 - name: Install Kget
   flatpak:
     name: org.kde.kget
     state: present
-- name: Install Ktorrent
-  flatpak:
-    name: org.kde.ktorrent
-    state: present
+# - name: Install Ktorrent
+#   flatpak:
+#     name: org.kde.ktorrent
+#     state: present
 - name: Install ark
   flatpak:
     name: org.kde.ark

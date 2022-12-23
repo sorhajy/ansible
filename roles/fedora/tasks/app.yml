@@ -9,6 +9,7 @@
       - firefox
       - gnome-boxes
       - gnome-tweaks
+      - gnome-connections
       - gnome-extensions-app
       - gnome-firmware
       - gnome-shell-extension-gsconnect
