@@ -15,15 +15,16 @@
     packages:
     - core
 
-# - name: Install develop snap packages with classic
-#   snap:
-#     name: "{{ packages }}"
-#     state: present
-#     classic: yes
-#   vars:
-#     packages:
-#     - sosumi # MacOS VM
-#     - google-cloud-cli
+- name: Install develop snap packages with classic
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: yes
+  vars:
+    packages:
+    - pycharm-community
+    # - sosumi # MacOS VM
+    # - google-cloud-cli
 
 # - name: Install network snap packages
 #   snap:
