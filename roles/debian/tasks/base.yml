@@ -29,7 +29,6 @@
       - bzip2
       - lzip
       - arj
-      - lha
       - unace
       - unrar
       - lzma
