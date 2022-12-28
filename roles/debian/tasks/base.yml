@@ -35,7 +35,6 @@
       - lzma
       - zstd
       - lz4
-      - lzo
       - apt-mirror
       - fail2ban
       #
