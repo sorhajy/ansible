@@ -121,6 +121,8 @@
     state: present
   vars:
     packages:
+      - docker.io
+      - docker-compose
       - default-jdk
       - default-jdk-headless
       - default-jre
@@ -169,6 +171,18 @@
       - libssl-dev
       - libbz2-dev
       - ldap-utils
+
+- name: Enable Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Add the user Docker groups
+  user:
+    name: "{{ os_user }}"
+    groups: docker
+    append: yes
 
 - name: Install VM packages
   apt:

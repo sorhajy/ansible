@@ -3,15 +3,15 @@
 - name: Check lsb_release
   command: "lsb_release -cs"
   register: lsb_release
-- name: Add Docker GPG key
-  apt_key:
-    url: "https://download.docker.com/linux/debian/gpg"
-    state: present
-- name: Add Docker repo
-  apt_repository:
-    repo: "deb https://download.docker.com/linux/debian {{ lsb_release.stdout }} stable"
-    filename: docker
-    state: present
+# - name: Add Docker GPG key
+#   apt_key:
+#     url: "https://download.docker.com/linux/debian/gpg"
+#     state: present
+# - name: Add Docker repo
+#   apt_repository:
+#     repo: "deb https://download.docker.com/linux/debian {{ lsb_release.stdout }} stable"
+#     filename: docker
+#     state: present
 
 - name: Add VScode GPG key
   apt_key:
@@ -40,41 +40,41 @@
     repo: "deb https://dbeaver.io/debs/dbeaver-ce /"
     state: present
 
-- name: Add yggdrasil GPG key
-  apt_key:
-    url: "https://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/key.txt"
-    state: present
-- name: Add yggdrasil repo
-  apt_repository:
-    repo: "deb http://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/ debian yggdrasil"
-    state: present
+# - name: Add yggdrasil GPG key
+#   apt_key:
+#     url: "https://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/key.txt"
+#     state: present
+# - name: Add yggdrasil repo
+#   apt_repository:
+#     repo: "deb http://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/ debian yggdrasil"
+#     state: present
 
 - name: Update cache after update repo
   apt:
     update_cache: yes
 
-- name: Install Docker packages
-  apt:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
-      - docker-compose-plugin
+# - name: Install Docker packages
+#   apt:
+#     name: "{{ packages }}"
+#     state: present
+#   vars:
+#     packages:
+#       - docker-ce
+#       - docker-ce-cli
+#       - containerd.io
+#       - docker-compose-plugin
 
-- name: Enable Docker service
-  service:
-    name: docker
-    state: started
-    enabled: yes
+# - name: Enable Docker service
+#   service:
+#     name: docker
+#     state: started
+#     enabled: yes
 
-- name: Add the user Docker groups
-  user:
-    name: "{{ os_user }}"
-    groups: docker
-    append: yes
+# - name: Add the user Docker groups
+#   user:
+#     name: "{{ os_user }}"
+#     groups: docker
+#     append: yes
 
 
 - name: Install additional repo Apps

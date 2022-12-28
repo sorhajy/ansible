@@ -5,23 +5,29 @@
     state: present
   vars:
     packages:
+      - kdenetwork
+      - kdegraphics
+      - kdepim
+      - kdeutils
+      - kdesdk
+      - kdemultimedia
       - yakuake
-      - gwenview
-      - okular
+      # - gwenview
+      # - okular
       # - kwrite
       - ktorrent
-      - kget
+      # - kget
       # - falkon
-      - ark
-      - okteta
-      - kontact
+      # - ark
+      # - okteta
+      # - kontact
       - konversation
       - krusader
-      - kdiff3
+      # - kdiff3
       # - kdevelop
-      - kcalc
+      # - kcalc
       - kbackup
-      - kdenlive
+      # - kdenlive
 
 - name: Install base Apps
   apt:
@@ -37,9 +43,9 @@
       - virt-manager
       - android-file-transfer
       - keepassxc
-      - remmina
-      - remmina-plugin-rdp
-      - remmina-plugin-vnc
+      # - remmina
+      # - remmina-plugin-rdp
+      # - remmina-plugin-vnc
       # - electrum
       - firefox-esr
       - chromium
@@ -49,7 +55,7 @@
       - gimp
       - inkscape
       - obs-studio
-      - audacity
+      # - audacity
       - thunderbird
       # - pidgin
       - libreoffice
