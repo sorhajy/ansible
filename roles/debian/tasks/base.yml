@@ -20,14 +20,22 @@
       - iotop
       - net-tools
       - zram-tools
-      - dphys-swapfile
       - dirmngr
       - zstd
       - firmware-misc-nonfree
       - openssh-client
       - openssh-server
+      - xz-utils
       - bzip2
+      - lzip
+      - arj
+      - lha
+      - unace
+      - unrar
+      - lzma
+      - zstd
       - lz4
+      - lzo
       - apt-mirror
       - fail2ban
       #
@@ -254,6 +262,11 @@
     # Docker subnet
     - 172.17.0.0/16
     - 172.18.0.0/16
+- name: Allow IPv6
+  become: true
+  community.general.ufw:
+    rule: allow
+    proto: ipv6
 - name: Reject everything and enable UFW
   become: true
   community.general.ufw:
@@ -321,16 +334,6 @@
     size: 4096
     state: present
     force: no
-  become: true
-  become_user: "{{ os_user }}"
-
-- name: Create user GIT dir
-  file:
-    path: "/home/{{ os_user }}/git"
-    state: directory
-    owner: "{{ os_user }}"
-    group: "{{ os_user }}"
-    mode: "0755"
   become: true
   become_user: "{{ os_user }}"
 

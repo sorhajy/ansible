@@ -8,17 +8,17 @@
       - yakuake
       - gwenview
       - okular
-      - kwrite
+      # - kwrite
       - ktorrent
       - kget
-      - falkon
+      # - falkon
       - ark
       - okteta
       - kontact
       - konversation
       - krusader
       - kdiff3
-      - kdevelop
+      # - kdevelop
       - kcalc
       - kbackup
       - kdenlive
@@ -30,7 +30,7 @@
   vars:
     packages:
       - telegram-desktop
-      - jami
+      # - jami
       - syncthing
       - gparted
       - wireshark
@@ -40,21 +40,22 @@
       - remmina
       - remmina-plugin-rdp
       - remmina-plugin-vnc
-      - electrum
+      # - electrum
       - firefox-esr
       - chromium
       - vlc
       - handbrake
-      - krita
+      # - krita
       - gimp
       - inkscape
       - obs-studio
       - audacity
       - thunderbird
-      - pidgin
+      # - pidgin
       - libreoffice
       - libreoffice-plasma
       - onionshare
+      - jmeter
 
 - name: Install Win compatibility tools
   apt:

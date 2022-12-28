@@ -13,39 +13,23 @@
     filename: docker
     state: present
 
-- name: Configure VScodium GPG key
-  shell: wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | gpg --dearmor  | dd of=/usr/share/keyrings/vscodium-archive-keyring.gpg
-- name: Add VScodium repo
+- name: Add VScode GPG key
+  apt_key:
+    url: "https://packages.microsoft.com/keys/microsoft.asc"
+    state: present
+- name: Add VScode repo
   apt_repository:
-    repo: "deb [ signed-by=/usr/share/keyrings/vscodium-archive-keyring.gpg ] https://download.vscodium.com/debs vscodium main"
+    repo: "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
     state: present
 
-- name: Add AnyDesk GPG key
-  apt_key:
-    url: "https://keys.anydesk.com/repos/DEB-GPG-KEY"
-    state: present
-- name: Add AnyDesk repo
-  apt_repository:
-    repo: "deb http://deb.anydesk.com/ all main"
-    state: present
-
-- name: Add Yandex browser GPG key
-  apt_key:
-    state: present
-    url: "https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG"
-- name: Add Yandex browser repo
-  apt_repository:
-    repo: "deb [arch=amd64] http://repo.yandex.ru/yandex-browser/deb stable main"
-    state: present
-
-- name: Add Element GPG key
-  apt_key:
-    url: "https://packages.riot.im/debian/riot-im-archive-keyring.gpg"
-    state: present
-- name: Add Element repo
-  apt_repository:
-    repo: "deb https://packages.riot.im/debian/ default main"
-    state: present
+# - name: Add Yandex browser GPG key
+#   apt_key:
+#     state: present
+#     url: "https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG"
+# - name: Add Yandex browser repo
+#   apt_repository:
+#     repo: "deb [arch=amd64] http://repo.yandex.ru/yandex-browser/deb stable main"
+#     state: present
 
 - name: Add DBeaver GPG key
   apt_key:
@@ -78,7 +62,7 @@
       - docker-ce
       - docker-ce-cli
       - containerd.io
-      - docker-compose
+      - docker-compose-plugin
 
 - name: Enable Docker service
   service:
@@ -99,18 +83,16 @@
     state: present
   vars:
     packages:
-      - yggdrasil
-      - codium
-      - anydesk
-      - element-desktop
+      # - yggdrasil
+      - code
       - dbeaver-ce
-      - yandex-browser-stable
+      # - yandex-browser-stable
 
-- name: Create yggdrasil config file
-  become: true
-  shell: yggdrasil -genconf > /etc/yggdrasil.conf
-- name: Enable autoload & start yggdrasil service
-  service:
-    name: yggdrasil
-    state: started
-    enabled: yes
+# - name: Create yggdrasil config file
+#   become: true
+#   shell: yggdrasil -genconf > /etc/yggdrasil.conf
+# - name: Enable autoload & start yggdrasil service
+#   service:
+#     name: yggdrasil
+#     state: started
+#     enabled: yes

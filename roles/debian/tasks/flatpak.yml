@@ -6,48 +6,15 @@
   vars:
     packages:
       - flatpak
-      # - gnome-software-plugin-flatpak
 
 - name: Add Flathub repo
   command: "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
 
-# System
-# - name: Install DejaDup
-#   flatpak:
-#     name: org.gnome.DejaDup
-#     state: present
 # - name: Install KeePassXC
 #   flatpak:
 #     name: org.keepassxc.KeePassXC
 #     state: present
-# - name: Install Remmina
-#   flatpak:
-#     name: org.remmina.Remmina
-#     state: present
-# - name: Install Anydesk
-#   flatpak:
-#     name: com.anydesk.Anydesk
-#     state: present
-# - name: Install Electrum
-#   flatpak:
-#     name: org.electrum.electrum 
-#     state: present
 
-# Dev
-# - name: Install PyCharm
-#   flatpak:
-#     name: com.jetbrains.PyCharm-Community
-#     state: present
-- name: Install Postman
-  flatpak:
-    name: com.getpostman.Postman
-    state: present
-# - name: Install DBeaver
-#   flatpak:
-#     name: io.dbeaver.DBeaverCommunity
-#     state: present
-
-# Browser
 # - name: Install Firefox
 #   flatpak:
 #     name: org.mozilla.firefox
@@ -55,6 +22,125 @@
 # - name: Install Chromium
 #   flatpak:
 #     name: org.chromium.Chromium
+#     state: present
+
+# - name: Install Remmina
+#   flatpak:
+#     name: org.remmina.Remmina
+#     state: present
+- name: Install Anydesk
+  flatpak:
+    name: com.anydesk.Anydesk
+    state: present
+# - name: Install Geany
+#   flatpak:
+#     name: org.geany.Geany
+#     state: present
+# - name: Install Meld
+#   flatpak:
+#     name: org.gnome.Meld
+#     state: present
+
+# - name: Install PyCharm-CE
+#   flatpak:
+#     name: com.jetbrains.PyCharm-Community
+#     state: present
+# - name: Install AndroidStudio
+#   flatpak:
+#     name: com.google.AndroidStudio
+#     state: present
+# - name: Install DBeaver
+#   flatpak:
+#     name: io.dbeaver.DBeaverCommunity
+#     state: present
+- name: Install Postman
+  flatpak:
+    name: com.getpostman.Postman
+    state: present
+# - name: Install Jmeter
+#   flatpak:
+#     name: org.apache.jmeter
+#     state: present
+# - name: Install DejaDup
+#   flatpak:
+#     name: org.gnome.DejaDup
+#     state: present
+
+# - name: Install Telegram
+#   flatpak:
+#     name: org.telegram.desktop
+#     state: present
+# - name: Install Pidgin
+#   flatpak:
+#     name: im.pidgin.Pidgin
+#     state: present
+- name: Install Zoom
+  flatpak:
+    name: us.zoom.Zoom
+    state: present
+- name: Install Skype
+  flatpak:
+    name: com.skype.Client
+    state: present
+# - name: Install Element
+#   flatpak:
+#     name: im.riot.Riot
+#     state: present
+- name: Install Slack
+  flatpak:
+    name: com.slack.Slack
+    state: present
+- name: Install Mattermost
+  flatpak:
+    name: com.mattermost.Desktop
+    state: present
+- name: Install MS Teams
+  flatpak:
+    name: com.microsoft.Teams
+    state: present
+# - name: Install Jami
+#   flatpak:
+#     name: net.jami.Jami
+#     state: present
+- name: Install Jitsi Meet
+  flatpak:
+    name: org.jitsi.jitsi-meet
+    state: present
+# - name: Install Discord
+#   flatpak:
+#     name: com.discordapp.Discord
+#     state: present
+
+# Office
+- name: Install OnlyOffice
+  flatpak:
+    name: org.onlyoffice
+    state: present
+# - name: Install LibreOffice
+#   flatpak:
+#     name: org.libreoffice.LibreOffice
+#     state: present
+# - name: Install Thunderbird
+#   flatpak:
+#     name: org.mozilla.Thunderbird
+#     state: present
+# - name: Install Gnome Calendar
+#   flatpak:
+#     name: org.gnome.Calendar
+#     state: present
+- name: Install Obsidian # ! Proprietary
+  flatpak:
+    name: md.obsidian.Obsidian
+    state: present
+# Compress Image
+# - name: Install Curtail
+#   flatpak:
+#     name: com.github.huluti.Curtail
+#     state: present
+# Metadata Cleaner
+# - name: Install MetadataCleaner
+#   flatpak:
+#     name: fr.romainvigier.MetadataCleaner
 #     state: present
 
 # Media
@@ -91,100 +177,67 @@
 #     name: org.kde.kdenlive
 #     state: present
 
-# Social
-# - name: Install Telegram
-#   flatpak:
-#     name: org.telegram.desktop
-#     state: present
-# - name: Install Thunderbird
-#   flatpak:
-#     name: org.mozilla.Thunderbird
-#     state: present
-# - name: Install Pidgin
-#   flatpak:
-#     name: im.pidgin.Pidgin
-#     state: present
-- name: Install Zoom
-  flatpak:
-    name: us.zoom.Zoom
-    state: present
-- name: Install Skype
-  flatpak:
-    name: com.skype.Client
-    state: present
-# - name: Install Element
-#   flatpak:
-#     name: im.riot.Riot
-#     state: present
-- name: Install NeoChat
-  flatpak:
-    name: org.kde.neochat
-    state: present
-- name: Install Slack
-  flatpak:
-    name: com.slack.Slack
-    state: present
-- name: Install MS Teams
-  flatpak:
-    name: com.microsoft.Teams
-    state: present
-# - name: Install Jami
-#   flatpak:
-#     name: net.jami.Jami
-#     state: present
-- name: Install Jitsi Meet
-  flatpak:
-    name: org.jitsi.jitsi-meet
-    state: present
-- name: Install Discord
-  flatpak:
-    name: com.discordapp.Discord
-    state: present
 
-# Office
-- name: Install OnlyOffice
+# Custom
+- name: Install GTK Stress Testing
   flatpak:
-    name: org.onlyoffice
+    name: com.leinardi.gst
     state: present
-# - name: Install LibreOffice
+# - name: Install Gnome passwords
 #   flatpak:
-#     name: org.libreoffice.LibreOffice
+#     name: org.gnome.PasswordSafe
+#     state: present
+# - name: Install Gnome Boxes
+#   flatpak:
+#     name: org.gnome.Boxes
+#     state: present
+# - name: Install Gnome Connections
+#   flatpak:
+#     name: org.gnome.Connections
+#     state: present
+# - name: Install Apache Directory Studio
+#   flatpak:
+#     name: org.apache.directory.studio
+#     state: present
+# - name: Install Gnome sushi
+#   flatpak:
+#     name: org.gnome.NautilusPreviewer
+#     state: present
+# - name: Install Gnome tasks
+#   flatpak:
+#     name: org.gnome.GTG
 #     state: present
 
 # Files
+# - name: Install Transmission
+#   flatpak:
+#     name: com.transmissionbt.Transmission
+#     state: present
+# - name: Install qBittorrent
+#   flatpak:
+#     name: org.qbittorrent.qBittorrent
+#     state: present
 # - name: Install Kget
 #   flatpak:
 #     name: org.kde.kget
 #     state: present
-# - name: Install Transmission
+# - name: Install Ktorrent
 #   flatpak:
-#     name: com.transmissionbt.Transmission
+#     name: org.kde.ktorrent
+#     state: present
+# - name: Install ark
+#   flatpak:
+#     name: org.kde.ark
+#     state: present
+# - name: Install Tribler
+#   flatpak:
+#     name: org.tribler.Tribler
 #     state: present
 # - name: Install Filezilla
 #   flatpak:
 #     name: org.filezillaproject.Filezilla
 #     state: present
-- name: Install Tribler
-  flatpak:
-    name: org.tribler.Tribler
-    state: present
 # - name: Install OnionShare
 #   flatpak:
 #     name: org.onionshare.OnionShare
-#     state: present
-
-# - name: Install GTK Stress Testing
-#   flatpak:
-#     name: com.leinardi.gst
-#     state: present
-
-- name: Install Obsidian # ! Proprietary
-  flatpak:
-    name: md.obsidian.Obsidian
-    state: present
-
-# Compress Image
-# - name: Install Curtail
-#   flatpak:
-#     name: com.github.huluti.Curtail
 #     state: present
