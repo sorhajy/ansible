@@ -37,11 +37,23 @@
       - apt-mirror
       - fail2ban
       #
+      - amd64-microcode
+      - firmware-amd-graphics
+      - libgl1-mesa-dri
+      - libglx-mesa0
+      - xserver-xorg-video-all
+      - libglx-mesa0:i386
+      - libgl1-mesa-dri:i386
       - mesa-utils
       - mesa-utils-extra
       - mesa-va-drivers
       - mesa-vdpau-drivers
       - mesa-vulkan-drivers
+      - mesa-vulkan-drivers:i386
+      - pulseaudio-module-bluetooth
+      - bluez
+      - bluez-firmware
+      - bluez-tools
       #
       - vim
       - htop
