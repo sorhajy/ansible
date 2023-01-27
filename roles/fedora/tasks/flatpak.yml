@@ -74,10 +74,10 @@
   flatpak:
     name: org.telegram.desktop
     state: present
-- name: Install Pidgin
-  flatpak:
-    name: im.pidgin.Pidgin
-    state: present
+# - name: Install Pidgin
+#   flatpak:
+#     name: im.pidgin.Pidgin
+#     state: present
 - name: Install Zoom
   flatpak:
     name: us.zoom.Zoom
@@ -86,14 +86,14 @@
   flatpak:
     name: com.skype.Client
     state: present
-- name: Install Element
-  flatpak:
-    name: im.riot.Riot
-    state: present
-- name: Install Slack
-  flatpak:
-    name: com.slack.Slack
-    state: present
+# - name: Install Element
+#   flatpak:
+#     name: im.riot.Riot
+#     state: present
+# - name: Install Slack
+#   flatpak:
+#     name: com.slack.Slack
+#     state: present
 - name: Install Mattermost
   flatpak:
     name: com.mattermost.Desktop
@@ -102,18 +102,18 @@
   flatpak:
     name: com.microsoft.Teams
     state: present
-- name: Install Jami
-  flatpak:
-    name: net.jami.Jami
-    state: present
+# - name: Install Jami
+#   flatpak:
+#     name: net.jami.Jami
+#     state: present
 - name: Install Jitsi Meet
   flatpak:
     name: org.jitsi.jitsi-meet
     state: present
-- name: Install Discord
-  flatpak:
-    name: com.discordapp.Discord
-    state: present
+# - name: Install Discord
+#   flatpak:
+#     name: com.discordapp.Discord
+#     state: present
 
 # Office
 - name: Install OnlyOffice

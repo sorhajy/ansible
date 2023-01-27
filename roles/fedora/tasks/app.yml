@@ -16,35 +16,35 @@
       - wireshark
       - syncthing
 
-- name: Install KVM packages
-  dnf:
-    name: "{{ packages }}"
-    state: present
-  vars:
-    packages:
-      - qemu
-      - qemu-kvm
-      - libvirt-daemon
-      - libvirt
-      - libvirt-devel
-      - ebtables
-      - virt-manager
-      - bridge-utils
+# - name: Install KVM packages
+#   dnf:
+#     name: "{{ packages }}"
+#     state: present
+#   vars:
+#     packages:
+#       - qemu
+#       - qemu-kvm
+#       - libvirt-daemon
+#       - libvirt
+#       - libvirt-devel
+#       - ebtables
+#       - virt-manager
+#       - bridge-utils
 
-- name: Start & enable libvirt
-  service:
-    name: "{{ item }}"
-    state: started
-    enabled: yes
-  with_items:
-  - libvirtd-admin.socket
-  - libvirtd-tls.socket
-  - libvirtd.socket
-  - libvirtd-ro.socket
-  - libvirtd-tcp.socket
-  - virtnetworkd-ro.socket
-  - virtnetworkd-admin.socket
-  - virtnetworkd.socket
+# - name: Start & enable libvirt
+#   service:
+#     name: "{{ item }}"
+#     state: started
+#     enabled: yes
+#   with_items:
+#   - libvirtd-admin.socket
+#   - libvirtd-tls.socket
+#   - libvirtd.socket
+#   - libvirtd-ro.socket
+#   - libvirtd-tcp.socket
+#   - virtnetworkd-ro.socket
+#   - virtnetworkd-admin.socket
+#   - virtnetworkd.socket
 
 - name: Install vagrant
   dnf:

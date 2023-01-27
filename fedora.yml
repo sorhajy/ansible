@@ -56,12 +56,12 @@
 #       name: fedora
 #       tasks_from: snap
 
-- name: Configure packages by flatpak
-  hosts: localhost
-  tasks:
-  - include_role:
-      name: fedora
-      tasks_from: flatpak
+# - name: Configure packages by flatpak
+#   hosts: localhost
+#   tasks:
+#   - include_role:
+#       name: fedora
+#       tasks_from: flatpak
 
 # - name: Configure custom packages
 #   hosts: localhost

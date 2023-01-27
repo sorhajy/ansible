@@ -20,7 +20,7 @@
       - zsh-autosuggestions
       - snapd
       - zram
-      - zfs-fuse
+      # - zfs-fuse
       - "@Development Tools"
       - "@development-tools"
       - golang
