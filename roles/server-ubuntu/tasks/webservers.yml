@@ -31,3 +31,9 @@
     packages:
     - certbot
     - python3-certbot-nginx
+
+- name: Check LetsEncrypt dir
+  file: 
+    path: "/var/www/letsencrypt"
+    state: directory
+    mode: "0777"
