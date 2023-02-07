@@ -55,7 +55,6 @@
     repo: "deb http://repo.yandex.ru/yandex-disk/deb/ stable main"
     state: present
 
-
 - name: Add DBeaver GPG key
   apt_key:
     url: "https://dbeaver.io/debs/dbeaver.gpg.key"
@@ -88,19 +87,16 @@
       - docker-ce-cli
       - containerd.io
       - docker-compose-plugin
-
 - name: Enable Docker service
   service:
     name: docker
     state: started
     enabled: yes
-
 - name: Add the user Docker groups
   user:
     name: "{{ os_user }}"
     groups: docker
     append: yes
-
 
 - name: Install additional repo Apps
   apt:
