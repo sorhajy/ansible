@@ -113,7 +113,8 @@
       - dbeaver-ce
       - yandex-browser-stable
       - yandex-disk
-      - virtualbox
+      - virtualbox-7.0
+      - virtualbox-guest-additions-iso
 
 # - name: Create yggdrasil config file
 #   become: true
