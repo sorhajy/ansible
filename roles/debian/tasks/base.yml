@@ -99,6 +99,8 @@
       - sshfs
       - btrfs-progs
       - btrfs-compsize
+      - hfsprogs
+      - hfsutils
       # - zfs-fuse
 
 - name: Install monitor packages
