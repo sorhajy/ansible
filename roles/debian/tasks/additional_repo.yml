@@ -114,7 +114,6 @@
       - yandex-browser-stable
       - yandex-disk
       - virtualbox-7.0
-      - virtualbox-guest-additions-iso
 
 # - name: Create yggdrasil config file
 #   become: true
