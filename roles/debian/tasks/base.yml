@@ -87,6 +87,7 @@
       - nmap
       - firejail
       - ncdu
+      - xrdp
 
 - name: Install filesystems packages
   apt:
