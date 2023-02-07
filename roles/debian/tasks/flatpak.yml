@@ -179,10 +179,10 @@
 
 
 # Custom
-- name: Install GTK Stress Testing
-  flatpak:
-    name: com.leinardi.gst
-    state: present
+# - name: Install GTK Stress Testing
+#   flatpak:
+#     name: com.leinardi.gst
+#     state: present
 # - name: Install Gnome passwords
 #   flatpak:
 #     name: org.gnome.PasswordSafe
@@ -195,10 +195,10 @@
 #   flatpak:
 #     name: org.gnome.Connections
 #     state: present
-# - name: Install Apache Directory Studio
-#   flatpak:
-#     name: org.apache.directory.studio
-#     state: present
+- name: Install Apache Directory Studio
+  flatpak:
+    name: org.apache.directory.studio
+    state: present
 # - name: Install Gnome sushi
 #   flatpak:
 #     name: org.gnome.NautilusPreviewer

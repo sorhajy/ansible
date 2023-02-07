@@ -6,6 +6,7 @@
     state: present
   vars:
     packages:
+      - locales-all
       - zsh
       - zsh-syntax-highlighting
       - zsh-autosuggestions
@@ -98,7 +99,7 @@
       - sshfs
       - btrfs-progs
       - btrfs-compsize
-      - zfs-fuse
+      # - zfs-fuse
 
 - name: Install monitor packages
   apt:
@@ -133,8 +134,8 @@
     state: present
   vars:
     packages:
-      - docker.io
-      - docker-compose
+      # - docker.io
+      # - docker-compose
       - default-jdk
       - default-jdk-headless
       - default-jre
@@ -184,17 +185,17 @@
       - libbz2-dev
       - ldap-utils
 
-- name: Enable Docker service
-  service:
-    name: docker
-    state: started
-    enabled: yes
+# - name: Enable Docker service
+#   service:
+#     name: docker
+#     state: started
+#     enabled: yes
 
-- name: Add the user Docker groups
-  user:
-    name: "{{ os_user }}"
-    groups: docker
-    append: yes
+# - name: Add the user Docker groups
+#   user:
+#     name: "{{ os_user }}"
+#     groups: docker
+#     append: yes
 
 - name: Install VM packages
   apt:
