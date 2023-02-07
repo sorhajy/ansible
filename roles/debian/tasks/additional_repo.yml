@@ -115,6 +115,12 @@
       - yandex-disk
       - virtualbox-7.0
 
+- name: Add the user VirtualBox groups
+  user:
+    name: "{{ os_user }}"
+    groups: vboxusers
+    append: yes
+
 # - name: Create yggdrasil config file
 #   become: true
 #   shell: yggdrasil -genconf > /etc/yggdrasil.conf
