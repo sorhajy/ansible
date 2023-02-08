@@ -49,26 +49,26 @@
       name: fedora
       tasks_from: docker
 
-# - name: Configure packages by snap
-#   hosts: localhost
-#   tasks:
-#   - include_role:
-#       name: fedora
-#       tasks_from: snap
+- name: Configure packages by snap
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: fedora
+      tasks_from: snap
 
-# - name: Configure packages by flatpak
-#   hosts: localhost
-#   tasks:
-#   - include_role:
-#       name: fedora
-#       tasks_from: flatpak
+- name: Configure packages by flatpak
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: fedora
+      tasks_from: flatpak
 
-# - name: Configure custom packages
-#   hosts: localhost
-#   tasks:
-#   - include_role:
-#       name: fedora
-#       tasks_from: custom
+- name: Configure custom packages
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: fedora
+      tasks_from: custom
 
 
 
