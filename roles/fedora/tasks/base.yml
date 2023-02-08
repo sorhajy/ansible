@@ -76,6 +76,7 @@
       - s3cmd
       - pwgen
       - sushi
+      - xrdp
 
 - name: Install Databases
   dnf:
@@ -123,6 +124,7 @@
     - sshd
     - ufw
     - tor
+    - xrdp
 
 - name: Configure disabled services
   service:
