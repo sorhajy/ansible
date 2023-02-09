@@ -316,6 +316,7 @@
   - libvirtd
   - tor
   - i2pd
+  - xrdp
 
 - name: Configure disabled services
   service:
