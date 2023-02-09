@@ -102,6 +102,7 @@
       - btrfs-compsize
       - hfsprogs
       - hfsutils
+      - cifs-utils
       # - zfs-fuse
 
 - name: Install monitor packages
