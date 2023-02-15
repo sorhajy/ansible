@@ -20,6 +20,13 @@
       name: server-ubuntu
       tasks_from: base
 
+- name: Configure cron
+  hosts: all
+  tasks:
+  - include_role:
+      name: server-ubuntu
+      tasks_from: cron
+
 - name: Configure SDK & DevTools
   hosts: all
   tasks:
