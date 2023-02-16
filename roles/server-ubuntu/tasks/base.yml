@@ -20,8 +20,8 @@
       - iotop
       - ncdu
       - net-tools
-      - zram-config
-      - zram-tools
+      # - zram-config
+      # - zram-tools
       - locate
       - autossh
       - iperf
