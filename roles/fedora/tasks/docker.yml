@@ -1,23 +1,23 @@
 ---
 
-# - name: Inspect old packages & remove them
-#   dnf:
-#     name: "{{ packages }}"
-#     state: absent
-#   vars:
-#     packages:
-#       - docker
-#       - docker-client
-#       - docker-client-latest
-#       - docker-common
-#       - docker-latest
-#       - docker-latest-logrotate
-#       - docker-logrotate
-#       - docker-selinux
-#       - docker-engine-selinux
-#       - docker-engine
-#       - podman
-#       - podman-docker
+- name: Inspect old packages & remove them
+  dnf:
+    name: "{{ packages }}"
+    state: absent
+  vars:
+    packages:
+      # - docker
+      # - docker-client
+      # - docker-client-latest
+      # - docker-common
+      # - docker-latest
+      # - docker-latest-logrotate
+      # - docker-logrotate
+      # - docker-selinux
+      # - docker-engine-selinux
+      # - docker-engine
+      - podman
+      - podman-docker
 
 - name: Add Docker GPG key
   ansible.builtin.rpm_key:
