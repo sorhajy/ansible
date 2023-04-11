@@ -7,6 +7,7 @@
   vars:
     packages:
       - firefox
+      - chromium
       - gnome-boxes
       - gnome-tweaks
       - gnome-connections
@@ -15,6 +16,22 @@
       - gnome-shell-extension-gsconnect
       - wireshark
       - syncthing
+      - transmission
+      - keepassxc
+      #
+      - remmina
+      - remmina-plugins-rdp
+      - remmina-plugins-vnc
+      #
+      - libreoffice
+      #
+      - telegram-desktop
+      - thunderbird
+      #
+      - vlc
+      - HandBrake-gui
+      #
+      - pycharm-community
 
 # - name: Install KVM packages
 #   dnf:

@@ -4,14 +4,14 @@
   dnf:
     update_cache: yes
 
-- name: Remove usless system packages
-  dnf:
-    name: "{{ packages }}"
-    state: absent
-  vars:
-    packages:
-    - libreoffice
-    - libreoffice-*
+# - name: Remove usless system packages
+#   dnf:
+#     name: "{{ packages }}"
+#     state: absent
+#   vars:
+#     packages:
+#     - libreoffice
+#     - libreoffice-*
 
 - name: Install ansible-galaxy community.general collection
   become: true

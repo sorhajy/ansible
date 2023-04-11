@@ -10,10 +10,10 @@
 - name: Add Flathub repo
   command: "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
 
-- name: Install KeePassXC
-  flatpak:
-    name: org.keepassxc.KeePassXC
-    state: present
+# - name: Install KeePassXC
+#   flatpak:
+#     name: org.keepassxc.KeePassXC
+#     state: present
 # - name: Install Electrum
 #   flatpak:
 #     name: org.electrum.electrum
@@ -23,15 +23,15 @@
 #   flatpak:
 #     name: org.mozilla.firefox
 #     state: present
-- name: Install Chromium
-  flatpak:
-    name: org.chromium.Chromium
-    state: present
+# - name: Install Chromium
+#   flatpak:
+#     name: org.chromium.Chromium
+#     state: present
 
-- name: Install Remmina
-  flatpak:
-    name: org.remmina.Remmina
-    state: present
+# - name: Install Remmina
+#   flatpak:
+#     name: org.remmina.Remmina
+#     state: present
 - name: Install Anydesk
   flatpak:
     name: com.anydesk.Anydesk
@@ -65,15 +65,15 @@
   flatpak:
     name: org.apache.jmeter
     state: present
-- name: Install DejaDup
-  flatpak:
-    name: org.gnome.DejaDup
-    state: present
+# - name: Install DejaDup
+#   flatpak:
+#     name: org.gnome.DejaDup
+#     state: present
 
-- name: Install Telegram
-  flatpak:
-    name: org.telegram.desktop
-    state: present
+# - name: Install Telegram
+#   flatpak:
+#     name: org.telegram.desktop
+#     state: present
 # - name: Install Pidgin
 #   flatpak:
 #     name: im.pidgin.Pidgin
@@ -120,14 +120,14 @@
   flatpak:
     name: org.onlyoffice.desktopeditors
     state: present
-- name: Install LibreOffice
-  flatpak:
-    name: org.libreoffice.LibreOffice
-    state: present
-- name: Install Thunderbird
-  flatpak:
-    name: org.mozilla.Thunderbird
-    state: present
+# - name: Install LibreOffice
+#   flatpak:
+#     name: org.libreoffice.LibreOffice
+#     state: present
+# - name: Install Thunderbird
+#   flatpak:
+#     name: org.mozilla.Thunderbird
+#     state: present
 # - name: Install Gnome Calendar
 #   flatpak:
 #     name: org.gnome.Calendar
@@ -148,14 +148,14 @@
 #     state: present
 
 # Media
-- name: Install VLC
-  flatpak:
-    name: org.videolan.VLC
-    state: present
-- name: Install handBrake
-  flatpak:
-    name: fr.handbrake.ghb
-    state: present
+# - name: Install VLC
+#   flatpak:
+#     name: org.videolan.VLC
+#     state: present
+# - name: Install handBrake
+#   flatpak:
+#     name: fr.handbrake.ghb
+#     state: present
 # - name: Install Krita
 #   flatpak:
 #     name: org.kde.krita
@@ -213,10 +213,10 @@
 #     state: present
 
 # Files
-- name: Install Transmission
-  flatpak:
-    name: com.transmissionbt.Transmission
-    state: present
+# - name: Install Transmission
+#   flatpak:
+#     name: com.transmissionbt.Transmission
+#     state: present
 # - name: Install qBittorrent
 #   flatpak:
 #     name: org.qbittorrent.qBittorrent
