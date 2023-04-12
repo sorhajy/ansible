@@ -78,6 +78,9 @@
       - sushi
       - xrdp
       - imapsync
+      - borgbackup
+      - borgmatic
+      - duplicity
 
 - name: Install Databases
   dnf:
