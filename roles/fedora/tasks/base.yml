@@ -81,6 +81,7 @@
       - borgbackup
       - borgmatic
       - duplicity
+      - ssss
 
 - name: Install Databases
   dnf:
