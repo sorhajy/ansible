@@ -130,6 +130,7 @@
     - ufw
     - tor
     - xrdp
+    - supervisord
 
 - name: Configure disabled services
   service:
