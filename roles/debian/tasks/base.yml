@@ -207,7 +207,7 @@
     state: present
   vars:
     packages:
-      - qemu
+      # - qemu
       - qemu-kvm
       - libvirt-daemon
       - libvirt-clients
