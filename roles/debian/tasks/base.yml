@@ -112,7 +112,7 @@
   vars:
     packages:
       - hardinfo
-      - cpupower-gui
+      # - cpupower-gui
 
 - name: Install VPN & net-tools
   apt:
