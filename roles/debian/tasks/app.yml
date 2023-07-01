@@ -36,9 +36,9 @@
   vars:
     packages:
       - telegram-desktop
-      # - jami
+      - jami
       - syncthing
-      # - gparted
+      - gparted
       - wireshark
       - virt-manager
       - android-file-transfer
@@ -57,7 +57,7 @@
       - obs-studio
       - audacity
       - thunderbird
-      # - pidgin
+      - pidgin
       - libreoffice
       - libreoffice-plasma
       - onionshare
@@ -75,4 +75,4 @@
       - wine-binfmt
       - winetricks
       - playonlinux
-      # - steam
+      - steam
