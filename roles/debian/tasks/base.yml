@@ -88,6 +88,13 @@
       - firejail
       - ncdu
       - xrdp
+      - samba
+
+- name: Add the user samba groups
+  user:
+    name: "{{ os_user }}"
+    groups: sambashare
+    append: yes
 
 - name: Install filesystems packages
   apt:
@@ -112,6 +119,9 @@
   vars:
     packages:
       - hardinfo
+      - clinfo
+      - vulkan-tools
+      - wayland-utils
       # - cpupower-gui
 
 - name: Install VPN & net-tools
