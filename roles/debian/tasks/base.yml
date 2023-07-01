@@ -82,7 +82,7 @@
       - rsync
       - speedtest-cli
       - smartmontools
-      - netcat
+      - netcat-openbsd
       - hashcat
       - nmap
       - firejail
