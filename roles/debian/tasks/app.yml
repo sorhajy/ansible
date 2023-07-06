@@ -5,6 +5,8 @@
     state: present
   vars:
     packages:
+      - kde-plasma-desktop
+      - kdeadmin
       - kdenetwork
       - kdegraphics
       - kdepim
