@@ -55,14 +55,14 @@
     repo: "deb http://repo.yandex.ru/yandex-disk/deb/ stable main"
     state: present
 
-- name: Add DBeaver GPG key
-  apt_key:
-    url: "https://dbeaver.io/debs/dbeaver.gpg.key"
-    state: present
-- name: Add DBeaver repo
-  apt_repository:
-    repo: "deb https://dbeaver.io/debs/dbeaver-ce /"
-    state: present
+# - name: Add DBeaver GPG key
+#   apt_key:
+#     url: "https://dbeaver.io/debs/dbeaver.gpg.key"
+#     state: present
+# - name: Add DBeaver repo
+#   apt_repository:
+#     repo: "deb https://dbeaver.io/debs/dbeaver-ce /"
+#     state: present
 
 # - name: Add yggdrasil GPG key
 #   apt_key:
@@ -106,7 +106,7 @@
     packages:
       # - yggdrasil
       - code
-      - dbeaver-ce
+      # - dbeaver-ce
       - yandex-browser-stable
       - yandex-disk
       # - virtualbox-7.0
