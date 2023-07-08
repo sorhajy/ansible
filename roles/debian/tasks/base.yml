@@ -1,5 +1,33 @@
 ---
 
+- name: Install base packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - amd64-microcode
+      - apt-transport-https
+      - build-essential
+      - ca-certificates
+      - default-jdk
+      - default-jdk-headless
+      - default-jre
+      - default-jre-headless
+      - firmware-amd-graphics
+      - firmware-misc-nonfree
+      - linux-headers-amd64
+      - locales-all
+      - locate
+      - gnupg-agent
+      - mesa-utils
+      - mesa-utils-extra
+      - mesa-va-drivers
+      - mesa-vdpau-drivers
+      - mesa-vulkan-drivers
+      - software-properties-common
+      - xserver-xorg-video-all
+
 - name: Install system packages and DevTools
   apt:
     name: "{{ packages }}"
@@ -7,13 +35,11 @@
   vars:
     packages:
       - adb
-      - amd64-microcode
       - android-sdk
       - ansible
       - apkinfo
       - apktool
       - apt-mirror
-      - apt-transport-https
       - aria2
       - arj
       - arp-scan
@@ -25,32 +51,23 @@
       - bluez-firmware
       - bluez-tools
       - borgbackup
-      - build-essential
       - bzip2
-      - ca-certificates
       - clang
       - clinfo
       - cmake
       - composer
       - curl
-      - default-jdk
-      - default-jdk-headless
-      - default-jre
-      - default-jre-headless
       - dirmngr
-      - docker-compose
       - docker.io
+      - docker-compose
       - duplicity
       - exif
       - fail2ban
       - fastboot
       - firejail
-      - firmware-amd-graphics
-      - firmware-misc-nonfree
       - gcc
       - git
       - git-lfs
-      - gnupg-agent
       - golang
       - hardinfo
       - hashcat
@@ -81,21 +98,12 @@
       - libssl-dev
       - libxml2
       - libxml2-dev
-      - linux-headers-amd64
-      - locales-all
-      - locate
       - luarocks
       - lz4
       - lzip
       - lzma
       - make
       - mat2
-      - mesa-utils
-      - mesa-utils-extra
-      - mesa-va-drivers
-      - mesa-vdpau-drivers
-      - mesa-vulkan-drivers
-      - mesa-vulkan-drivers:i386
       - mypy
       - ncdu
       - net-tools
@@ -134,7 +142,6 @@
       - shadowsocks-libev
       - smartmontools
       - snapd
-      - software-properties-common
       - speedtest-cli
       - ssh
       - ssss
@@ -154,7 +161,6 @@
       - wireguard
       - wireguard-tools
       - xrdp
-      - xserver-xorg-video-all
       - xz-utils
       - yggdrasil
       - youtube-dl
