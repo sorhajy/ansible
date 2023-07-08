@@ -64,15 +64,6 @@
 #     repo: "deb https://dbeaver.io/debs/dbeaver-ce /"
 #     state: present
 
-# - name: Add yggdrasil GPG key
-#   apt_key:
-#     url: "https://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/key.txt"
-#     state: present
-# - name: Add yggdrasil repo
-#   apt_repository:
-#     repo: "deb http://neilalexander.s3.dualstack.eu-west-2.amazonaws.com/deb/ debian yggdrasil"
-#     state: present
-
 - name: Update cache after update repo
   apt:
     update_cache: yes
@@ -104,7 +95,6 @@
     state: present
   vars:
     packages:
-      # - yggdrasil
       - code
       # - dbeaver-ce
       - yandex-browser-stable
@@ -116,12 +106,3 @@
 #     name: "{{ os_user }}"
 #     groups: vboxusers
 #     append: yes
-
-# - name: Create yggdrasil config file
-#   become: true
-#   shell: yggdrasil -genconf > /etc/yggdrasil.conf
-# - name: Enable autoload & start yggdrasil service
-#   service:
-#     name: yggdrasil
-#     state: started
-#     enabled: yes

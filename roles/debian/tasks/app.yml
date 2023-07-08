@@ -5,31 +5,23 @@
     state: present
   vars:
     packages:
+      - falkon
+      - kbackup
       - kde-plasma-desktop
       - kdeadmin
-      - kdenetwork
       - kdegraphics
-      - kdepim
-      - kdeutils
-      - kdesdk
       - kdemultimedia
-      - yakuake
-      # - gwenview
-      # - okular
-      # - kwrite
-      - ktorrent
-      # - kget
-      # - falkon
-      # - ark
-      # - okteta
-      # - kontact
+      - kdenetwork
+      - kdenlive
+      - kdepim
+      - kdesdk
+      - kdeutils
+      - kdevelop
+      - kdiff3
       - konversation
       - krusader
-      # - kdiff3
-      # - kdevelop
-      # - kcalc
-      - kbackup
-      # - kdenlive
+      - ktorrent
+      - yakuake
 
 - name: Install base Apps
   apt:
@@ -37,33 +29,29 @@
     state: present
   vars:
     packages:
-      - telegram-desktop
-      - jami
-      - syncthing
-      - gparted
-      - wireshark
-      - virt-manager
       - android-file-transfer
-      - keepassxc
-      # - remmina
-      # - remmina-plugin-rdp
-      # - remmina-plugin-vnc
-      # - electrum
-      - firefox-esr
-      - chromium
-      - vlc
-      - handbrake
-      # - krita
-      - gimp
-      - inkscape
-      - obs-studio
       - audacity
-      - thunderbird
-      - pidgin
+      - chromium
+      - firefox-esr
+      - gimp
+      - gparted
+      - handbrake
+      - inkscape
+      - jami
+      - jmeter
+      - keepassxc
+      - krita
       - libreoffice
       - libreoffice-plasma
+      - obs-studio
       - onionshare
-      - jmeter
+      - pidgin
+      - syncthing
+      - telegram-desktop
+      - thunderbird
+      - virt-manager
+      - vlc
+      - wireshark
 
 - name: Install Win compatibility tools
   apt:
@@ -71,10 +59,10 @@
     state: present
   vars:
     packages:
-      - wine
-      - wine64
-      - wine64-tools
-      - wine-binfmt
-      - winetricks
       - playonlinux
       - steam
+      - wine
+      - wine-binfmt
+      - wine64
+      - wine64-tools
+      - winetricks
