@@ -114,6 +114,9 @@
       # - zfs-dkms
       # - zfs-zed
       - zfs-fuse
+      - gocryptfs
+      - cryfs
+      - s3fs
 
 - name: Install monitor packages
   apt:
