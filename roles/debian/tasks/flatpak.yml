@@ -106,10 +106,10 @@
   flatpak:
     name: org.jitsi.jitsi-meet
     state: present
-# - name: Install Discord
-#   flatpak:
-#     name: com.discordapp.Discord
-#     state: present
+- name: Install Discord
+  flatpak:
+    name: com.discordapp.Discord
+    state: present
 
 # Office
 - name: Install OnlyOffice
@@ -179,10 +179,10 @@
 
 
 # Custom
-# - name: Install GTK Stress Testing
-#   flatpak:
-#     name: com.leinardi.gst
-#     state: present
+- name: Install GTK Stress Testing
+  flatpak:
+    name: com.leinardi.gst
+    state: present
 # - name: Install Gnome passwords
 #   flatpak:
 #     name: org.gnome.PasswordSafe
