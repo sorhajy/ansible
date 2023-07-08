@@ -110,10 +110,10 @@
       - hfsprogs
       - hfsutils
       - cifs-utils
-      - zfsutils-linux
-      - zfs-dkms
-      - zfs-zed
-      # - zfs-fuse
+      # - zfsutils-linux
+      # - zfs-dkms
+      # - zfs-zed
+      - zfs-fuse
 
 - name: Install monitor packages
   apt:
