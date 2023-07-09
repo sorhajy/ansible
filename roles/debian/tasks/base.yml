@@ -145,6 +145,7 @@
       - speedtest-cli
       - ssh
       - ssss
+      - supervisor
       - telnet
       - tor
       - tree
@@ -360,6 +361,7 @@
   - i2pd
   - xrdp
   - yggdrasil
+  - supervisor
 
 - name: Configure disabled services
   service:
@@ -425,10 +427,24 @@
   become_user: "{{ os_user }}"
   command: "curl -s -fLo /home/{{ os_user }}/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 
-- name: Config vimrc
+- name: Configure vimrc
   template:
     src: vimrc.j2
     dest: "/home/{{ os_user }}/.vimrc"
     owner: "{{ os_user }}"
     group: "{{ os_user }}"
     mode: '0640'
+
+- name: Configure syncthing
+  become: true
+  template:
+    src: syncthing.conf.j2
+    dest: "/etc/supervisor/conf.d/syncthing.conf"
+    owner: "root"
+    group: "root"
+    mode: '0644'
+- name: Restart supervisor
+  service:
+    name: "supervisor"
+    state: restarted
+    enabled: true
