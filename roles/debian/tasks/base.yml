@@ -381,11 +381,14 @@
     mode: '0444'
 
 - name: Check root SSH dir
+  become: true
   file: 
     path: "/root/.ssh"
     state: directory
 
 - name: Check SSH dir
+  become: true
+  become_user: "{{ os_user }}"
   file: 
     path: "/home/{{ os_user }}/.ssh"
     state: directory
