@@ -6,13 +6,3 @@
     hour: 4
     user: root
     job: "docker system prune -f"
-
-- name: Creates a cron task for certbot renew certs
-  cron:
-    name: renew certs
-    state: present
-    minute: 1
-    hour: 1
-    weekday: 1
-    user: root
-    job: 'certbot renew --non-interactive --quiet --agree-tos --email admin@itmegastarc.om --no-eff-email --post-hook "nginx -s reload"'

@@ -41,6 +41,7 @@
       - snapd
       - mc
       - bash-completion
+      - traceroute
 
 # - name: Enable autoload & start zram service
 #   become: true

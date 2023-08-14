@@ -166,34 +166,34 @@
 
 
 
-- name: Add ClickHouse GPG key
-  become: true
-  apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: E0C56BD4
-- name: Add ClickHouse repo
-  become: true
-  apt_repository:
-    repo: "deb http://repo.yandex.ru/clickhouse/deb/stable/ main/"
-    state: present
-- name: Install ClickHouse
-  become: true
-  apt: 
-    name: "{{ packages }}"
-    state: present
-    update_cache: true
-  vars:
-    packages:
-      - clickhouse-server
-      - clickhouse-client
-- name: Configure ClickHouse user
-  become: true
-  template:
-    src: roles/server-ubuntu/templates/clickhouse_user.xml.j2
-    dest: /etc/clickhouse-server/users.d/{{ clickhouse_user }}.xml
-- name: Disable autoload & stop ClickHouse service
-  become: true
-  service:
-    name: clickhouse-server
-    state: stopped
-    enabled: false
+# - name: Add ClickHouse GPG key
+#   become: true
+#   apt_key:
+#     keyserver: keyserver.ubuntu.com
+#     id: E0C56BD4
+# - name: Add ClickHouse repo
+#   become: true
+#   apt_repository:
+#     repo: "deb http://repo.yandex.ru/clickhouse/deb/stable/ main/"
+#     state: present
+# - name: Install ClickHouse
+#   become: true
+#   apt: 
+#     name: "{{ packages }}"
+#     state: present
+#     update_cache: true
+#   vars:
+#     packages:
+#       - clickhouse-server
+#       - clickhouse-client
+# - name: Configure ClickHouse user
+#   become: true
+#   template:
+#     src: roles/server-ubuntu/templates/clickhouse_user.xml.j2
+#     dest: /etc/clickhouse-server/users.d/{{ clickhouse_user }}.xml
+# - name: Disable autoload & stop ClickHouse service
+#   become: true
+#   service:
+#     name: clickhouse-server
+#     state: stopped
+#     enabled: false

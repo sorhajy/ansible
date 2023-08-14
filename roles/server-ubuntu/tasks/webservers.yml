@@ -37,3 +37,13 @@
     path: "/var/www/letsencrypt"
     state: directory
     mode: "0777"
+
+- name: Creates a cron task for certbot renew certs
+  cron:
+    name: renew certs
+    state: present
+    minute: 0
+    hour: 0
+    weekday: 1
+    user: root
+    job: 'certbot renew --non-interactive --quiet --agree-tos --register-unsafely-without-email --no-eff-email --post-hook "nginx -s reload"'
