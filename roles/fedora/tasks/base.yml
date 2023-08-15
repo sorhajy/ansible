@@ -263,6 +263,7 @@
     mode: '0444'
 
 - name: Install OhMyZsh
+  ignore_errors: true
   become: true
   become_user: "{{ os_user }}"
   shell: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
