@@ -82,6 +82,7 @@
       - borgmatic
       - duplicity
       - ssss
+      - corectrl
 
 - name: Install Databases
   dnf:
