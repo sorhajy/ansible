@@ -18,6 +18,10 @@
       - syncthing
       - transmission
       - keepassxc
+      - gimp
+      - audacity
+      - obs-studio
+      - kdenlive
       #
       - remmina
       - remmina-plugins-rdp
@@ -27,6 +31,7 @@
       #
       - telegram-desktop
       - thunderbird
+      - pidgin
       #
       - vlc
       - HandBrake-gui
