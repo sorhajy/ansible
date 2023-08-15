@@ -31,7 +31,7 @@
       - vlc
       - HandBrake-gui
       #
-      - pycharm-community
+      # - pycharm-community
 
 - name: Install KVM packages
   dnf:
