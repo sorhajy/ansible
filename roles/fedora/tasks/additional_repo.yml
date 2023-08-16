@@ -38,6 +38,19 @@
     group: root
     mode: '0644'
 
+# - name: Add AnyDesk GPG key
+#   ansible.builtin.rpm_key:
+#     state: present
+#     key: https://keys.anydesk.com/repos/RPM-GPG-KEY
+# - name: Configure AnyDesk repo
+#   become: true
+#   template:
+#     src: AnyDesk-fedora.repo.j2
+#     dest: "/etc/yum.repos.d/AnyDesk-Fedora.repo"
+#     owner: "root"
+#     group: "root"
+#     mode: '0644'
+
 - name: Add Yandex browser GPG key
   ansible.builtin.rpm_key:
     state: present
