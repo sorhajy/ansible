@@ -36,7 +36,7 @@
 
 - name: Write swap entry in fstab
   become: true
-  mount: name=swapfile src=/swapfile fstype=swap opts=sw passno=0 dump=0 state=present
+  mount: name=swap src=/swapfile fstype=swap opts=sw,nofail passno=0 dump=0 state=present
   when:  (swapfile_resize == "true") or (swapfile.stat.isreg is undefined) or (not swapfile.stat.isreg)
 
 - name: Enable swapfile

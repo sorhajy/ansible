@@ -23,16 +23,69 @@
       - docker-buildx-plugin
       - docker-compose-plugin
 
-- name: Disable & stop Docker service
+- name: Enable & start Docker service
   become: true
   service:
     name: docker
     state: started
     enabled: true
 
+- name: Create non-privileged docker user
+  become: true
+  user:
+    name: "{{ docker_user }}"
+    password_lock: yes
+    state: present
+    shell: /bin/bash
+    system: no
+    createhome: yes
+    home: "/home/{{ docker_user }}"
+
+- name: Check user SSH dir
+  become: true
+  file: 
+    path: "/home/{{ docker_user }}/.ssh"
+    state: directory
+    owner: "{{ docker_user }}"
+    group: "{{ docker_user }}"
+    mode: "0775"
+
+- name: Inspect user authorized_keys
+  become: true
+  file:
+    path: "/home/{{ docker_user}}/.ssh/authorized_keys"
+    state: touch
+    force: no
+    owner: "{{ docker_user }}"
+    group: "{{ docker_user }}"
+    mode: "0664"
+
+- name: Inspect user ssh-config
+  become: true
+  file:
+    path: "/home/{{ docker_user}}/.ssh/config"
+    state: touch
+    force: no
+    owner: "{{ docker_user }}"
+    group: "{{ docker_user }}"
+    mode: "0664"
+
+- name: Inspect user SSH key
+  become: true
+  openssh_keypair:
+    path: "/home/{{ docker_user }}/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    state: present
+    force: no
+    owner: "{{ docker_user }}"
+    group: "{{ docker_user }}"
+    mode: "0600"
+
+
 - name: Add the user Docker groups
   become: true
   user:
-    name: "{{ server_user }}"
+    name: "{{ docker_user }}"
     groups: docker
     append: yes

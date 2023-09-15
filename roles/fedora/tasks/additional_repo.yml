@@ -26,17 +26,17 @@
     group: root
     mode: '0644'
 
-- name: Add Virtualbox GPG key
-  ansible.builtin.rpm_key:
-    state: present
-    key: https://www.virtualbox.org/download/oracle_vbox.asc
-- name: Add Virtualbox repo
-  template:
-    src: virtualbox.repo.j2
-    dest: "/etc/yum.repos.d/virtualbox.repo"
-    owner: root
-    group: root
-    mode: '0644'
+# - name: Add Virtualbox GPG key
+#   ansible.builtin.rpm_key:
+#     state: present
+#     key: https://www.virtualbox.org/download/oracle_vbox.asc
+# - name: Add Virtualbox repo
+#   template:
+#     src: virtualbox.repo.j2
+#     dest: "/etc/yum.repos.d/virtualbox.repo"
+#     owner: root
+#     group: root
+#     mode: '0644'
 
 # - name: Add AnyDesk GPG key
 #   ansible.builtin.rpm_key:
@@ -75,15 +75,15 @@
     group: root
     mode: '0644'
 
-- name: Add i2pd repo
-  community.general.copr:
-    state: enabled
-    name: 'supervillain/i2pd'
+# - name: Add i2pd repo
+#   community.general.copr:
+#     state: enabled
+#     name: 'supervillain/i2pd'
 
-- name: Add yggdrasil repo
-  community.general.copr:
-    state: enabled
-    name: 'neilalexander/yggdrasil-go'
+# - name: Add yggdrasil repo
+#   community.general.copr:
+#     state: enabled
+#     name: 'neilalexander/yggdrasil-go'
 
 - name: Update dnf cache
   dnf:
@@ -98,31 +98,31 @@
       - code
       - yandex-browser-stable
       - yandex-disk
-      - VirtualBox
-      # - kmod-VirtualBox
-      - akmod-VirtualBox
-      - virtualbox-guest-additions
-      - i2pd
-      - yggdrasil
+      # - VirtualBox
+      # # - kmod-VirtualBox
+      # - akmod-VirtualBox
+      # - virtualbox-guest-additions
+      # - i2pd
+      # - yggdrasil
 
-- name: Create yggdrasil config file
-  become: true
-  shell: yggdrasil -genconf > /etc/yggdrasil.conf
+# - name: Create yggdrasil config file
+#   become: true
+#   shell: yggdrasil -genconf > /etc/yggdrasil.conf
 
-- name: Configure enabled services
-  service:
-    name: "{{ item }}"
-    state: started
-    enabled: true
-  with_items:
-    - i2pd
-- name: Configure disabled services
-  service:
-    name: "{{ item }}"
-    state: stopped
-    enabled: false
-  with_items:
-    - yggdrasil
+# - name: Configure enabled services
+#   service:
+#     name: "{{ item }}"
+#     state: started
+#     enabled: true
+#   with_items:
+#     - i2pd
+# - name: Configure disabled services
+#   service:
+#     name: "{{ item }}"
+#     state: stopped
+#     enabled: false
+#   with_items:
+#     - yggdrasil
 
 - name: Add the user VirtualBox groups
   user:

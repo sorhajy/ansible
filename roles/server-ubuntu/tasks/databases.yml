@@ -197,3 +197,56 @@
 #     name: clickhouse-server
 #     state: stopped
 #     enabled: false
+
+
+- name: Create non-privileged database user
+  become: true
+  user:
+    name: "{{ database_user }}"
+    password_lock: yes
+    state: present
+    shell: /bin/bash
+    system: no
+    createhome: yes
+    home: "/home/{{ database_user }}"
+
+- name: Check user SSH dir
+  become: true
+  file: 
+    path: "/home/{{ database_user }}/.ssh"
+    state: directory
+    owner: "{{ database_user }}"
+    group: "{{ database_user }}"
+    mode: "0775"
+
+- name: Inspect user authorized_keys
+  become: true
+  file:
+    path: "/home/{{ database_user}}/.ssh/authorized_keys"
+    state: touch
+    force: no
+    owner: "{{ database_user }}"
+    group: "{{ database_user }}"
+    mode: "0664"
+
+- name: Inspect user ssh-config
+  become: true
+  file:
+    path: "/home/{{ database_user}}/.ssh/config"
+    state: touch
+    force: no
+    owner: "{{ database_user }}"
+    group: "{{ database_user }}"
+    mode: "0664"
+
+- name: Inspect user SSH key
+  become: true
+  openssh_keypair:
+    path: "/home/{{ database_user }}/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    state: present
+    force: no
+    owner: "{{ database_user }}"
+    group: "{{ database_user }}"
+    mode: "0600"
