@@ -88,6 +88,8 @@
       - nodejs-npm
       - composer
       - samba
+      - libgda
+      - libgda-sqlite
 
 - name: Install Databases
   dnf:
