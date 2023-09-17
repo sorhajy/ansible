@@ -5,3 +5,9 @@ https://extensions.gnome.org/extension/1065/docker-status/
 https://extensions.gnome.org/extension/8/places-status-indicator/
 https://extensions.gnome.org/extension/7/removable-drive-menu/
 https://extensions.gnome.org/extension/779/clipboard-indicator/
+https://extensions.gnome.org/extension/5278/pano/
+https://extensions.gnome.org/extension/4481/forge/
+https://extensions.gnome.org/extension/1460/vitals/
+https://extensions.gnome.org/extension/5219/tophat/
+
+https://extensions.gnome.org/extension/5489/search-light/

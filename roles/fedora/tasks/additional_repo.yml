@@ -51,29 +51,29 @@
 #     group: "root"
 #     mode: '0644'
 
-- name: Add Yandex browser GPG key
-  ansible.builtin.rpm_key:
-    state: present
-    key: https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG
-- name: Add Yandex browser repo
-  template:
-    src: yandex-browser.repo.j2
-    dest: "/etc/yum.repos.d/yandex-browser.repo"
-    owner: root
-    group: root
-    mode: '0644'
+# - name: Add Yandex browser GPG key
+#   ansible.builtin.rpm_key:
+#     state: present
+#     key: https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG
+# - name: Add Yandex browser repo
+#   template:
+#     src: yandex-browser.repo.j2
+#     dest: "/etc/yum.repos.d/yandex-browser.repo"
+#     owner: root
+#     group: root
+#     mode: '0644'
 
-- name: Add Yandex Disk GPG key
-  ansible.builtin.rpm_key:
-    state: present
-    key: https://repo.yandex.ru/yandex-disk/YANDEX-DISK-KEY.GPG
-- name: Add Yandex Disk repo
-  template:
-    src: yandex-disk.repo.j2
-    dest: "/etc/yum.repos.d/yandex-disk.repo"
-    owner: root
-    group: root
-    mode: '0644'
+# - name: Add Yandex Disk GPG key
+#   ansible.builtin.rpm_key:
+#     state: present
+#     key: https://repo.yandex.ru/yandex-disk/YANDEX-DISK-KEY.GPG
+# - name: Add Yandex Disk repo
+#   template:
+#     src: yandex-disk.repo.j2
+#     dest: "/etc/yum.repos.d/yandex-disk.repo"
+#     owner: root
+#     group: root
+#     mode: '0644'
 
 # - name: Add i2pd repo
 #   community.general.copr:
@@ -96,8 +96,8 @@
   vars:
     packages:
       - code
-      - yandex-browser-stable
-      - yandex-disk
+      # - yandex-browser-stable
+      # - yandex-disk
       # - VirtualBox
       # # - kmod-VirtualBox
       # - akmod-VirtualBox
@@ -124,8 +124,8 @@
 #   with_items:
 #     - yggdrasil
 
-- name: Add the user VirtualBox groups
-  user:
-    name: "{{ os_user }}"
-    groups: vboxusers
-    append: yes
+# - name: Add the user VirtualBox groups
+#   user:
+#     name: "{{ os_user }}"
+#     groups: vboxusers
+#     append: yes

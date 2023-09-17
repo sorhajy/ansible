@@ -7,7 +7,10 @@
   vars:
     packages:
       - firefox
+      # - firefox-wayland
       - chromium
+      # - fedora-chromium-config-gnome
+      # - fedora-chromium-config-gssapi
       - gnome-boxes
       - gnome-tweaks
       - gnome-connections
@@ -19,6 +22,8 @@
       - transmission
       - keepassxc
       - gimp
+      - krita
+      - inkscape
       - audacity
       - obs-studio
       - kdenlive
@@ -29,14 +34,28 @@
       #
       - libreoffice
       #
-      - telegram-desktop
       - thunderbird
+      - telegram-desktop
       - pidgin
+      - discord
       #
       - vlc
       - HandBrake-gui
       #
       # - pycharm-community
+
+- name: Configure syncthing for User
+  template:
+    src: syncthing.ini.j2
+    dest: "/etc/supervisord.d/syncthing.ini"
+    owner: "{{ os_user }}"
+    group: "{{ os_user }}"
+    mode: '0644'
+- name: Restart supervisord service
+  service:
+    name: "supervisord"
+    state: restarted
+    enabled: true
 
 - name: Install KVM packages
   dnf:
