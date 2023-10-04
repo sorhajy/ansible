@@ -4,29 +4,29 @@
   command: "lsb_release -cs"
   register: lsb_release
 
-# - name: Add Docker GPG key
-#   apt_key:
-#     url: "https://download.docker.com/linux/debian/gpg"
-#     state: present
-# - name: Add Docker repo
-#   apt_repository:
-#     repo: "deb https://download.docker.com/linux/debian {{ lsb_release.stdout }} stable"
-#     filename: docker
-#     state: present
+- name: Add Docker GPG key
+  apt_key:
+    url: "https://download.docker.com/linux/debian/gpg"
+    state: present
+- name: Add Docker repo
+  apt_repository:
+    repo: "deb https://download.docker.com/linux/debian {{ lsb_release.stdout }} stable"
+    filename: docker
+    state: present
 
-# - name: Add VirtualBox 2016 GPG key
-#   apt_key:
-#     url: "https://www.virtualbox.org/download/oracle_vbox_2016.asc"
-#     state: present
-# - name: Add VirtualBox GPG key
-#   apt_key:
-#     url: "https://www.virtualbox.org/download/oracle_vbox.asc"
-#     state: present
-# - name: Add VirtualBox repo
-#   apt_repository:
-#     repo: "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian {{ lsb_release.stdout }} contrib"
-#     filename: virtualbox
-#     state: present
+- name: Add VirtualBox 2016 GPG key
+  apt_key:
+    url: "https://www.virtualbox.org/download/oracle_vbox_2016.asc"
+    state: present
+- name: Add VirtualBox GPG key
+  apt_key:
+    url: "https://www.virtualbox.org/download/oracle_vbox.asc"
+    state: present
+- name: Add VirtualBox repo
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian {{ lsb_release.stdout }} contrib"
+    filename: virtualbox
+    state: present
 
 - name: Add VScode GPG key
   apt_key:
@@ -37,23 +37,23 @@
     repo: "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
     state: present
 
-- name: Add Yandex browser GPG key
-  apt_key:
-    state: present
-    url: "https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG"
-- name: Add Yandex browser repo
-  apt_repository:
-    repo: "deb [arch=amd64] http://repo.yandex.ru/yandex-browser/deb stable main"
-    state: present
+# - name: Add Yandex browser GPG key
+#   apt_key:
+#     state: present
+#     url: "https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG"
+# - name: Add Yandex browser repo
+#   apt_repository:
+#     repo: "deb [arch=amd64] http://repo.yandex.ru/yandex-browser/deb stable main"
+#     state: present
 
-- name: Add Yandex disk GPG key
-  apt_key:
-    state: present
-    url: "http://repo.yandex.ru/yandex-disk/YANDEX-DISK-KEY.GPG"
-- name: Add Yandex disk repo
-  apt_repository:
-    repo: "deb http://repo.yandex.ru/yandex-disk/deb/ stable main"
-    state: present
+# - name: Add Yandex disk GPG key
+#   apt_key:
+#     state: present
+#     url: "http://repo.yandex.ru/yandex-disk/YANDEX-DISK-KEY.GPG"
+# - name: Add Yandex disk repo
+#   apt_repository:
+#     repo: "deb http://repo.yandex.ru/yandex-disk/deb/ stable main"
+#     state: present
 
 # - name: Add DBeaver GPG key
 #   apt_key:
@@ -68,26 +68,26 @@
   apt:
     update_cache: yes
 
-# - name: Install Docker packages
-#   apt:
-#     name: "{{ packages }}"
-#     state: present
-#   vars:
-#     packages:
-#       - docker-ce
-#       - docker-ce-cli
-#       - containerd.io
-#       - docker-compose-plugin
-# - name: Enable Docker service
-#   service:
-#     name: docker
-#     state: started
-#     enabled: yes
-# - name: Add the user Docker groups
-#   user:
-#     name: "{{ os_user }}"
-#     groups: docker
-#     append: yes
+- name: Install Docker packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose-plugin
+- name: Enable Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+- name: Add the user Docker groups
+  user:
+    name: "{{ os_user }}"
+    groups: docker
+    append: yes
 
 - name: Install additional repo Apps
   apt:
@@ -97,12 +97,12 @@
     packages:
       - code
       # - dbeaver-ce
-      - yandex-browser-stable
-      - yandex-disk
-      # - virtualbox-7.0
+      # - yandex-browser-stable
+      # - yandex-disk
+      - virtualbox-7.0
 
-# - name: Add the user VirtualBox groups
-#   user:
-#     name: "{{ os_user }}"
-#     groups: vboxusers
-#     append: yes
+- name: Add the user VirtualBox groups
+  user:
+    name: "{{ os_user }}"
+    groups: vboxusers
+    append: yes

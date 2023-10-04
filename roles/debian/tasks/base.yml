@@ -6,80 +6,72 @@
     state: present
   vars:
     packages:
-      - amd64-microcode
+      - acl
       - apt-transport-https
       - build-essential
       - ca-certificates
-      - default-jdk
-      - default-jdk-headless
-      - default-jre
-      - default-jre-headless
-      - firmware-amd-graphics
-      - firmware-misc-nonfree
-      - linux-headers-amd64
+      - dirmngr
+      - gnupg-agent
       - locales-all
       - locate
-      - gnupg-agent
-      - mesa-utils
-      - mesa-utils-extra
-      - mesa-va-drivers
-      - mesa-vdpau-drivers
-      - mesa-vulkan-drivers
+      - openssh-client
+      - openssh-server
       - software-properties-common
-      - xserver-xorg-video-all
+      - ssh
 
-- name: Install system packages and DevTools
+- name: Install shell packages
   apt:
     name: "{{ packages }}"
     state: present
   vars:
     packages:
-      - adb
-      - android-sdk
-      - ansible
-      - apkinfo
-      - apktool
-      - apt-mirror
-      - aria2
-      - arj
-      - arp-scan
-      - autossh
       - bash
       - bash-completion
-      - black
+      - zsh
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
+
+- name: Install drivers and video packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - amd64-microcode
       - bluez
       - bluez-firmware
       - bluez-tools
-      - borgbackup
-      - bzip2
-      - clang
       - clinfo
-      - cmake
-      - composer
-      - curl
-      - dirmngr
-      - docker.io
-      - docker-compose
-      - duplicity
-      - exif
-      - fail2ban
-      - fastboot
-      - firejail
-      - gcc
-      - git
-      - git-lfs
-      - golang
-      - hardinfo
-      - hashcat
-      - hdparm
-      - htop
-      - i2pd
-      - iotop
-      - iperf
-      - iperf3
-      - jo
-      - jq
-      - ldap-utils
+      - firmware-amd-graphics
+      - firmware-misc-nonfree
+      - linux-headers-amd64
+      - mesa-utils
+      - mesa-utils-extra
+      - mesa-va-drivers
+      - mesa-vdpau-drivers
+      - mesa-vulkan-drivers
+      - pulseaudio-module-bluetooth
+      - vulkan-tools
+      - wayland-utils
+      - xserver-xorg-video-all
+
+- name: Install JDK packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - default-jdk
+      - default-jdk-headless
+      - default-jre
+      - default-jre-headless
+
+- name: Install system libs
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
       - libblkid-dev
       - libbz2-dev
       - libffi-dev
@@ -98,79 +90,131 @@
       - libssl-dev
       - libxml2
       - libxml2-dev
+      - zlib1g-dev
+
+- name: Install DevTools
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - black
+      - cargo
+      - clang
+      - cmake
+      - composer
+      - gcc
+      - git
+      - git-lfs
+      - golang
+      - jo
+      - jq
+      - ldap-utils
       - luarocks
+      - make
+      - mypy
+      - nodejs
+      - npm
+      - pipenv
+      - python3
+      - python3-dev
+      - python3-pip
+      - ruby-dev
+      - rust-gdb
+      - rust-lldb
+      - rust-src
+      - rustc
+      - virtualenv
+
+- name: Install system packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - apt-mirror
+      - aria2
+      - arp-scan
+      - autossh
+      - borgbackup
+      - curl
+      - duplicity
+      - exif
+      - fail2ban
+      - firejail
+      - hardinfo
+      - hdparm
+      - htop
+      - iotop
+      - mat2
+      - ncdu
+      - ninja-build
+      - nmap
+      - php
+      - pv
+      - qrencode
+      - rclone
+      - rsync
+      - s3cmd
+      - samba
+      - screen
+      - smartmontools
+      - snapd
+      - speedtest-cli
+      - ssss
+      - supervisor
+      - telnet
+      - tree
+      - unace
+      - vim
+      - watch
+      - wget
+      - xrdp
+      - youtube-dl
+      # - docker-compose
+      # - docker.io
+
+- name: Install archive and compression packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - arj
+      - bzip2
       - lz4
       - lzip
       - lzma
-      - make
-      - mat2
-      - mypy
-      - ncdu
+      - unrar
+      - xz-utils
+      - zram-tools
+      - zstd
+
+- name: Install network packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - hashcat
+      - i2pd
+      - iperf
+      - iperf3
       - net-tools
       - netcat-openbsd
       - network-manager-l2tp
       - network-manager-l2tp-gnome
       - network-manager-openconnect-gnome
       - network-manager-openvpn-gnome
-      - ninja-build
-      - nmap
-      - nodejs
-      - npm
       - openconnect
-      - openssh-client
-      - openssh-server
       - openvpn
-      - php
-      - pipenv
       - proxychains4
-      - pulseaudio-module-bluetooth
-      - pv
-      - python3
-      - python3-dev
-      - python3-pip
-      - qrencode
-      - rclone
-      - rsync
-      - ruby-dev
-      - rust-gdb
-      - rust-lldb
-      - rust-src
-      - rustc
-      - s3cmd
-      - samba
-      - screen
       - shadowsocks-libev
-      - smartmontools
-      - snapd
-      - speedtest-cli
-      - ssh
-      - ssss
-      - supervisor
-      - telnet
       - tor
-      - tree
       - ufw
-      - unace
-      - unrar
-      - vim
-      - virtualenv
-      - vulkan-tools
-      - watch
-      - watch
-      - wayland-utils
-      - wget
       - wireguard
       - wireguard-tools
-      - xrdp
-      - xz-utils
       - yggdrasil
-      - youtube-dl
-      - zlib1g-dev
-      - zram-tools
-      - zsh
-      - zsh-autosuggestions
-      - zsh-syntax-highlighting
-      - zstd
 
 - name: Add the user samba groups
   user:
@@ -196,6 +240,18 @@
       - s3fs
       - sshfs
       - zfs-fuse
+
+- name: Install Andorid packages and DevTools
+  apt:
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - adb
+      - android-sdk
+      - apkinfo
+      - apktool
+      - fastboot
 
 - name: Install Nginx
   apt: 
@@ -223,16 +279,16 @@
     state: stopped
     enabled: no
 
-- name: Enable Docker service
-  service:
-    name: docker
-    state: started
-    enabled: yes
-- name: Add the user Docker groups
-  user:
-    name: "{{ os_user }}"
-    groups: docker
-    append: yes
+# - name: Enable Docker service
+#   service:
+#     name: docker
+#     state: started
+#     enabled: yes
+# - name: Add the user Docker groups
+#   user:
+#     name: "{{ os_user }}"
+#     groups: docker
+#     append: yes
 
 - name: Create yggdrasil config file
   become: true
@@ -274,13 +330,13 @@
     state: present
   vars:
     packages:
-      - redis
-      - redis-tools
-      - redis-server
+      - default-mysql-client
+      - default-mysql-server
       - postgresql
       - postgresql-client
-      - default-mysql-server
-      - default-mysql-client
+      - redis
+      - redis-server
+      - redis-tools
       - sqlite3
 
 # Services
@@ -354,14 +410,14 @@
     state: started
     enabled: true
   with_items:
-  - ufw
-  - sshd
-  - libvirtd
-  - tor
-  - i2pd
-  - xrdp
-  - yggdrasil
-  - supervisor
+    - i2pd
+    - libvirtd
+    - sshd
+    - supervisor
+    - tor
+    - ufw
+    - xrdp
+    - yggdrasil
 
 - name: Configure disabled services
   service:
@@ -369,10 +425,10 @@
     state: stopped
     enabled: false
   with_items:
-  - shadowsocks-libev
-  - redis-server
-  - postgresql
-  - mysql
+    - mysql
+    - postgresql
+    - redis-server
+    - shadowsocks-libev
 
 - name: Copy wallpaper
   copy:
