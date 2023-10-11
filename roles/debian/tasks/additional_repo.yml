@@ -64,6 +64,14 @@
 #     repo: "deb https://dbeaver.io/debs/dbeaver-ce /"
 #     state: present
 
+# - name: Add AnyDesk GPG key
+#   apt_key:
+#     url: "https://keys.anydesk.com/repos/DEB-GPG-KEY"
+#     state: present
+# - name: Add AnyDesk repo
+#   apt_repository:
+#     repo: "deb http://deb.anydesk.com/ all main"
+
 - name: Update cache after update repo
   apt:
     update_cache: yes
@@ -96,6 +104,7 @@
   vars:
     packages:
       - code
+      # - anydesk
       # - dbeaver-ce
       # - yandex-browser-stable
       # - yandex-disk
