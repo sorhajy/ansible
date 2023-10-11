@@ -2,6 +2,6 @@
 autorestart = True
 autostart = True
 directory = /home/{{ os_user }}/
-user = sorh{{ os_user }}ajy
+user = {{ os_user }}
 command = /usr/bin/syncthing --no-browser --home="/home/{{ os_user }}/.config/syncthing"
 environment = STNORESTART="1", HOME="/home/{{ os_user }}"
