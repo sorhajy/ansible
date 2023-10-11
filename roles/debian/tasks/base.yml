@@ -142,6 +142,7 @@
       - exif
       - fail2ban
       - firejail
+      - fio
       - hardinfo
       - hdparm
       - htop
