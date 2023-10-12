@@ -141,8 +141,8 @@
       - duplicity
       - exif
       - fail2ban
-      - firejail
       - fio
+      - firejail
       - hardinfo
       - hdparm
       - htop
@@ -153,6 +153,7 @@
       - nmap
       - php
       - pv
+      - pwgen
       - qrencode
       - rclone
       - rsync
