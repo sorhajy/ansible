@@ -155,6 +155,7 @@
       - pv
       - pwgen
       - qrencode
+      - restic
       - rclone
       - rsync
       - s3cmd
@@ -216,7 +217,7 @@
       - ufw
       - wireguard
       - wireguard-tools
-      - yggdrasil
+      # - yggdrasil
 
 - name: Add the user samba groups
   user:
@@ -241,7 +242,8 @@
       - mdadm
       - s3fs
       - sshfs
-      - zfs-fuse
+      # - zfs-fuse
+      # - zfsutils-linux
 
 - name: Install Andorid packages and DevTools
   apt:
@@ -292,9 +294,9 @@
 #     groups: docker
 #     append: yes
 
-- name: Create yggdrasil config file
-  become: true
-  shell: yggdrasil -genconf > /etc/yggdrasil/yggdrasil.conf
+# - name: Create yggdrasil config file
+#   become: true
+#   shell: yggdrasil -genconf > /etc/yggdrasil/yggdrasil.conf
 
 - name: Install VM packages
   apt:
@@ -384,18 +386,19 @@
   loop:
     # Docker subnet
     - 172.17.0.0/16
-- name: Allow access for Yggdrasil
-  become: true
-  community.general.ufw:
-    rule: allow
-    src: '{{ item }}'
-  loop:
-    - ff00::/8
-- name: Allow IPv6
-  become: true
-  community.general.ufw:
-    rule: allow
-    proto: ipv6
+    - 172.18.0.0/16
+# - name: Allow access for Yggdrasil
+#   become: true
+#   community.general.ufw:
+#     rule: allow
+#     src: '{{ item }}'
+#   loop:
+#     - ff00::/8
+# - name: Allow IPv6
+#   become: true
+#   community.general.ufw:
+#     rule: allow
+#     proto: ipv6
 - name: Reject everything and enable UFW
   become: true
   community.general.ufw:
@@ -412,14 +415,12 @@
     state: started
     enabled: true
   with_items:
-    - i2pd
     - libvirtd
     - sshd
     - supervisor
-    - tor
     - ufw
     - xrdp
-    - yggdrasil
+    # - yggdrasil
 
 - name: Configure disabled services
   service:
@@ -427,6 +428,8 @@
     state: stopped
     enabled: false
   with_items:
+    - tor
+    - i2pd
     - mysql
     - postgresql
     - redis-server
