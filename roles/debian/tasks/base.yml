@@ -243,7 +243,7 @@
       - s3fs
       - sshfs
       # - zfs-fuse
-      # - zfsutils-linux
+      - zfsutils-linux
 
 - name: Install Andorid packages and DevTools
   apt:
