@@ -199,6 +199,7 @@
     state: present
   vars:
     packages:
+      - ethtool
       - hashcat
       - i2pd
       - iperf
