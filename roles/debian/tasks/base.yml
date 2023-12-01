@@ -244,8 +244,9 @@
       - mdadm
       - s3fs
       - sshfs
-      # - zfs-fuse
+      - vmtouch
       - zfsutils-linux
+      # - zfs-fuse
 
 - name: Install Andorid packages and DevTools
   apt:
