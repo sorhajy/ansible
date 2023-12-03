@@ -37,23 +37,23 @@
     repo: "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
     state: present
 
-# - name: Add Yandex browser GPG key
-#   apt_key:
-#     state: present
-#     url: "https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG"
-# - name: Add Yandex browser repo
-#   apt_repository:
-#     repo: "deb [arch=amd64] http://repo.yandex.ru/yandex-browser/deb stable main"
-#     state: present
+- name: Add Yandex browser GPG key
+  apt_key:
+    state: present
+    url: "https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG"
+- name: Add Yandex browser repo
+  apt_repository:
+    repo: "deb [arch=amd64] http://repo.yandex.ru/yandex-browser/deb stable main"
+    state: present
 
-# - name: Add Yandex disk GPG key
-#   apt_key:
-#     state: present
-#     url: "http://repo.yandex.ru/yandex-disk/YANDEX-DISK-KEY.GPG"
-# - name: Add Yandex disk repo
-#   apt_repository:
-#     repo: "deb http://repo.yandex.ru/yandex-disk/deb/ stable main"
-#     state: present
+- name: Add Yandex disk GPG key
+  apt_key:
+    state: present
+    url: "http://repo.yandex.ru/yandex-disk/YANDEX-DISK-KEY.GPG"
+- name: Add Yandex disk repo
+  apt_repository:
+    repo: "deb http://repo.yandex.ru/yandex-disk/deb/ stable main"
+    state: present
 
 # - name: Add DBeaver GPG key
 #   apt_key:
@@ -106,8 +106,8 @@
       - code
       # - anydesk
       # - dbeaver-ce
-      # - yandex-browser-stable
-      # - yandex-disk
+      - yandex-browser-stable
+      - yandex-disk
       - virtualbox-7.0
 
 - name: Add the user VirtualBox groups
