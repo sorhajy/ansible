@@ -149,6 +149,7 @@
       - htop
       - iotop
       - mat2
+      - mc
       - ncdu
       - ninja-build
       - nmap
