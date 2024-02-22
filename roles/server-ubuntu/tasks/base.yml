@@ -5,43 +5,46 @@
     state: present
   vars:
     packages:
-      - fail2ban
       - apt-transport-https
+      - at
+      - atop
+      - blktrace
+      - autossh
+      - bash-completion
       - ca-certificates
       - curl
-      - wget
+      - dirmngr
+      - fail2ban
       - gnupg-agent
-      - software-properties-common
-      - ufw
-      - ssh
-      - screen
-      - vim
       - htop
+      - iftop
       - iotop
-      - ncdu
-      - net-tools
-      # - zram-config
-      # - zram-tools
-      - locate
-      - autossh
+      - iotop
       - iperf
       - iperf3
-      - jq
       - jo
+      - jq
+      - locate
+      - mc
+      - ncdu
+      - net-tools
       - netcat
       - pv
       - qrencode
       - rsync
+      - screen
+      - snapd
+      - software-properties-common
+      - ssh
       - sshfs
       - telnet
-      - tree
-      - watch
-      - dirmngr
-      - zstd
-      - snapd
-      - mc
-      - bash-completion
       - traceroute
+      - tree
+      - ufw
+      - vim
+      - watch
+      - wget
+      - zstd
 
 # - name: Enable autoload & start zram service
 #   become: true
@@ -84,6 +87,17 @@
   community.general.ufw:
     rule: allow
     port: '443'
+
+- name: Allow all access to port 51820
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '51820'
+- name: Allow all access to port 22000
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: '22000'
 
 - name: Allow all access from RFC1918 networks to this host
   become: true
