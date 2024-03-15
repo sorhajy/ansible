@@ -82,12 +82,12 @@
       - mdadm
       - fuse3
       - sshfs
-      - zfs-dkms
-      - zfsutils-linux
+      # - zfs-dkms
+      # - zfsutils-linux
       - btrfs-progs
       - btrfs-compsize
       - apt-btrfs-snapshot
-      - zfs-auto-snapshot
+      # - zfs-auto-snapshot
 
 - name: Install CLI utils
   apt:

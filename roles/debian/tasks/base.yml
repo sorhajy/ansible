@@ -246,7 +246,7 @@
       - s3fs
       - sshfs
       - vmtouch
-      - zfsutils-linux
+      # - zfsutils-linux
       # - zfs-fuse
 
 - name: Install Andorid packages and DevTools
