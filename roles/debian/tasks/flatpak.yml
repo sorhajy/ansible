@@ -49,10 +49,10 @@
 #   flatpak:
 #     name: com.google.AndroidStudio
 #     state: present
-- name: Install DBeaver
-  flatpak:
-    name: io.dbeaver.DBeaverCommunity
-    state: present
+# - name: Install DBeaver
+#   flatpak:
+#     name: io.dbeaver.DBeaverCommunity
+#     state: present
 - name: Install Postman
   flatpak:
     name: com.getpostman.Postman
@@ -78,26 +78,26 @@
   flatpak:
     name: us.zoom.Zoom
     state: present
-- name: Install Skype
-  flatpak:
-    name: com.skype.Client
-    state: present
+# - name: Install Skype
+#   flatpak:
+#     name: com.skype.Client
+#     state: present
 # - name: Install Element
 #   flatpak:
 #     name: im.riot.Riot
 #     state: present
-- name: Install Slack
-  flatpak:
-    name: com.slack.Slack
-    state: present
+# - name: Install Slack
+#   flatpak:
+#     name: com.slack.Slack
+#     state: present
 - name: Install Mattermost
   flatpak:
     name: com.mattermost.Desktop
     state: present
-- name: Install MS Teams
-  flatpak:
-    name: com.microsoft.Teams
-    state: present
+# - name: Install MS Teams
+#   flatpak:
+#     name: com.microsoft.Teams
+#     state: present
 # - name: Install Jami
 #   flatpak:
 #     name: net.jami.Jami
