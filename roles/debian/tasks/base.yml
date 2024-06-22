@@ -133,6 +133,7 @@
     state: present
   vars:
     packages:
+      - auditd
       - apt-mirror
       - aria2
       - arp-scan
