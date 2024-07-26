@@ -10,6 +10,10 @@
 - name: Add Flathub repo
   command: "flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo"
 
+- name: Install PortProton
+  flatpak:
+    name: ru.linux_gaming.PortProton
+    state: present
 # - name: Install KeePassXC
 #   flatpak:
 #     name: org.keepassxc.KeePassXC
