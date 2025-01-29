@@ -108,7 +108,7 @@
       - dbeaver-ce
       - yandex-browser-stable
       - yandex-disk
-      - virtualbox-7.0
+      - virtualbox-7.1
 
 - name: Add the user VirtualBox groups
   user:
