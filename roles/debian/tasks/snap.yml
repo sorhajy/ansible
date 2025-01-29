@@ -18,14 +18,14 @@
     packages:
     - pycharm-community
 
-# - name: Install system snap packages
-#   snap:
-#     name: "{{ packages }}"
-#     state: present
-#     classic: no
-#   vars:
-#     packages:
-#     - kdiskmark
+- name: Install system snap packages
+  snap:
+    name: "{{ packages }}"
+    state: present
+    classic: no
+  vars:
+    packages:
+    - kdiskmark
 
 # - name: Install network snap packages
 #   snap:
