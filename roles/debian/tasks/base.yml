@@ -44,6 +44,8 @@
       - clinfo
       - firmware-amd-graphics
       - firmware-misc-nonfree
+      - intel-gpu-tools
+      - intel-microcode
       - linux-headers-amd64
       - mesa-utils
       - mesa-utils-extra
