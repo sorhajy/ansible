@@ -56,6 +56,8 @@
       - vulkan-tools
       - wayland-utils
       - xserver-xorg-video-all
+      - firmware-intel-sound
+      - firmware-linux-nonfree
 
 - name: Install JDK packages
   apt:
@@ -204,7 +206,18 @@
     state: present
   vars:
     packages:
+      - broadcom-sta-dkms
       - ethtool
+      - firmware-atheros
+      - firmware-b43-installer
+      - firmware-bnx2
+      - firmware-bnx2x
+      - firmware-brcm80211
+      - firmware-iwlwifi
+      - firmware-libertas
+      - firmware-netronome
+      - firmware-qlogic
+      - firmware-realtek
       - hashcat
       - i2pd
       - iperf
