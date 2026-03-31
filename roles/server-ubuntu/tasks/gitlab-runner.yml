@@ -1,22 +1,27 @@
+- name: Check GitLab GPG key
+  become: true
+  ansible.builtin.apt_key:
+    url: "https://packages.gitlab.com/gpg.key"
+    state: present
+
 - name: Add gitlab runner repo
   become: true
-  shell: curl -L "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh" | sudo bash
+  ansible.builtin.shell: curl -L "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh" | sudo bash
   args:
     creates: /usr/bin/gitlab-runner
 
 - name: Install gitlab-runner
   become: true
-  apt:
+  ansible.builtin.apt:
     name: gitlab-runner
     state: present
 
 - name: Add gitlab-runner user to docker group
   become: true
-  user:
+  ansible.builtin.user:
     name: gitlab-runner
-    append: yes
+    append: true
     groups: docker
-
 # - name: Register gitlab docker runner
 #   when: gitlab_runner_in_docker|bool == true
 #   become: true
@@ -47,3 +52,30 @@
 #     --run-untagged="false" \
 #     --locked="true" \
 #     --access-level="ref_protected"
+
+- name: Ensure /etc/sudoers.d directory exists
+  ansible.builtin.file:
+    path: /etc/sudoers.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0750'
+
+- name: Add sudoers rule for gitlab-runner
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/gitlab-runner
+    state: present
+    create: true
+    owner: root
+    group: root
+    mode: '0440'
+    line: "gitlab-runner ALL=(root) NOPASSWD: /usr/sbin/service"
+    validate: '/usr/sbin/visudo -cf %s'
+
+# - name: Configure sudo rule for gitlab-runner
+#   community.general.sudoers:
+#     name: gitlab-runner-rule
+#     user: gitlab-runner
+#     commands: /usr/sbin/service
+#     nopasswd: true
+#     state: present

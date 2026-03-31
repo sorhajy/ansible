@@ -1,5 +1,5 @@
 - name: Creates a cron task for clean docker
-  cron:
+  ansible.builtin.cron:
     name: docker clean
     state: present
     minute: 0

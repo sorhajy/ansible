@@ -1,0 +1,12 @@
+additional_root_public_keys:
+  - ""
+
+additional_public_keys:
+  server-user:
+    - ""
+
+  docker-user:
+    - ""
+
+  gitlab-runner:
+    - ""

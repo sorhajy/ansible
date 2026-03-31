@@ -1,17 +1,17 @@
 - name: Add Docker GPG key
   become: true
-  apt_key:
+  ansible.builtin.apt_key:
     url: "https://download.docker.com/linux/ubuntu/gpg"
     state: present
 - name: Add Docker repo
   become: true
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
     state: present
 
 - name: Install Docker packages
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ packages }}"
     state: present
     update_cache: true
@@ -25,25 +25,25 @@
 
 - name: Enable & start Docker service
   become: true
-  service:
+  ansible.builtin.service:
     name: docker
     state: started
     enabled: true
 
 - name: Create non-privileged docker user
   become: true
-  user:
+  ansible.builtin.user:
     name: "{{ docker_user }}"
-    password_lock: yes
+    password_lock: true
     state: present
     shell: /bin/bash
-    system: no
-    createhome: yes
+    system: false
+    createhome: true
     home: "/home/{{ docker_user }}"
 
 - name: Check user SSH dir
   become: true
-  file: 
+  ansible.builtin.file:
     path: "/home/{{ docker_user }}/.ssh"
     state: directory
     owner: "{{ docker_user }}"
@@ -52,40 +52,39 @@
 
 - name: Inspect user authorized_keys
   become: true
-  file:
-    path: "/home/{{ docker_user}}/.ssh/authorized_keys"
+  ansible.builtin.file:
+    path: "/home/{{ docker_user }}/.ssh/authorized_keys"
     state: touch
-    force: no
+    force: false
     owner: "{{ docker_user }}"
     group: "{{ docker_user }}"
     mode: "0664"
 
 - name: Inspect user ssh-config
   become: true
-  file:
-    path: "/home/{{ docker_user}}/.ssh/config"
+  ansible.builtin.file:
+    path: "/home/{{ docker_user }}/.ssh/config"
     state: touch
-    force: no
+    force: false
     owner: "{{ docker_user }}"
     group: "{{ docker_user }}"
     mode: "0664"
 
 - name: Inspect user SSH key
   become: true
-  openssh_keypair:
+  community.crypto.openssh_keypair:
     path: "/home/{{ docker_user }}/.ssh/id_rsa"
     type: rsa
     size: 4096
     state: present
-    force: no
+    force: false
     owner: "{{ docker_user }}"
     group: "{{ docker_user }}"
     mode: "0600"
 
-
 - name: Add the user Docker groups
   become: true
-  user:
+  ansible.builtin.user:
     name: "{{ docker_user }}"
     groups: docker
-    append: yes
+    append: true

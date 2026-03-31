@@ -1,49 +1,163 @@
 - name: Install Nginx
   become: true
-  apt: 
+  ansible.builtin.apt:
     name: nginx-full
     state: present
-- name: Disable autoload & stop Nginx
+- name: Enable autoload & start Nginx
   become: true
-  service:
+  ansible.builtin.service:
     name: nginx
-    enabled: no
-    state: stopped
+    enabled: true
+    state: started
 
-- name: Install Apache
-  become: true
-  apt: 
-    name: apache2
-    state: present
-- name: Disable autoload & stop Apache
-  become: true
-  service:
-    name: apache2
-    enabled: no
-    state: stopped
+# - name: Install Apache
+#   become: true
+#   ansible.builtin.apt:
+#     name: apache2
+#     state: present
+# - name: Disable autoload & stop Apache
+#   become: true
+#   ansible.builtin.service:
+#     name: apache2
+#     enabled: false
+#     state: stopped
+
+
+- name: Check custom nginx conf dir
+  ansible.builtin.file:
+    path: "/app/service/nginx"
+    state: directory
+    owner: server-user
+    group: server-user
+    mode: "0755"
+
+- name: Remove default nginx config
+  ansible.builtin.file:
+    path: "/etc/nginx/sites-enabled/default"
+    state: absent
+
+- name: Clear nginx default conf.d
+  ansible.builtin.file:
+    path: "/etc/nginx/conf.d"
+    state: absent
+
+- name: Create symlink
+  ansible.builtin.file:
+    src: "/app/service/nginx"
+    dest: "/etc/nginx/conf.d"
+    state: link
+
+- name: Copy nginx default config
+  ansible.builtin.copy:
+    src: "roles/server-ubuntu/templates/nginx/default.conf"
+    dest: "/etc/nginx/conf.d/default.conf"
+    owner: root
+    group: root
+    mode: "0644"
+    remote_src: false
+
+- name: Check selfsigned key dir
+  ansible.builtin.file:
+    path: "/etc/ssl/private"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+# - name: Check selfsigned cert dir
+#   ansible.builtin.file:
+#     path: "/etc/ssl/certs"
+#     state: directory
+#     owner: root
+#     group: root
+#     mode: "0755"
+
+- name: Check custom cert dir
+  ansible.builtin.file:
+    path: "/etc/ssl/certs/apps"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+- name: Check custom private key ssl dir
+  ansible.builtin.file:
+    path: "/etc/ssl/private/apps"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Generate dhparam.pem
+  community.crypto.openssl_dhparam:
+    path: /etc/nginx/dhparam.pem
+    size: 2048
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Generate self-signed Private Key
+  ansible.builtin.openssl_privatekey:
+    path: /etc/ssl/private/selfsigned.key
+    size: 2048
+    type: RSA
+    force: true
+
+- name: Generate Certificate Sign Request (CSR)
+  ansible.builtin.openssl_csr:
+    path: /etc/ssl/private/selfsigned.csr
+    privatekey_path: /etc/ssl/private/selfsigned.key
+    force: true
+    country_name: ND
+    organization_name: ND
+    common_name: ND
+    subject_alt_name: ["IP:{{ ansible_host }}"]
+
+- name: Generate selfsigned cert
+  ansible.builtin.openssl_certificate:
+    path: /etc/ssl/certs/selfsigned.crt
+    privatekey_path: /etc/ssl/private/selfsigned.key
+    csr_path: /etc/ssl/private/selfsigned.csr
+    provider: selfsigned
+    force: true
+    selfsigned_not_after: "+3650d"
 
 - name: Install CertBot
   become: true
-  apt: 
+  ansible.builtin.apt:
     name: "{{ packages }}"
     state: present
   vars:
     packages:
-    - certbot
-    - python3-certbot-nginx
+      - certbot
+      - python3-certbot-nginx
 
 - name: Check LetsEncrypt dir
-  file: 
+  ansible.builtin.file:
     path: "/var/www/letsencrypt"
     state: directory
     mode: "0777"
 
 - name: Creates a cron task for certbot renew certs
-  cron:
+  ansible.builtin.cron:
     name: renew certs
     state: present
     minute: 0
     hour: 0
     weekday: 1
     user: root
-    job: 'certbot renew --non-interactive --quiet --agree-tos --register-unsafely-without-email --no-eff-email --post-hook "nginx -s reload"'
+    job: 'certbot renew --non-interactive --quiet --agree-tos --register-unsafely-without-email --no-eff-email --post-hook "/usr/sbin/nginx -s reload" --pre-hook "/usr/sbin/nginx -s reload" --deploy-hook "/usr/sbin/nginx -s reload"'
+
+- name: Creates a cron task for nginx reload
+  ansible.builtin.cron:
+    name: nginx reload
+    state: present
+    minute: 0
+    hour: 1
+    weekday: 1
+    user: root
+    job: "/usr/sbin/nginx -s reload"
+
+- name: Reload nginx
+  ansible.builtin.service:
+    name: nginx
+    state: reloaded
+    enabled: true

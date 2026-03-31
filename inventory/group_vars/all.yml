@@ -1,0 +1,13 @@
+root_public_keys:
+  - ""
+
+public_keys:
+  server-user:
+    - ""
+  docker-user:
+    - ""
+  db-user:
+    - ""
+
+revoked_public_keys:
+  - ""

@@ -1,6 +1,10 @@
+- name: Change hostname
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
+
 - name: Install base requirements
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ packages }}"
     state: present
   vars:
@@ -8,9 +12,9 @@
       - apt-transport-https
       - at
       - atop
-      - blktrace
       - autossh
       - bash-completion
+      - blktrace
       - ca-certificates
       - curl
       - dirmngr
@@ -24,16 +28,13 @@
       - iperf3
       - jo
       - jq
-      - locate
-      - mc
       - ncdu
       - net-tools
-      - netcat
+      - netcat-openbsd
       - pv
-      - qrencode
       - rsync
       - screen
-      - snapd
+      # - snapd
       - software-properties-common
       - ssh
       - sshfs
@@ -45,20 +46,27 @@
       - watch
       - wget
       - zstd
+      # - python3
+      # - python3-pip
 
-# - name: Enable autoload & start zram service
-#   become: true
-#   service:
-#     name: zram-config
-#     state: started
-#     enabled: yes
+- name: Enable fail2ban service
+  become: true
+  ansible.builtin.service:
+    name: fail2ban
+    state: started
+    enabled: true
+
+- name: Install passlib for password hashing
+  ansible.builtin.package:
+    name: python3-passlib
+    state: present
 
 - name: Enable autoload & stop ufw service
   become: true
-  service:
+  ansible.builtin.service:
     name: ufw
     state: stopped
-    enabled: yes
+    enabled: true
 
 - name: Disable UFW
   become: true
@@ -72,38 +80,67 @@
   community.general.ufw:
     state: reset
 
+- name: Set default incoming policy to deny
+  community.general.ufw:
+    default: reject
+    direction: incoming
+
+- name: Set default outgoing policy to allow
+  community.general.ufw:
+    default: allow
+    direction: outgoing
+
+- name: Allow SSH service by name
+  community.general.ufw:
+    rule: allow
+    name: OpenSSH
+
 - name: Allow all access to port 22
   become: true
   community.general.ufw:
     rule: allow
-    port: '22'
+    port: "22"
 - name: Allow all access to port 80
   become: true
   community.general.ufw:
     rule: allow
-    port: '80'
+    port: "80"
 - name: Allow all access to port 443
   become: true
   community.general.ufw:
     rule: allow
-    port: '443'
-
+    port: "443"
+- name: Allow all access to port 1080
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: "1080"
+- name: Allow all access to port 1443
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: "1443"
+- name: Allow all access to port 3128
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: "3128"
+- name: Allow all access to port 8443
+  become: true
+  community.general.ufw:
+    rule: allow
+    port: "8443"
 - name: Allow all access to port 51820
   become: true
   community.general.ufw:
     rule: allow
-    port: '51820'
-- name: Allow all access to port 22000
-  become: true
-  community.general.ufw:
-    rule: allow
-    port: '22000'
+    port: "51820"
 
 - name: Allow all access from RFC1918 networks to this host
   become: true
   community.general.ufw:
     rule: allow
-    src: '{{ item }}'
+    src: "{{ item }}"
   loop:
     - 127.0.0.0/8
     - 10.0.0.0/8
@@ -114,7 +151,7 @@
   become: true
   community.general.ufw:
     rule: allow
-    src: '{{ item }}'
+    src: "{{ item }}"
   loop:
     - 172.17.0.0/16
     - 172.18.0.0/16
@@ -129,3 +166,52 @@
   become: true
   community.general.ufw:
     state: reloaded
+
+- name: Disable IPv6 (runtime)
+  ansible.builtin.sysctl:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+    sysctl_set: true
+    reload: true
+  with_items:
+    - { key: "net.ipv6.conf.all.disable_ipv6", value: "1" }
+    - { key: "net.ipv6.conf.default.disable_ipv6", value: "1" }
+    - { key: "net.ipv6.conf.lo.disable_ipv6", value: "1" }
+
+- name: Ensure settings persist across reboots
+  ansible.builtin.copy:
+    dest: /etc/sysctl.d/99-disable-ipv6.conf
+    content: |
+      net.ipv6.conf.all.disable_ipv6 = 1
+      net.ipv6.conf.default.disable_ipv6 = 1
+      net.ipv6.conf.lo.disable_ipv6 = 1
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Configure TCP keepalive (runtime)
+  ansible.builtin.sysctl:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+    sysctl_set: true
+    reload: true
+  with_items:
+    - { key: "net.ipv4.tcp_keepalive_time", value: "600" }
+    - { key: "net.ipv4.tcp_keepalive_intvl", value: "60" }
+    - { key: "net.ipv4.tcp_keepalive_probes", value: "5" }
+
+- name: Ensure settings persist across reboots
+  ansible.builtin.copy:
+    dest: /etc/sysctl.d/99-disable-ipv6.conf
+    content: |
+      net.ipv4.tcp_keepalive_time = 600
+      net.ipv4.tcp_keepalive_intvl = 60
+      net.ipv4.tcp_keepalive_probes = 5
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Reload sysctl
+  ansible.builtin.command: sysctl --system

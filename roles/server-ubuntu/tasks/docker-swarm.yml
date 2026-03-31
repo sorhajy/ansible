@@ -1,8 +1,37 @@
 - name: Install Python modules
   become: true
-  pip:
-    name: docker-py
-    state: latest
+  ansible.builtin.package:
+    name: python3-docker
+    state: present
+
+- name: Get default interface name
+  ansible.builtin.shell: "ip route | awk '/default/ {print $5}'"
+  register: default_iface
+  changed_when: false
+
+- name: Get MTU from default interface
+  ansible.builtin.command: "cat /sys/class/net/{{ default_iface.stdout }}/mtu"
+  register: default_mtu
+  changed_when: false
+
+- name: Set MTU variable if not defined in inventory
+  set_fact:
+    swarm_mtu: "{{ default_mtu.stdout | int }}"
+  when: swarm_mtu is not defined
+
+- name: Delete default docker_gwbridge if exists
+  ansible.builtin.shell: |
+    docker network rm docker_gwbridge || true
+  when: ("{{ role }}" == "manager") and ("{{ is_swarm }}" == "true")
+
+- name: Recreate docker_gwbridge with custom MTU
+  ansible.builtin.shell: |
+    docker network create -d bridge \
+      --subnet 172.18.0.0/16 \
+      --opt com.docker.network.bridge.name=docker_gwbridge \
+      --opt com.docker.network.driver.mtu={{ swarm_mtu }} \
+      docker_gwbridge
+  when: ("{{ role }}" == "manager") and ("{{ is_swarm }}" == "true")
 
 - name: Inspect swarm manager
   when: ("{{ role }}" == "manager") and ("{{ is_swarm }}" == "true")

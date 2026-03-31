@@ -1,32 +1,57 @@
 - name: Check root SSH dir
   become: true
-  file: 
+  ansible.builtin.file:
     path: "/root/.ssh"
     state: directory
+    owner: root
+    group: root
+    mode: "700"
 
 - name: Inspect root SSH key
   become: true
-  openssh_keypair:
+  community.crypto.openssh_keypair:
     path: "/root/.ssh/id_rsa"
     type: rsa
     size: 4096
     state: present
-    force: no
+    force: false
+
+# - name: Reset ssh keys to root
+#   become: true
+#   ansible.builtin.copy:
+#     src: "templates/authorized_keys"
+#     dest: "/root/.ssh/authorized_keys"
+#     owner: root
+#     group: root
+#     mode: "0600"
+
+- name: Deploy authorized_keys file for root
+  ansible.builtin.template:
+    src: ./roles/server-ubuntu/templates/ssh/root_authorized_keys.j2
+    dest: /root/.ssh/authorized_keys
+    mode: '0600'
+
+- name: Add public keys from group_vars to root
+  ansible.builtin.authorized_key:
+    user: root
+    state: present
+    key: "{{ item }}"
+  loop: "{{ additional_root_public_keys | default([]) }}"
 
 - name: Create non-privileged user
   become: true
-  user:
+  ansible.builtin.user:
     name: "{{ server_user }}"
-    password_lock: yes
+    password_lock: true
     state: present
     shell: /bin/bash
-    system: no
-    createhome: yes
+    system: false
+    createhome: true
     home: "/home/{{ server_user }}"
 
 - name: Check user SSH dir
   become: true
-  file: 
+  ansible.builtin.file:
     path: "/home/{{ server_user }}/.ssh"
     state: directory
     owner: "{{ server_user }}"
@@ -35,32 +60,187 @@
 
 - name: Inspect user authorized_keys
   become: true
-  file:
-    path: "/home/{{ server_user}}/.ssh/authorized_keys"
+  ansible.builtin.file:
+    path: "/home/{{ server_user }}/.ssh/authorized_keys"
     state: touch
-    force: no
+    force: false
     owner: "{{ server_user }}"
     group: "{{ server_user }}"
     mode: "0664"
 
 - name: Inspect user ssh-config
   become: true
-  file:
-    path: "/home/{{ server_user}}/.ssh/config"
+  ansible.builtin.file:
+    path: "/home/{{ server_user }}/.ssh/config"
     state: touch
-    force: no
+    force: false
     owner: "{{ server_user }}"
     group: "{{ server_user }}"
     mode: "0664"
 
 - name: Inspect user SSH key
   become: true
-  openssh_keypair:
+  community.crypto.openssh_keypair:
     path: "/home/{{ server_user }}/.ssh/id_rsa"
     type: rsa
     size: 4096
     state: present
-    force: no
+    force: false
     owner: "{{ server_user }}"
     group: "{{ server_user }}"
     mode: "0600"
+
+- name: Create docker user
+  become: true
+  ansible.builtin.user:
+    name: "{{ docker_user }}"
+    password_lock: true
+    state: present
+    shell: /bin/bash
+    system: false
+    createhome: true
+    home: "/home/{{ docker_user }}"
+
+- name: Check docker user SSH dir
+  become: true
+  ansible.builtin.file:
+    path: "/home/{{ docker_user }}/.ssh"
+    state: directory
+    owner: "{{ docker_user }}"
+    group: "{{ docker_user }}"
+    mode: "0775"
+
+- name: Inspect docker user authorized_keys
+  become: true
+  ansible.builtin.file:
+    path: "/home/{{ docker_user }}/.ssh/authorized_keys"
+    state: touch
+    force: false
+    owner: "{{ docker_user }}"
+    group: "{{ docker_user }}"
+    mode: "0664"
+
+- name: Inspect docker user ssh-config
+  become: true
+  ansible.builtin.file:
+    path: "/home/{{ docker_user }}/.ssh/config"
+    state: touch
+    force: false
+    owner: "{{ docker_user }}"
+    group: "{{ docker_user }}"
+    mode: "0664"
+
+- name: Inspect docker user SSH key
+  become: true
+  community.crypto.openssh_keypair:
+    path: "/home/{{ docker_user }}/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    state: present
+    force: false
+    owner: "{{ docker_user }}"
+    group: "{{ docker_user }}"
+    mode: "0600"
+
+
+- name: Ensure Root PasswordAuthentication is set to prohibit-password
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PermitRootLogin'
+    line: 'PermitRootLogin prohibit-password'
+    state: present
+
+- name: Ensure StrictModes is set to yes
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?StrictModes'
+    line: 'StrictModes yes'
+    state: present
+
+- name: Ensure MaxAuthTries is set to 2
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?MaxAuthTries'
+    line: 'MaxAuthTries 2'
+    state: present
+
+- name: Ensure PasswordAuthentication is set to no
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PasswordAuthentication'
+    line: 'PasswordAuthentication no'
+    state: present
+
+- name: Ensure PermitEmptyPasswords is set to no
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PermitEmptyPasswords'
+    line: 'PermitEmptyPasswords no'
+    state: present
+
+- name: Ensure ChallengeResponseAuthentication is set to no
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?ChallengeResponseAuthentication'
+    line: 'ChallengeResponseAuthentication no'
+    state: present
+
+- name: Reload SSH service to apply changes
+  ignore_errors: true
+  ansible.builtin.service:
+    name: ssh
+    state: reloaded
+    enabled: true
+
+- name: Reload SSH service to apply changes
+  ignore_errors: true
+  ansible.builtin.service:
+    name: sshd
+    state: reloaded
+    enabled: true
+
+
+- name: Deploy authorized_keys file for each user
+  ignore_errors: true
+  ansible.builtin.template:
+    src: ./roles/server-ubuntu/templates/ssh/authorized_keys.j2
+    dest: "/home/{{ item.key }}/.ssh/authorized_keys"
+    mode: '0400'
+    owner: "{{ item.key }}"
+    group: "{{ item.key }}"
+  loop: "{{ public_keys | dict2items }}"
+  vars:
+    ssh_keys: "{{ item.value | default([]) }}"
+
+- name: Add public keys to authorized_keys
+  ignore_errors: true
+  ansible.builtin.authorized_key:
+    user: "{{ item.key }}"
+    state: present
+    key: "{{ item.value | join('\n') }}"
+  loop: "{{ additional_public_keys | default({}) | dict2items }}"
+  loop_control:
+    label: "{{ item.key | default([]) }}"
+
+
+- name: Retrieve non-system local users from /etc/passwd
+  ansible.builtin.getent:
+    database: passwd
+  register: passwd_data
+- name: Get list of non-system users
+  ansible.builtin.command: >-
+    awk -F: '($3>=1000)&&($1!="nobody"){print $1}' /etc/passwd
+  register: local_users
+
+- name: Remove revoked SSH key from authorized_keys for root
+  ansible.builtin.authorized_key:
+    user: root
+    state: absent
+    key: "{{ item }}"
+  loop: "{{ revoked_public_keys }}"
+- name: Remove revoked SSH key from authorized_keys for all non-system users
+  ansible.builtin.authorized_key:
+    user: "{{ item[0] }}"
+    state: absent
+    key: "{{ item[1] }}"
+  loop: "{{ local_users.stdout_lines | product(revoked_public_keys) | list }}"

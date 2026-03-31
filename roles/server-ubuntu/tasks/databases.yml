@@ -1,62 +1,68 @@
 - name: Install Redis
+  when: redis_install is defined and redis_install | bool
   become: true
-  apt: 
+  ansible.builtin.apt:
     name: redis
     state: present
 - name: Configure Redis password
+  when: redis_install is defined and redis_install | bool
   become: true
   ansible.builtin.lineinfile:
     path: /etc/redis/redis.conf
-    regexp: '^# requirepass foobared'
+    regexp: "^# requirepass foobared"
     line: "requirepass {{ redis_password }}"
     owner: redis
     group: redis
-    mode: '0640'
+    mode: "0640"
 - name: Configure Redis listen interface
+  when: redis_install is defined and redis_install | bool
   become: true
   ansible.builtin.lineinfile:
     path: /etc/redis/redis.conf
-    regexp: '^bind 127.0.0.1 ::1'
+    regexp: "^bind 127.0.0.1 ::1"
     line: "# bind 127.0.0.1 ::1"
     owner: redis
     group: redis
-    mode: '0640'
+    mode: "0640"
 - name: Disable autostart & stop Redis
+  when: redis_install is defined and redis_install | bool
   become: true
-  service:
+  ansible.builtin.service:
     name: redis-server
-    enabled: no
+    enabled: false
     state: stopped
 
-
-
 - name: Install PostgreSQL
+  when: postgres_install is defined and postgres_install | bool
   become: true
-  apt: 
+  ansible.builtin.apt:
     name: "{{ packages }}"
     state: present
   vars:
     packages:
-    - postgresql
-    - postgresql-contrib
-    - postgresql-common
-    - postgresql-client
-    - postgresql-client-common
-    - python3-psycopg2
+      - postgresql
+      - postgresql-contrib
+      - postgresql-common
+      - postgresql-client
+      - postgresql-client-common
+      - python3-psycopg2
     # - python3-ipaddr
 
 - name: Start PostgreSQL service
+  when: postgres_install is defined and postgres_install | bool
   become: true
-  service:
+  ansible.builtin.service:
     name: postgresql
     state: started
 
 - name: Change postgres password
+  when: postgres_install is defined and postgres_install | bool
   become: true
   become_method: enable
-  command: sudo su postgres -c "psql -c \"ALTER USER postgres WITH PASSWORD '{{ postgres_password }}';\""
+  ansible.builtin.command: sudo su postgres -c "psql -c \"ALTER USER postgres WITH PASSWORD '{{ postgres_password }}';\""
 
 - name: Collect PostgreSQL version
+  when: postgres_install is defined and postgres_install | bool
   community.postgresql.postgresql_info:
     login_host: "127.0.0.1"
     login_user: "postgres"
@@ -65,9 +71,10 @@
   register: postgres_version
 
 - name: Configure PostgreSQL allow connection
+  when: postgres_install is defined and postgres_install | bool
   become: true
   community.postgresql.postgresql_pg_hba:
-    dest: /etc/postgresql/{{postgres_version.version.major}}/main/pg_hba.conf
+    dest: /etc/postgresql/{{ postgres_version.version.major }}/main/pg_hba.conf
     contype: host
     users: all
     source: "0.0.0.0/0"
@@ -76,16 +83,73 @@
     create: true
 
 - name: Configure PostgreSQL listen interface
+  when: postgres_install is defined and postgres_install | bool
   become: true
   ansible.builtin.lineinfile:
-    path: /etc/postgresql/{{postgres_version.version.major}}/main/postgresql.conf
+    path: /etc/postgresql/{{ postgres_version.version.major }}/main/postgresql.conf
     regexp: "^#listen_addresses = 'localhost'"
     line: "listen_addresses = '*'"
     owner: postgres
     group: postgres
-    mode: '0644'
+    mode: "0644"
+
+- name: Configure PostgreSQL shared buffers
+  when: postgres_install is defined and postgres_install | bool
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/postgresql/{{ postgres_version.version.major }}/main/postgresql.conf
+    regexp: "^shared_buffers = 128MB"
+    line: "shared_buffers = {{ (ansible_facts['memtotal_mb'] * 0.25) | int | abs }}MB"
+    owner: postgres
+    group: postgres
+    mode: "0644"
+
+- name: Configure PostgreSQL work mem
+  when: postgres_install is defined and postgres_install | bool
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/postgresql/{{ postgres_version.version.major }}/main/postgresql.conf
+    regexp: "^#work_mem = 4MB"
+    line: "work_mem = 16MB"
+    owner: postgres
+    group: postgres
+    mode: "0644"
+
+- name: Configure PostgreSQL work mem
+  when: postgres_install is defined and postgres_install | bool
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/postgresql/{{ postgres_version.version.major }}/main/postgresql.conf
+    regexp: "^#maintenance_work_mem = 64MB"
+    line: "maintenance_work_mem = 500MB"
+    owner: postgres
+    group: postgres
+    mode: "0644"
+
+- name: Configure PostgreSQL effective_io_concurrency
+  when: postgres_install is defined and postgres_install | bool
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/postgresql/{{ postgres_version.version.major }}/main/postgresql.conf
+    regexp: "^#effective_io_concurrency = 1"
+    line: "effective_io_concurrency = 100"
+    owner: postgres
+    group: postgres
+    mode: "0644"
+
+- name: Configure PostgreSQL random_page_cost
+  when: postgres_install is defined and postgres_install | bool
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/postgresql/{{ postgres_version.version.major }}/main/postgresql.conf
+    regexp: "^#random_page_cost = 4.0"
+    line: "random_page_cost = 1.1"
+    owner: postgres
+    group: postgres
+    mode: "0644"
 
 - name: Set PostgreSQL listen interface
+  when: postgres_install is defined and postgres_install | bool
   become: true
   community.postgresql.postgresql_set:
     login_host: "127.0.0.1"
@@ -95,6 +159,7 @@
     value: "*"
 
 - name: Reload PostgreSQL configuration
+  when: postgres_install is defined and postgres_install | bool
   community.postgresql.postgresql_query:
     login_host: "127.0.0.1"
     login_user: "postgres"
@@ -102,18 +167,74 @@
     db: postgres
     query: "SELECT pg_reload_conf();"
 
-- name: Disable autostart & stop PostgreSQL service
+- name: Enable autostart & start PostgreSQL service
+  when: postgres_install is defined and postgres_install | bool
   become: true
-  service:
+  ansible.builtin.service:
     name: postgresql
-    enabled: false
-    state: stopped
+    enabled: true
+    state: restarted
 
+- name: Check postgres user SSH dir
+  when: postgres_install is defined and postgres_install | bool
+  become: true
+  become_user: postgres
+  ansible.builtin.file:
+    path: "/var/lib/postgresql/.ssh"
+    state: directory
+    owner: "postgres"
+    group: "postgres"
+    mode: "0775"
+- name: Inspect postgres user authorized_keys
+  when: postgres_install is defined and postgres_install | bool
+  become: true
+  become_user: postgres
+  ansible.builtin.file:
+    path: "/var/lib/postgresql/.ssh/authorized_keys"
+    state: touch
+    force: false
+    owner: "postgres"
+    group: "postgres"
+    mode: "0664"
+- name: Inspect postgres user ssh-config
+  when: postgres_install is defined and postgres_install | bool
+  become: true
+  become_user: postgres
+  ansible.builtin.file:
+    path: "/var/lib/postgresql/.ssh/config"
+    state: touch
+    force: false
+    owner: "postgres"
+    group: "postgres"
+    mode: "0664"
+- name: Inspect postgres user SSH key
+  when: postgres_install is defined and postgres_install | bool
+  become: true
+  become_user: postgres
+  community.crypto.openssh_keypair:
+    path: "/var/lib/postgresql/.ssh/id_rsa"
+    type: rsa
+    size: 4096
+    state: present
+    force: false
+    owner: "postgres"
+    group: "postgres"
+    mode: "0600"
 
+- name: Add a backuper public keys
+  when: postgres_install is defined and postgres_install | bool
+  become: true
+  become_user: postgres
+  ansible.builtin.lineinfile:
+    path: /var/lib/postgresql/.ssh/authorized_keys
+    line: "{{ backuper_ssh_public_key }}"
+    state: present
+    create: false
 
 - name: Install MySQL
   become: true
-  apt: 
+  when: mysql_install is defined and mysql_install | bool
+  ansible.builtin.apt:
     name: "{{ packages }}"
     state: present
   vars:
@@ -124,14 +245,16 @@
 
 - name: Start MySQL service
   become: true
-  service:
+  when: mysql_install is defined and mysql_install | bool
+  ansible.builtin.service:
     name: mysql
     state: started
 
 - name: Set MySQL root Password
   ignore_errors: true
   become: true
-  mysql_user:
+  when: mysql_install is defined and mysql_install | bool
+  community.mysql.mysql_user:
     login_unix_socket: "/var/run/mysqld/mysqld.sock"
     # login_password: "{{ mysql_root_password }}"
     name: "root"
@@ -140,31 +263,32 @@
 
 - name: Configure listen interface
   become: true
+  when: mysql_install is defined and mysql_install | bool
   ansible.builtin.lineinfile:
-    path: /etc/mysql/mysql.conf.d/mysqld.cnf 
-    regexp: '^bind-address		= 127.0.0.1'
-    line: 'bind-address		= 0.0.0.0'
+    path: /etc/mysql/mysql.conf.d/mysqld.cnf
+    regexp: "^bind-address		= 127.0.0.1"
+    line: "bind-address		= 0.0.0.0"
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
 - name: Configure listen mysqlx interface
   become: true
+  when: mysql_install is defined and mysql_install | bool
   ansible.builtin.lineinfile:
-    path: /etc/mysql/mysql.conf.d/mysqld.cnf 
-    regexp: '^mysqlx-bind-address	= 127.0.0.1'
-    line: 'mysqlx-bind-address	= 0.0.0.0'
+    path: /etc/mysql/mysql.conf.d/mysqld.cnf
+    regexp: "^mysqlx-bind-address	= 127.0.0.1"
+    line: "mysqlx-bind-address	= 0.0.0.0"
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
 
 - name: Disable autostart & stop MySQL service
   become: true
-  service:
+  when: mysql_install is defined and mysql_install | bool
+  ansible.builtin.service:
     name: mysql
     state: stopped
     enabled: false
-
-
 
 # - name: Add ClickHouse GPG key
 #   become: true
@@ -178,7 +302,7 @@
 #     state: present
 # - name: Install ClickHouse
 #   become: true
-#   apt: 
+#   apt:
 #     name: "{{ packages }}"
 #     state: present
 #     update_cache: true
@@ -198,21 +322,20 @@
 #     state: stopped
 #     enabled: false
 
-
 - name: Create non-privileged database user
   become: true
-  user:
+  ansible.builtin.user:
     name: "{{ database_user }}"
-    password_lock: yes
+    password_lock: true
     state: present
     shell: /bin/bash
-    system: no
-    createhome: yes
+    system: false
+    createhome: true
     home: "/home/{{ database_user }}"
 
 - name: Check user SSH dir
   become: true
-  file: 
+  ansible.builtin.file:
     path: "/home/{{ database_user }}/.ssh"
     state: directory
     owner: "{{ database_user }}"
@@ -221,32 +344,32 @@
 
 - name: Inspect user authorized_keys
   become: true
-  file:
-    path: "/home/{{ database_user}}/.ssh/authorized_keys"
+  ansible.builtin.file:
+    path: "/home/{{ database_user }}/.ssh/authorized_keys"
     state: touch
-    force: no
+    force: false
     owner: "{{ database_user }}"
     group: "{{ database_user }}"
     mode: "0664"
 
 - name: Inspect user ssh-config
   become: true
-  file:
-    path: "/home/{{ database_user}}/.ssh/config"
+  ansible.builtin.file:
+    path: "/home/{{ database_user }}/.ssh/config"
     state: touch
-    force: no
+    force: false
     owner: "{{ database_user }}"
     group: "{{ database_user }}"
     mode: "0664"
 
 - name: Inspect user SSH key
   become: true
-  openssh_keypair:
+  community.crypto.openssh_keypair:
     path: "/home/{{ database_user }}/.ssh/id_rsa"
     type: rsa
     size: 4096
     state: present
-    force: no
+    force: false
     owner: "{{ database_user }}"
     group: "{{ database_user }}"
     mode: "0600"
